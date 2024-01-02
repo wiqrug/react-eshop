@@ -6,7 +6,7 @@ nav {
     justify-content: space-between; /* Space between items */
     align-items: center;
     padding: 10px 30px; /* Adjusted padding */
-    position: fixed; /* Fixed at the top */
+    position: relative; /* Fixed at the top SIMAINEI oti tha pataei pano se allo content. Position Relative simainei tha einai sxetiko me ta giro giro ara kai den tha pataei pano se allo content */ 
     width: 100%;
     top: 0;
     z-index: 1000; /* Ensures the navbar stays above other content */

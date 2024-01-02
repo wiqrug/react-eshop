@@ -30,7 +30,7 @@ const App = () => {
     return (
         <div>
             <NavBar onMenuSelect={handleMenuSelect} />
-            <div style={{ marginTop: '60px' }}>{message}</div> {/* Display message below the navbar */}
+            <div ></div> {/* Display message below the navbar */}
             {menu === 'home' && <Home />}
             {menu === 'certificates' && <Certificates />}
             {menu === 'login' && <Login />}
