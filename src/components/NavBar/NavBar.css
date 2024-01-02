@@ -38,10 +38,14 @@ nav ul li {
     cursor: pointer;
     display: flex; /* Flex container for vertical centering */
     align-items: center; /* Center items vertically */
-    background-color: #444; /* Background color for buttons */
+    /*background-color: #444; Background color for buttons */
     border-radius: 5px; /* Rounded corners */
     padding: 10px 20px; /* Padding for button effect */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    /* transition: background-color 0.3s ease; Smooth transition for hover effect */
+}
+
+nav ul li Link{
+    color:white;
 }
 
 nav ul li:hover {
