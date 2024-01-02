@@ -7,9 +7,10 @@ import Certificates from './components/Certificates/Certificates';
 import Certificate from './components/Certificate/Certificate';
 import Login from './components/Login/Login';
 import {Link, Routes, Route}from 'react-router-dom';
+import SignUp from './components/SignUp/SignUp';
 
 const App = () => {
-    const [menu, setMenu] = useState('home');
+    /*const [menu, setMenu] = useState('home');
     const [message, setMessage] = useState('Welcome to Home');
 
     const handleMenuSelect = (menuOption) => {
@@ -29,7 +30,7 @@ const App = () => {
                 setMessage('');
         }
     };
-
+*/
     return (
         // <div>
         //     <NavBar onMenuSelect={handleMenuSelect} />
@@ -39,37 +40,10 @@ const App = () => {
         //     {menu === 'login' && <Login />}
         // </div>
         <>
-            {/* <nav>
-                <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/Certificates">Certificates</Link>
-                    </li>
-                    <li>
-                        <Link to="/Login">Login</Link>
-                    </li>
-                </ul>
-            </nav> */}
+            
             {/* <NavBar onMenuSelect={handleMenuSelect} /> */}
             <NavBar />
-            {/* <nav>
-                <div className="navbar-brand">CertShop</div>
-                <div className="nav-menu">
-                    <ul>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/Certificates">Certificates</Link>
-                        </li>
-                        <li className="login-icon">
-                            <Link to="/Login">Login</Link>
-                        </li>
-                    </ul>
-                </div>
-            </nav> */}
+            
             
 
             <Routes>
@@ -77,8 +51,8 @@ const App = () => {
                 <Route path="/Certificates" element={<Certificates/>} />
                 <Route path="/Certificate/:id" element={<Certificate/>} />
                 <Route path="/Login" element={<Login/>} />
+                <Route path="/SignUp" element={<SignUp />} />
                 <Route path="*" element={<NotFound/>} />
-            
             </Routes>
         </>
     );

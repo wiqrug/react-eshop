@@ -33,7 +33,7 @@ const NavBar = () => {
                         <Link to="/Certificates">Certificates</Link>
                     </li>
                     <li className="login-icon">
-                        <Link to="/Login">Login</Link>
+                         <Link to="/Login">&#128100;</Link>
                     </li>
                 </ul>
             </div>
