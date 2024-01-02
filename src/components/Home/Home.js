@@ -34,28 +34,28 @@ export default function Home(){
             <div>
                 <h3>Most Common Certificates</h3>
                 <li>
-                    cert1
+                    <Link to="/Certificate/1">cert1</Link>
                 </li>
                 <li>
-                    cert2
+                    <Link to="/Certificate/2">cert2</Link>
                 </li>
                 <li>
-                    cert3
+                    <Link to="/Certificate/3">cert3</Link>
                 </li>
                 <Link to="/Certificates">See more Certificates</Link>
             </div>
             <div>
                 <h3>Recommended Certificates</h3>
                 <li>
-                    cert1
+                    <Link to="/Certificate/1">cert1</Link>
                 </li>
                 <li>
-                    cert2
+                    <Link to="/Certificate/2">cert2</Link>
                 </li>
                 <li>
-                    cert3
+                    <Link to="/Certificate/3">cert3</Link>
                 </li>
-                <Link to="/Certificates">See more Certificates</Link>
+                <Link  to="/Certificates">See more Certificates</Link>
             </div>
         </>
     );

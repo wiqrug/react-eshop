@@ -1,6 +1,7 @@
 // src/App.js
 import React, { useState } from 'react';
 import NavBar from './components/NavBar/NavBar';
+import NotFound from './components/NotFound/NotFound';
 import Home from './components/Home/Home';
 import Certificates from './components/Certificates/Certificates';
 import Certificate from './components/Certificate/Certificate';
@@ -76,6 +77,8 @@ const App = () => {
                 <Route path="/Certificates" element={<Certificates/>} />
                 <Route path="/Certificate/:id" element={<Certificate/>} />
                 <Route path="/Login" element={<Login/>} />
+                <Route path="*" element={<NotFound/>} />
+            
             </Routes>
         </>
     );
