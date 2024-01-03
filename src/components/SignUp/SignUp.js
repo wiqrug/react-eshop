@@ -1,28 +1,154 @@
-import React, { useState } from 'react';
-import './SignUp.css';
-import { Link } from 'react-router-dom';
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Link  } from 'react-router-dom';
 
+function Copyright(props) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
-const SignUp = () => {
+// TODO remove, this demo shouldn't need to reset the theme.
 
-    const [email, setEmail] = useState(null);
-    const [password, setPassword] = useState(null);
+const defaultTheme = createTheme();
 
-    return <>
-    <h2>Sign up</h2>
-        <form method="post" className="login-box" action="url">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your E-mail" value={email} />
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your Password" value={password} />
-            <button type="submit" className="submit-btn">Log In</button>
-        </form>
-        <div className="center-me">
-            <p>Already a member?</p>
-            <p>You can log in <Link to="../Login">here</Link>!</p>  {/* link to SignUp page/component*/}
-        </div>
-    </>
-        ;
-};
+export default function SignUp() {
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+      
+        try {
+          const response = await fetch('http://localhost:5021/api/Account/Register', {
+            method: 'POST',
+            body: JSON.stringify({
+              firstName: data.get('firstName'),
+              lastName: data.get('lastName'),
+              email: data.get('email'),
+              password: data.get('password'),
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          console.log();
+          
+          if (response.ok) {
+            // Form data successfully submitted
+            console.log(response.body);
+          } else {
+            console.error('Failed to submit form data');
+          }
+        } catch (error) {
+          console.error('An error occurred while submitting form data', error);
+        }
+      };
 
-export default SignUp;
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="firstName"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  label="I want to receive inspiration, marketing promotions and updates via email."
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link to="..\Login" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        <Copyright sx={{ mt: 5 }} />
+      </Container>
+    </ThemeProvider>
+  );
+}
