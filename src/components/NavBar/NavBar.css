@@ -1,4 +1,3 @@
-/* src/components/NavBar/NavBar.css */
 nav {
     background-color: #333; /* Dark background */
     color: white;
@@ -6,7 +5,7 @@ nav {
     justify-content: space-between; /* Space between items */
     align-items: center;
     padding: 10px 30px; /* Adjusted padding */
-    position: relative; /* Fixed at the top SIMAINEI oti tha pataei pano se allo content. Position Relative simainei tha einai sxetiko me ta giro giro ara kai den tha pataei pano se allo content */ 
+    position: relative; /* Positioned relative to its normal position */
     width: 100%;
     top: 0;
     z-index: 1000; /* Ensures the navbar stays above other content */
@@ -16,6 +15,7 @@ nav {
 .navbar-brand {
     font-size: 24px; /* Larger font size for the brand name */
     font-weight: bold; /* Bold font weight */
+    color: white; /* Ensuring brand name is white */
 }
 
 .nav-menu {
@@ -38,18 +38,17 @@ nav ul li {
     cursor: pointer;
     display: flex; /* Flex container for vertical centering */
     align-items: center; /* Center items vertically */
-    /*background-color: #444; Background color for buttons */
-    border-radius: 5px; /* Rounded corners */
     padding: 10px 20px; /* Padding for button effect */
-    /* transition: background-color 0.3s ease; Smooth transition for hover effect */
 }
 
-nav ul li Link{
-    color:white;
+nav ul li a { /* Targeting <a> elements inside list items */
+    color: white; /* Changing link color to white */
+    text-decoration: none; /* Removing underline from links */
+    transition: color 0.3s ease; /* Smooth color transition for hover effect */
 }
 
-nav ul li:hover {
-    background-color: #555; /* Slight change in background color on hover */
+nav ul li:hover a {
+    color: #ddd; /* Slight change in link color on hover */
 }
 
 /* Styling for the login icon */

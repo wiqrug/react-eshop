@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const Certificate = () => {
     // Todo: 
-    // redircts you on your home screen if you are logined in
+    // redircts you on your home screen if you are logINED in
     // redirects you on login in if you are not logged in and then returns you on this page through history
     const handleClick = () => {
 
