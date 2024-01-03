@@ -8,6 +8,7 @@ import Certificate from './components/Certificate/Certificate';
 import Login from './components/Login/Login';
 import {Link, Routes, Route}from 'react-router-dom';
 import SignUp from './components/SignUp/SignUp';
+import Exam from './components/Exam/Exam';
 
 const App = () => {
     /*const [menu, setMenu] = useState('home');
@@ -52,6 +53,7 @@ const App = () => {
                 <Route path="/Certificate/:id" element={<Certificate/>} />
                 <Route path="/Login" element={<Login/>} />
                 <Route path="/SignUp" element={<SignUp />} />
+                <Route path="/Exam/:id" element={<Exam/>} />
                 <Route path="*" element={<NotFound/>} />
             </Routes>
         </>
