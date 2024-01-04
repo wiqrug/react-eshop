@@ -17,9 +17,11 @@ import { useState } from "react";
 const defaultTheme = createTheme();
 
 export default function SignUp() {
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  
   const handleSubmit = async (event) => {
     event.preventDefault(); //
     if (password !== confirmPassword) {

@@ -14,32 +14,44 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link  } from 'react-router-dom';
 
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
 export default function Login() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+    const jsonPayload = {
+      email: data.get("email"),
+      password: data.get("password")
+    }
+
+  try {
+    const response = await fetch(
+      "http://localhost:5021/api/Account/Login",
+      {
+        method: "POST",
+        body: JSON.stringify(jsonPayload),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log("Response Data:", responseData);
+    } else {
+      console.error(
+        "Failed to submit form data:",
+        response.status,
+        response.statusText
+      );
+    }
+  } catch(error) {
+      console.error("An error occurred while submitting form data", error);
+  }
+};
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -95,7 +107,7 @@ export default function Login() {
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  Forgot password? Sorry, we can't help
                 </Link>
               </Grid>
               <Grid item>
@@ -106,7 +118,6 @@ export default function Login() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
