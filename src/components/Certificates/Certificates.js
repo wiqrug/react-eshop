@@ -79,7 +79,7 @@ const Certificate = ({ src, title, price, id }) => {
       <article>
         <img src={src} alt="Certificate" />
         <h4 className="certificate-title">{title}</h4>
-        <h4>{price}</h4>
+        <h4>{price} €</h4>
       </article>
     </Link>
   );
@@ -93,7 +93,7 @@ const CertificatesList = () => {
           id={index + 1} // Assuming index+1 as the unique ID for each certificate
           src={certificate.src}
           title={certificate.title}
-          price={certificate.price}
+          price={certificate.price} 
         />
       ))}
     </section>
