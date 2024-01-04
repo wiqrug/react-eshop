@@ -1,78 +1,36 @@
+import React from "react";
+import "./Certificate.css"
+//I want to print details for each certificate
+// Whenever the user presses in a certificate it navigates to this component
 
-// src/components/Certificates/Certificates.js
-import { React, useEffect, useState } from 'react';
-import './Certificate.css';
-import { useNavigate, useParams } from 'react-router-dom';
+// Fields are : Name of certificate, Description of certificate
 
-const Certificate = () => {
-    // Todo: 
-    // redircts you on your home screen if you are logined in
-    // redirects you on login in if you are not logged in and then returns you on this page through history
-    const handleClick = () => {
+//Here instead of having hardcoded certificate, we need to get by id or title from the APIs that we made
 
-    }
-
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const { id } = useParams()
-
-    let navigate = useNavigate(); 
-    const routeChange = (examId) =>{ 
-        navigate("/Exam/" + examId);
-    }
+//Maybe i shouldnt call the Backend everytime i need the certificates, is there any way to access
+// The Certificates component and take the title and load it to the certificates 
 
 
-    return (
-        <>
-            
-            <div>ti koitas </div>
-            <div>re</div>
-            <div>vlaka</div>
+const certificate = {
+    src:"https://static.wikia.nocookie.net/windows/images/4/49/Adonet-300x225.png/revision/latest?cb=20190407170848",
+  title: "Learn ADO.NET",
+  description:
+    "In this course you will struggle just to see how many programmers struggled at the past",
 
-            <h1>Certificate {id}</h1>
-            <p>Certificate description</p>
-            <br />
-            <h3>Exam1</h3>
-            <p>Exam description</p>
-            <p>Number of questions: 10</p>
-            <p>Time Limit: 60 min</p>
-            {isLoggedIn &&  
-            <>
-                {/* If not already Writen */}
-                <button onClick={() => routeChange(1)}>Start Exam</button>
-                {/* Else */}
-                <div>Your Mark is 7/10!</div>
-            </>}
-            <h3>Exam2</h3>
-            <p>Exam description</p>
-            <p>Number of questions: 10</p>
-            <p>Time Limit: 60 min</p>
-            {isLoggedIn &&  
-            <>
-                {/* If not already Writen */}
-                <button onClick={() => routeChange(1)}>Start Exam</button>
-                {/* Else */}
-                <div>Your Mark is 7/10!</div>
-            </>}
-            <h3>Exam3</h3>
-            <p>Exam description</p>
-            <p>Number of questions: 10</p>
-            <p>Time Limit: 60 min</p>
-            {isLoggedIn &&  
-            <>
-                {/* If not already Writen */}
-                <button onClick={() => routeChange(1)}>Start Exam</button>
-                {/* Else */}
-                <div>Your Mark is 7/10!</div>
-            </>}
-
-            {/* should a modal asking you if you are sure to buy this cert */}
-            <button onClick={() => setIsLoggedIn(!isLoggedIn)}>Login</button>
-            <button onClick={handleClick}>Enroll</button>
-            <br/>
-            {/* redircts you on your home screen if you are logined in
-            redirects you on login in if you are not logged in and then returns you on this page through history */}
-        </>
-    );
 };
 
-export default Certificate;
+const CertificateDetails = () => {
+    const { title, description, src } = certificate;
+    return (
+      <div className="Certificate-Details-Container">
+        <div className="Certificate-Details-Title">
+          <h1>{title}</h1>
+        </div>
+        <img className="Certificate-Logo" src={src}/>
+        <div className="Certificate-Details-Description"><h1>{description}</h1></div>
+        <button className="Purhcase-Certificate">Buy now</button>
+      </div>
+    );
+  };
+  
+  export default CertificateDetails;

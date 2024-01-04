@@ -1,0 +1,1 @@
+ALEKOS: Print details for each certificate
