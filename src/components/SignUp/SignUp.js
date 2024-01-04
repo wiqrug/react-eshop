@@ -59,7 +59,7 @@ export default function SignUp() {
 
     try {
       const response = await fetch(
-        "http://localhost:5021/api/Account/Register",
+        "http://localhost:5021/api/Candidates",
         {
           method: "POST",
           body: JSON.stringify(jsonPayload),

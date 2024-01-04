@@ -1,78 +1,76 @@
 /* Certificates.css */
 
 section {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 20px;
-    padding: 20px;
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+article {
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px; /* Fixed height for uniform box size */
+  overflow: hidden; /* Hide overflow content */
+}
+
+article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+article img {
+  width: 100%; 
+  max-width: 100%; 
+  height: auto;
+  border-radius: 5px;
+}
+
+h4, h2, .title, .certificate-title {
+  font-size: 1.2em; /* Adjusted font size */
+  color: #2a2a2a;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  text-align: center;
+  overflow-wrap: break-word; /* Break long words */
+}
+
+p, .author {
+  font-size: 1em;
+  color: #555;
+  text-align: center;
+}
+
+.certificate-link {
+  color: #000;
+  text-decoration: none;
+  display: block; /* Ensure link occupies the entire grid item */
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 600px) {
   article {
-    background-color: white;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    max-width:400px ;
-    max-height: 400px;
+    height: auto; /* Flexible height for smaller screens */
   }
-  
-  article:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  h4, h2, .title, .certificate-title, p, .author {
+    font-size: 1em; /* Adjust font size for smaller screens */
   }
-  
-  article img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 5px;
+}
+
+/* Media Query for medium screens */
+@media (min-width: 601px) and (max-width: 1024px) {
+  article {
+    height: 350px; /* Adjust height for medium screens */
   }
-  
-  h2 {
-    margin-top: 0;
-    font-size: 1.4em;
-    color: #2a2a2a;
-    font-weight: 600;
-  }
-  
-  p {
-    font-size: 1em;
-    color: #555;
-  }
-  
-  .title {
-    font-size: 1.4em;
-    font-weight: bold;
-    color: #2a2a2a;
-    margin-bottom: 10px;
-    margin-top: 10px;
-  }
-  
-  .author {
-    font-size: 0.9em;
-    font-style: italic;
-    color: #666;
-    margin-bottom: 15px;
-  }
-  
-  /* Style for the Link component */
-  .certificate-link {
-    color: #000; /* Set the color to black for links within the certificate-link class */
-    text-decoration: none;
-  }
-  
-  /* Styles for the added class */
-  .certificate-title {
-    font-size: 1.4em; /* Desired font size */
-    color: #2a2a2a; /* Desired text color */
-    font-weight: 600; /* Desired font weight */
-    background-color: transparent; /* Prevent header highlighting */
-  }
-  
-  /* Style the header for price */
-  article h4:last-child {
-    color: #000; /* Set the price header to black color */
-  }
-  
+}
+
+/* Additional media queries can be added as needed */

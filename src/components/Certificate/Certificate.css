@@ -1,54 +1,51 @@
-/* CertificateDetails.css */
 .Certificate-Details-Title {
     background-color: black;
     color: white;
-    padding: 20px;
-    text-align: center; /* This ensures the title text is centered */
+    padding: 2vh; /* Use viewport height for dynamic padding */
+    text-align: center;
 }
 
 .Certificate-Details-Title h1 {
-    font-size: 2.5em; /* Large font size for the title */
-    margin: 0 auto; /* Center the title */
-    text-transform: uppercase; /* Uppercase for emphasis */
-    text-align: center; /* Center align the text */
+    font-size: 3vw; /* Use viewport width for dynamic font size */
+    margin: 0 auto;
+    text-transform: uppercase;
 }
 
 .Certificate-Details-Description {
-    font-size: 1.2em; /* Comfortable reading size */
-    color: #333; /* Dark grey for readability */
-    margin-top: 20px; /* Space between title and description */
-    padding: 0 20px; /* Padding for better text alignment */
-    line-height: 1.6; /* Line height for better readability */
-    text-align: center; /* Center align the description text */
+    font-size: 1.2rem; /* Use rem for scalable font size */
+    color: #333;
+    margin-top: 2vh; /* Use viewport height for margin */
+    padding: 0 5%; /* Use percentage for padding */
+    line-height: 1.6;
+    text-align: center;
 }
 
 .Purhcase-Certificate {
-    display: block; /* Make the button a block element */
-    width: max-content; /* Adjust width to content */
-    margin: 30px auto; /* Center the button and add margin for spacing */
-    padding: 10px 20px; /* Padding for button size */
-    background-color: #f04d24; /* Udemy's signature button color */
-    color: white; /* White text color */
-    font-size: 1.1em; /* Slightly larger font size */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    display: block;
+    width: max-content;
+    margin: 3vh auto; /* Use viewport height for margin */
+    padding: 1vh 2vw; /* Use viewport units for padding */
+    background-color: #f04d24;
+    color: white;
+    font-size: 1.1rem; /* Use rem for scalable font size */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
 }
 
 .Purhcase-Certificate:hover {
-    background-color: #e03c1c; /* Slightly darker shade on hover */
+    background-color: #e03c1c;
 }
 
-  .Certificate-Logo {
-    display: block; /* Use block display to allow margin auto to work */
-    margin: 50px auto; /* Add margin auto to center the image horizontally */
-    width: 300px; /* Set a width for the image */
-    height: 300px;
-    max-width: 100%; /* Ensure the image doesn't exceed its container's width */
-    max-height: 100%; /* Ensure the image doesn't exceed its container's height */
-    border: 1px solid #ddd; /* Add a subtle border for separation */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
-    border-radius: 5px; /* Rounded corners */
+.Certificate-Logo {
+    display: block;
+    margin: 5vh auto; /* Use viewport height for margin */
+    width: 50vw; /* Use viewport width for dynamic image size */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 300px; /* Max width to prevent over-scaling */
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
 }
