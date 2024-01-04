@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -19,6 +19,9 @@ import { Link  } from 'react-router-dom';
 const defaultTheme = createTheme();
 
 export default function Login() {
+
+  const [token, setToken] = useState('');
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -41,6 +44,10 @@ export default function Login() {
     if (response.ok) {
       const responseData = await response.json();
       console.log("Response Data:", responseData);
+
+      setToken(responseData.token);
+      console.log(responseData.token);
+
     } else {
       console.error(
         "Failed to submit form data:",

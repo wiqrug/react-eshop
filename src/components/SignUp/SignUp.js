@@ -13,6 +13,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Axios from "axios"; // Import Axios
+import Cookies from 'js-cookie';
 
 const defaultTheme = createTheme();
 
@@ -21,7 +23,7 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault(); //
     if (password !== confirmPassword) {
@@ -59,7 +61,7 @@ export default function SignUp() {
 
     try {
       const response = await fetch(
-        "http://localhost:5021/api/Account/Register",
+        "http://localhost:5021/api/Candidates",
         {
           method: "POST",
           body: JSON.stringify(jsonPayload),
@@ -68,7 +70,6 @@ export default function SignUp() {
           },
         }
       );
-      console.log(response.body);
       if (response.ok) {
         const responseData = await response.json();
         console.log("Response Data:", responseData);
