@@ -1,19 +1,18 @@
 // src/components/Certificates/Certificates.js
 import { React, useEffect, useState } from 'react';
 import './Exam.css';
-import { Link, useParams } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group'
-// import Button from '@mui/material/Button';
+// import { useParams } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 const Exam = () => {
     const [start, setStart] = useState(false)
     const [examEnded, setExamEnded] = useState(false)
-    const [nextQuestion, setNextQuestion] = useState(false)
     const [mark, setMark] = useState()
     const [answers, setAnswers] = useState([])
+    const [listClassName, setListClassName] = useState(["answerOption", "answerOption", "answerOption", "answerOption"])
     const [answer, setAnswer] = useState("")
     const [questionNumber, setQuestionNumber] = useState(0)
-    const { id } = useParams()
+    // const { id } = useParams()
 
     const Exam = [
         {
@@ -32,7 +31,7 @@ const Exam = () => {
             correctAnswer: "A"
         },
         {
-            question: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            question: "Lorem Ipsum is simply dummLorem Ipsum is simply dummy text of the printing and typesetting industry.and typesetting industry.",
             A: "A",
             B: "B",
             C: "C",
@@ -40,7 +39,7 @@ const Exam = () => {
             correctAnswer: "A"
         },
         {
-            question: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            question: "ply dummy text of the printing and typesetting industry.",
             A: "A",
             B: "B",
             C: "C",
@@ -48,7 +47,7 @@ const Exam = () => {
             correctAnswer: "A"
         },
         {
-            question: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            question: " Ipsum is simply dummy text of the printing and typesetLorem Ipsum is simply dummy text of the printing and typesetting industry.ting industry.",
             A: "A",
             B: "B",
             C: "C",
@@ -56,7 +55,15 @@ const Exam = () => {
             correctAnswer: "A"
         },
         {
-            question: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            question: "Lorem Ipsum is simply du industry.",
+            A: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            B: "B",
+            C: "C",
+            D: "D",
+            correctAnswer: "A"
+        },
+        {
+            question: "xt of the printing and typesetting industry.",
             A: "A",
             B: "B",
             C: "C",
@@ -64,7 +71,7 @@ const Exam = () => {
             correctAnswer: "A"
         },
         {
-            question: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            question: "LoremLoremLorem Ipsum is simply dummy text of the printing and typesetting industry..",
             A: "A",
             B: "B",
             C: "C",
@@ -72,7 +79,7 @@ const Exam = () => {
             correctAnswer: "A"
         },
         {
-            question: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            question: "Lorem Ipsum is simstry.",
             A: "A",
             B: "B",
             C: "C",
@@ -80,7 +87,7 @@ const Exam = () => {
             correctAnswer: "A"
         },
         {
-            question: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            question: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
             A: "A",
             B: "B",
             C: "C",
@@ -88,15 +95,7 @@ const Exam = () => {
             correctAnswer: "A"
         },
         {
-            question: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            A: "A",
-            B: "B",
-            C: "C",
-            D: "D",
-            correctAnswer: "A"
-        },
-        {
-            question: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            question: "Lorem Ipsum is simply dummy ustry.",
             A: "A",
             B: "B",
             C: "C",
@@ -113,8 +112,8 @@ const Exam = () => {
             //Reset the answer value
             setAnswer("")
 
-            // Move to next question
-            setNextQuestion(true)
+            //Refresh selected
+            setListClassName(["answerOption", "answerOption", "answerOption", "answerOption"])
         }
     }
 
@@ -184,175 +183,87 @@ const Exam = () => {
 
     return (
         <>
-            {/* <CSSTransition
-            in={start}
-            // nodeRef={nodeRef}
-            timeout={800}
-            transitionName = "fade"
-            classNames="container result"
-            unmountOnExit
-            onEnter={() => setShowButton(false)}
-            onExited={() => setNextQuestion(false)} 
-
-
-            // className="container result"
-            // component="div"
-            // transitionName="fade"
-            // transitionEnterTimeout={800}
-            // transitionLeaveTimeout={500}
-            // transitionAppear
-            // transitionAppearTimeout={500}
-            >*/}
-            {/* </CSSTransition> */}
-            {/* TODO: use csstransition on close setStart(false)
-         <CSSTransition
-            in={i === questionNumber}
-            nodeRef=null
-            timeout={800}
-            transitionName = "fade"
-            classNames="container result"
-            unmountOnExit
-            onEnter={}
-            onExited={} */}
             {start ?
                 <div className="container">
-                    <CSSTransition
-                        in={0 === questionNumber}
-                        nodeRef={null}
-                        timeout={800}
-                        transitionName="fade"
-                        classNames="container result"
-                        unmountOnExit
-                    // onEnter={}
-                    // onExited={}
-                    >
-                        <div className="container">
-                            <div className="questionCount">Question {questionNumber + 1} of {Questions.length}:</div>
-                            <h2 className="question">{Questions[questionNumber]["question"]}</h2>
-                            <div className="answerOptions">
-                                <ul className="answerOptions">
-                                    <li className="answerOption">
-                                        <label className="radioCustomLabel">
-                                            <input type="radio"
-                                                className="radioCustomButton"
-                                                name="myRadio"
-                                                value="A"
-                                                checked={answer === "A"}
-                                                onChange={(e) => setAnswer(e.target.value)} />
-                                            {Questions[questionNumber]["A"]}
-                                        </label>
-                                    </li>
-                                    <li className="answerOption">
-                                        <label className="radioCustomLabel">
-                                            <input type="radio"
-                                                className="radioCustomButton"
-                                                name="myRadio"
-                                                value="B"
-                                                checked={answer === "B"}
-                                                onChange={(e) => setAnswer(e.target.value)} />
-                                            {Questions[questionNumber]["B"]}
-                                        </label>
-                                    </li>
-                                    <li className="answerOption">
-                                        <label className="radioCustomLabel">
-                                            <input type="radio"
-                                                className="radioCustomButton"
-                                                name="myRadio"
-                                                value="C"
-                                                checked={answer === "C"}
-                                                onChange={(e) => setAnswer(e.target.value)} />
-                                            {Questions[questionNumber]["C"]}
-                                        </label>
-                                    </li>
-                                    <li className="answerOption">
-                                        <label className="radioCustomLabel">
-                                            <input type="radio"
-                                                className="radioCustomButton"
-                                                name="myRadio"
-                                                value="D"
-                                                checked={answer === "D"}
-                                                onChange={(e) => setAnswer(e.target.value)} />
-                                            {Questions[questionNumber]["D"]}
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            {Questions.length - 1 === questionNumber
-                                // ? <Button variant="contained" disableElevation onClick={handleSubmit}>End Exam</Button>
-                                // : <Button variant="contained" disableElevation onClick={handleNext}>Next Question</Button>}
-                                ? <button onClick={handleSubmit}>End Exam</button>
-                                : <button onClick={handleNext}>Next Question</button>} 
+                    <div className="container">
+                        <div className="questionCount">Question {questionNumber + 1} of {Questions.length}:</div>
+                        <h2 className="question">{Questions[questionNumber]["question"]}</h2>
+                        <div className="answerOptions">
+                            <ul className="answerOptions">
+                                <li className={listClassName[0]} onClick={(e) =>
+                                    setListClassName(["answerOptionSelected", "answerOptions", "answerOptions", "answerOptions"])}>
+                                    <label className='radioCustomLabel'>
+                                        <input type="radio"
+                                            className="radioCustomButton"
+                                            name="myRadio"
+                                            value="A"
+                                            checked={answer === "A"}
+                                            onClick={(e) => setAnswer(e.target.value)} />
+                                        {Questions[questionNumber]["A"]}
+                                    </label>
+                                </li>
+                                <li className={listClassName[1]} onClick={(e) =>
+                                    setListClassName(["answerOption", "answerOptionSelected", "answerOptions", "answerOptions"])}>
+                                    <label className="radioCustomLabel">
+                                        <input type="radio"
+                                            className="radioCustomButton"
+                                            name="myRadio"
+                                            value="B"
+                                            checked={answer === "B"}
+                                            onChange={(e) => setAnswer(e.target.value)} />
+                                        {Questions[questionNumber]["B"]}
+                                    </label>
+                                </li>
+                                <li className={listClassName[2]} onClick={(e) =>
+                                    setListClassName(["answerOptions", "answerOptions", "answerOptionSelected", "answerOptions"])}>
+                                    <label className="radioCustomLabel">
+                                        <input type="radio"
+                                            className="radioCustomButton"
+                                            name="myRadio"
+                                            value="C"
+                                            checked={answer === "C"}
+                                            onChange={(e) => setAnswer(e.target.value)} />
+                                        {Questions[questionNumber]["C"]}
+                                    </label>
+                                </li>
+                                <li className={listClassName[3]} onClick={(e) =>
+                                    setListClassName(["answerOptions", "answerOptions", "answerOptions", "answerOptionSelected"])}>
+                                    <label className="radioCustomLabel">
+                                        <input type="radio"
+                                            className="radioCustomButton"
+                                            name="myRadio"
+                                            value="D"
+                                            checked={answer === "D"}
+                                            onChange={(e) => setAnswer(e.target.value)} />
+                                        {Questions[questionNumber]["D"]}
+                                    </label>
+                                </li>
+                            </ul>
                         </div>
-                    </CSSTransition>
 
-
-
-                    {/* <h1>Question {questionNumber + 1} of {Questions.length}:</h1>
-                    <p>{Questions[questionNumber]["question"]}</p>
-                    <div>
-                        <label>
-                            <input type="radio"
-                                name="myRadio"
-                                value="A"
-                                checked={answer === "A"}
-                                onChange={(e) => setAnswer(e.target.value)} />
-                            {Questions[questionNumber]["A"]}
-                        </label>
-
-                        <label>
-                            <input type="radio"
-                                name="myRadio"
-                                value="B"
-                                checked={answer === "B"}
-                                onChange={(e) => setAnswer(e.target.value)} />
-                            {Questions[questionNumber]["B"]}
-                        </label>
-
-                        <label>
-                            <input type="radio"
-                                name="myRadio"
-                                value="C"
-                                checked={answer === "C"}
-                                onChange={(e) => setAnswer(e.target.value)} />
-                            {Questions[questionNumber]["C"]}
-                        </label>
-
-                        <label>
-                            <input type="radio"
-                                name="myRadio"
-                                value="D"
-                                checked={answer === "D"}
-                                onChange={(e) => setAnswer(e.target.value)} />
-                            {Questions[questionNumber]["D"]}
-                        </label>
+                        <div className='container'>
+                            <div className='center'>
+                                {Questions.length - 1 === questionNumber
+                                    ? <Button variant="contained" disableElevation onClick={handleSubmit}>End Exam</Button>
+                                    : <Button variant="contained" disableElevation onClick={handleNext}>Next Question</Button>}
+                            </div>
+                        </div>
                     </div>
-                    <h3>Attention: Cannot go back to previous questions!!</h3>
-
-                    {Questions.length - 1 === questionNumber
-                        ? <button onClick={handleSubmit}>End Exam</button>
-                        : <button onClick={handleNext}>Next Question</button>} */}
-
-                    {/* // answer !== "" && setQuestionNumber(questionNumber + 1)
-                            // console.log("answers:[" + answers + "]=" + answers.length) */}
-
                 </div>
 
                 // Page before and after starting the exam 
-                : <div>
+                : <div className="container result">
                     <h1>Exam: {Exam[0]["examName"]}</h1>
                     <p>Exam: {Exam[0]["examDescriprion"]}</p>
 
                     {/*  Page after exam has ended */}
                     {examEnded
-                        ? <div>
-                            <div>Exam Completed</div>
-                            <div>Your Mark is {mark} / 10</div>
-                        </div>
+                        ? <div>Exam Completed!       Your Mark is {mark} / 10</div>
+
                         // Page before exam starts
                         : <div>
                             <p>For this exam you need to answer {Questions.length} questions in {Exam[0]["Time"]} minutes!</p>
-                            <button onClick={() => setStart(!start)}>Let's Start</button>
+                            <Button variant="contained" disableElevation onClick={() => setStart(!start)}>Let's Start</Button>
                         </div>}
                 </div>
 
