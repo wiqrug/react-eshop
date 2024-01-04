@@ -11,11 +11,14 @@ import "./Certificate.css"
 // The Certificates component and take the title and load it to the certificates 
 
 
+//ABOUT BACKEND TASKS.
+// Add property Certificate Description
+
 const certificate = {
     src:"https://static.wikia.nocookie.net/windows/images/4/49/Adonet-300x225.png/revision/latest?cb=20190407170848",
   title: "Learn ADO.NET",
   description:
-    "In this course you will struggle just to see how many programmers struggled at the past",
+    "In this course you will struggle just to see how programmers struggled in the past",
 
 };
 

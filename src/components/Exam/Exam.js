@@ -13,7 +13,7 @@ const Exam = () => {
     const [answer, setAnswer] = useState("")
     const [questionNumber, setQuestionNumber] = useState(0)
     // const { id } = useParams()
-
+    
     const Exam = [
         {
             examName: "Exam Name",

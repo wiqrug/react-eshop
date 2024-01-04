@@ -2,16 +2,15 @@
 import React from "react";
 import "./Certificates.css";
 import { Link } from "react-router-dom";
+import "../../api/CertificatesApi/GetCertificates.js";
 
 //TODOS IN THIS COMPONENT
 /* 
+    fix image
     1)Fetch to get the certificates
     2)Each certificate should have an id starting from 1
       increasing +1 each time a certificate gets fetched
       (This also means that we should remove index, im keeping it atm)
-    3)Add image through link (upload somwhere in the internet)
-    4)Maybe adjust box sizes in order to be fixed and images to be fixed
-    5)Another problem is that if i only have 1 certificate, its very very fkin large
     
 */
 
