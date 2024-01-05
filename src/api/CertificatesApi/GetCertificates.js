@@ -22,18 +22,49 @@
 }
 */
 
+//NOTE: This fetch doesnt need any interaction with token because its in the default UI
+// let certificatet;
+//     fetch("http://localhost:5021/api/Certificates")
+//         .then(response => response.json())
+//         .then(data => {
+//             certificates = data.$values;
+//            console.log(certificatet);
+//         })
+//         .catch(error => {
+//             console.error('Error fetching certificates:', error);
+//         });
+
+// function getCertificateByTitle(title) {
+//     fetch("http://localhost:5021/api/Certificates")
+//         .then(response => response.json())
+//         .then(data => {
+//             const certificates = data.$values;
+//             const certificate = certificates.find(certificate => certificate.titleOfCertificate === title);
+//             console.log(certificate);
+//         })
+//         .catch(error => console.error('Error:', error));
+// }
+
+// getCertificateByTitle("Learn React");
 
 
-function getCertificates() {
-    fetch("http://localhost:5021/api/Certificates")
-        .then(response => response.json())
-        .then(data => {
-           const certificates = data.$values; // This line assigns the array of certificates to the 'certificates' variable
-            console.log(certificates); 
-        })
-        .catch(error => {
-            console.error('Error fetching certificates:', error);
-        });
-}
+//this function gets certificate by titleOfCertificate.
 
-getCertificates();
+//What i need to do, is:
+// When clicked on the certificate, take the certificate title and adjust to the find method 
+// in order to print the details of that certain certificate
+// to implement this, maybe we need to use Link! 
+console.log("hello");
+
+        fetch("http://localhost:5021/api/Certificates")
+            .then(response => response.json())
+            .then(data => {
+                const certificates = data.$values;
+                const certificate = certificates.find(certificate => certificate.titleOfCertificate === "Learn React");
+                console.log("psoli");
+                console.log(certificate);
+            })
+            .catch(error => console.error('Error:', error));
+
+
+
