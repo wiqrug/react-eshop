@@ -22,7 +22,7 @@ import Footer from "./Footer";
 
 const defaultTheme = createTheme();
 
-export default function SignUp() {
+export default function SignUp({ setCurrentUser }) {
   const {
     password,
     confirmPassword,
@@ -32,7 +32,6 @@ export default function SignUp() {
     setPasswordError,
   } = usePasswordValidation();
 
-  const [, setCurrentUser] = useState({});
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {

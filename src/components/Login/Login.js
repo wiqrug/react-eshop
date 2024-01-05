@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { login } from "../../api";
-import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -19,8 +17,8 @@ import { useLoginUser } from "hooks";
 
 const defaultTheme = createTheme();
 
-export default function Login() {
-  const handleSubmit = useLoginUser();
+export default function Login({ setCurrentUser }) {
+  const handleSubmit = useLoginUser(setCurrentUser);
 
   return (
     <ThemeProvider theme={defaultTheme}>

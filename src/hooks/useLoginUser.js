@@ -1,10 +1,7 @@
 import { login } from "api";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const useLoginUser = () => {
-  //edo eixes kai currentUser alla dne to xrisimopoiouses
-  const [, setCurrentUser] = useState({});
+export const useLoginUser = (setCurrentUser) => {
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {

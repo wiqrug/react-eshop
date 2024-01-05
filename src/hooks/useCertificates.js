@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
  */
 export const useCertificates = () => {
   const [certificates, setCertificates] = useState(null);
+
   useEffect(() => {
     getCertificates().then((data) => setCertificates(data.$values));
   }, []); // Empty dependency array to run only once

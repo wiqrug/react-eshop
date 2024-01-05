@@ -1,5 +1,5 @@
 // src/App.js
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "./components/NavBar";
 import NotFound from "./components/NotFound";
 import Home from "./components/Home";
@@ -15,13 +15,15 @@ const App = () => {
   //fetched certificates
   const certificates = useCertificates();
 
+  const [currentUser, setCurrentUser] = useState();
+
+  console.log(currentUser);
+
   return (
     <>
       <NavBar />
-
       <Routes>
         <Route path="/" element={<Home />} />
-
         <Route
           path="/Certificates"
           element={<Certificates certificates={certificates} />}
@@ -30,9 +32,14 @@ const App = () => {
           path="/Certificate/:id"
           element={<Certificate certificates={certificates} />}
         />
-
-        <Route path="/Login" element={<Login />} />
-        <Route path="/SignUp" element={<SignUp />} />
+        <Route
+          path="/Login"
+          element={<Login setCurrentUser={setCurrentUser} />}
+        />
+        <Route
+          path="/SignUp"
+          element={<SignUp setCurrentUser={setCurrentUser} />}
+        />
         <Route path="/Exam/:id" element={<Exam />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
