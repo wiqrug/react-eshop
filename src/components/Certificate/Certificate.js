@@ -12,6 +12,7 @@ const CertificateDetails = ({ certificates }) => {
     const foundCertificate = certificates.find(
       (cert) => cert.$id.toString() === id
     );
+
     setCertificate(foundCertificate);
   }, [certificates, id]);
 

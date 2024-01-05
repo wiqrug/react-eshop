@@ -8,8 +8,8 @@ import Certificate from "./components/Certificate";
 import Login from "./components/Login";
 import { Routes, Route } from "react-router-dom";
 import SignUp from "./components/SignUp";
-import Exam from "./components/Exam";
 import { useCertificates } from "./hooks";
+import Exam from "components/Exam";
 
 const App = () => {
   const certificates = useCertificates();

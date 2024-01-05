@@ -1,8 +1,8 @@
 // src/components/Certificates/Certificates.js
-import { React, useEffect, useState,useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "./Exam.css";
 // import { useParams } from 'react-router-dom';
-import Button from "@mui/material/Button";
+import { Button } from "../mui";
 
 const Exam = () => {
   const [start, setStart] = useState(false);
@@ -39,19 +39,25 @@ const Exam = () => {
   // dependency arrays should have all the variables warned by the linter
   // useMemo allows us to add Questions into the dependency array by persisting
   // a reference to the array between renders
-  const Questions = useMemo(()=>[
-    dummyAnswer("Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
-    dummyAnswer("ply dummy text of the printing and typesetting industry."),
-    dummyAnswer("Lorem Ipsum is simply du industry."),
-    dummyAnswer("xt of the printing and typesetting industry."),
-    dummyAnswer("Lorem Ipsum is simstry."),
-    dummyAnswer("Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry."),
-    dummyAnswer("Lorem Ipsum is simply dummy ustry.")
-  ],  
-  // Create array once on initial render, never re-create the object
-  []);
+  const Questions = useMemo(
+    () => [
+      dummyAnswer(
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      ),
+      dummyAnswer("ply dummy text of the printing and typesetting industry."),
+      dummyAnswer("Lorem Ipsum is simply du industry."),
+      dummyAnswer("xt of the printing and typesetting industry."),
+      dummyAnswer("Lorem Ipsum is simstry."),
+      dummyAnswer(
+        "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry."
+      ),
+      dummyAnswer("Lorem Ipsum is simply dummy ustry."),
+    ],
+    // Create array once on initial render, never re-create the object
+    []
+  );
 
-  const handleNext = () => {  
+  const handleNext = () => {
     if (answer) {
       //Update Answers and move to next question
       setAnswers([...answers, answer]);
@@ -117,17 +123,13 @@ const Exam = () => {
 
   // Evaluate Mark
   useEffect(() => {
-    let count = 0;
+    const count = Questions.filter(
+      (question, index) => question.correctAnswer === answers[index]
+    ).length;
 
-    // For each question check if the answeer is correct
-    for (let i = 0; i < Questions.length; i++) {
-      if (Questions[i]["correctAnswer"] === answers[i]) {
-        count++;
-      }
-    }
     // Set Mark
     setMark(count);
-  }, [examEnded, Questions,answers]);
+  }, [examEnded, Questions, answers]);
 
   return (
     <>
