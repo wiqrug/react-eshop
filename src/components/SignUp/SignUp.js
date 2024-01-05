@@ -13,8 +13,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Axios from "axios"; // Import Axios
-import Cookies from 'js-cookie';
+
 
 const defaultTheme = createTheme();
 
