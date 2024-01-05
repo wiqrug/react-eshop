@@ -6,7 +6,14 @@ ALEKOS: Print details for each certificate
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 What Backend need to send:
 
--- Home (if not  loggeIn): random 6-10 certificates from table certificates
+-- Home (if not  loggedIn): random 6-10 certificates from table certificates
 
 
 NOTE FROM ALEKOS: Paidia egw lew simera an thelete na gemiso ton api fakelo me oles tis HTTP methods pou thelete
+
+
+Add property src in the backedn in order to get the link for the image to display in the frontend
+
+Certificate component:
+    When click on button Buy now, if user is logged in then hes able to Buy
+     if use is not logged in, then it needs to redirect to the login/signup page
