@@ -15,18 +15,6 @@ export const login = async (data) => {
   if (response.ok) {
     const responseData = await response.json();
     return responseData;
-
-    // const authenticate = await fetch(
-    // "http://localhost:5021/",  //EDO MPAINEI URL OPOU O SERVER PAIRNEI PISO TO TOKEN KAI KANEI TO AUTHENTICATION
-    // {
-    //     method: "POST",
-    //     body: "",  //TORA TO BODY DEN XREIAZETAI NA KOUVALAEI PLIROFORIA. O,TI PLIROFORIA XREIAZETAI EINAI STO HEADER
-    //     headers:
-    //     {
-    //     "Content-Type": "application/json",
-    //     "Authorization": currentUser.token  //O SERVER VRISKEI TO TOKEN MESO TOU AUTHORIZATION HEADER
-    //     }
-    // }               //kai meta redirect sto home kapos...
   } else {
     console.error(
       "Failed to submit form data:",
