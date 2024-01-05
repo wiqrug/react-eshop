@@ -12,49 +12,21 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link  } from 'react-router-dom';
+import { LoginProcedure } from '../../api/LoginProcedure';
 
-
-// TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
 export default function Login() {
 
-  const [token, setToken] = useState('');
+  const [currentUser, setCurrentUser] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const jsonPayload = {
-      email: data.get("email"),
-      password: data.get("password")
-    }
 
   try {
-    const response = await fetch(
-      "http://localhost:5021/api/Account/Login",
-      {
-        method: "POST",
-        body: JSON.stringify(jsonPayload),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (response.ok) {
-      const responseData = await response.json();
-      console.log("Response Data:", responseData);
-
-      setToken(responseData.token);
-      console.log(responseData.token);
-
-    } else {
-      console.error(
-        "Failed to submit form data:",
-        response.status,
-        response.statusText
-      );
-    }
+    await LoginProcedure(data, setCurrentUser);
   } catch(error) {
       console.error("An error occurred while submitting form data", error);
   }
