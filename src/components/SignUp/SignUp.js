@@ -15,27 +15,13 @@ import {
   ThemeProvider,
 } from "../mui";
 
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import { loginProcedure } from "../../api";
-import { useNavigate } from "react-router-dom";
+import { loginProcedure, signUp } from "../../api";
+import { useNavigate, Link } from "react-router-dom";
+import { usePasswordValidation } from "hooks";
+import { createSignupPayload, formatAsISO } from "utils";
 
 const defaultTheme = createTheme();
-
-const usePasswordValidation = () => {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
-  return {
-    password,
-    confirmPassword,
-    passwordError,
-    setPassword,
-    setConfirmPassword,
-    setPasswordError,
-  };
-};
 
 export default function SignUp() {
   const {
@@ -53,49 +39,27 @@ export default function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault(); //
     if (password !== confirmPassword) {
-      setPasswordError("Passwords do not match");
+      setPasswordError();
       return;
     }
-    setPasswordError("");
+
     const data = new FormData(event.currentTarget);
+    const payload = createSignupPayload(data);
 
-    const formatAsISO = (dateString) => {
-      return dateString ? new Date(dateString).toISOString() : null;
-    };
-
-    const jsonPayload = {
-      firstName: data.get("firstName"),
-      middleName: data.get("middleName"),
-      lastName: data.get("lastName"),
-      gender: data.get("gender"),
-      nativeLanguage: data.get("nativeLanguage"),
-      birthDate: formatAsISO(data.get("birthDate")),
-      photoIDType: data.get("photoIDType"),
-      photoIDNumber: data.get("photoIDNumber"),
-      photoIDIssueDate: formatAsISO(data.get("photoIDIssueDate")),
-      email: data.get("email"),
-      address: data.get("address"),
-      addressLine2: data.get("addressLine2"),
-      countryOfResidence: data.get("countryOfResidence"),
-      stateOrTerritoryOrProvince: data.get("stateOrTerritoryOrProvince"),
-      townOrCity: data.get("townOrCity"),
-      postalCode: data.get("postalCode"),
-      landlineNumber: data.get("landlineNumber"),
-      mobileNumber: data.get("mobileNumber"),
-      password: btoa(data.get("password")),
-    };
+    await signUp(payload);
+    loginProcedure(data, setCurrentUser);
 
     try {
       const response = await fetch("http://localhost:5021/api/Candidates", {
         method: "POST",
-        body: JSON.stringify(jsonPayload),
+        body: JSON.stringify(payload),
         headers: {
           "Content-Type": "application/json",
         },
       });
       if (response.ok) {
-        setTimeout(await loginProcedure(data, setCurrentUser), 5000);
-        console.log(currentUser.email);
+        console.log(data);
+        await loginProcedure(data, setCurrentUser);
         navigate("/");
       } else {
         console.error(
@@ -308,9 +272,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="../Login" variant="body2">
-                  Already have an account? Sign in
-                </Link>
+                <Link to="../Login">Already have an account? Sign in</Link>
               </Grid>
             </Grid>
           </Box>

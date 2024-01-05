@@ -14,7 +14,7 @@ export async function loginProcedure(data, setCurrentUser) {
 
   if (response.ok) {
     const responseData = await response.json();
-    console.log("Response Data:", responseData);
+
     setCurrentUser({
       email: responseData.user.email,
       token: responseData.token,
