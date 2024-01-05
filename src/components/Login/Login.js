@@ -15,31 +15,12 @@ import {
 import Header from "./Header";
 import Footer from "./Footer";
 import Inputs from "./Inputs";
+import { useLoginUser } from "hooks";
 
 const defaultTheme = createTheme();
 
 export default function Login() {
-  //edo eixes kai currentUser alla dne to xrisimopoiouses
-  const [, setCurrentUser] = useState({});
-  const navigate = useNavigate();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    try {
-      const user = await login(data);
-
-      setCurrentUser({
-        email: user.email,
-        token: user.token,
-      });
-
-      navigate("/");
-    } catch (error) {
-      console.error("An error occurred while submitting form data", error);
-    }
-  };
+  const handleSubmit = useLoginUser();
 
   return (
     <ThemeProvider theme={defaultTheme}>
