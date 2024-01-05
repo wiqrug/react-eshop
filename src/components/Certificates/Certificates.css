@@ -74,3 +74,36 @@ p, .author {
 }
 
 /* Additional media queries can be added as needed */
+/* TROLL */
+@keyframes backgroundChange {
+  0% { background-color: blue; }
+  33% { background-color: black; }
+  66% { background-color: yellow; }
+  100% { background-color: blue; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.fancyAnime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  animation: backgroundChange 3s linear infinite;
+}
+
+.loading-animation {
+  padding: 10px 20px;
+  background-color: white;
+  border-radius: 20px;
+  animation: bounce 1s ease infinite;
+  position: relative;
+}
+
+.loading-animation:hover {
+  animation: none;
+  /* Additional styling for hover state if needed */
+}

@@ -1,39 +1,39 @@
-import React from "react";
-import "./Certificate.css"
-//I want to print details for each certificate
-// Whenever the user presses in a certificate it navigates to this component
-
-// Fields are : Name of certificate, Description of certificate
-
-//Here instead of having hardcoded certificate, we need to get by id or title from the APIs that we made
-
-//Maybe i shouldnt call the Backend everytime i need the certificates, is there any way to access
-// The Certificates component and take the title and load it to the certificates 
-
-
-//ABOUT BACKEND TASKS.
-// Add property Certificate Description
-
-const certificate = {
-    src:"https://static.wikia.nocookie.net/windows/images/4/49/Adonet-300x225.png/revision/latest?cb=20190407170848",
-  title: "Learn ADO.NET",
-  description:
-    "In this course you will struggle just to see how programmers struggled in the past",
-
-};
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import "./Certificate.css";
 
 const CertificateDetails = () => {
-    const { title, description, src } = certificate;
-    return (
-      <div className="Certificate-Details-Container">
-        <div className="Certificate-Details-Title">
-          <h1>{title}</h1>
-        </div>
-        <img className="Certificate-Logo" src={src}/>
-        <div className="Certificate-Details-Description"><h1>{description}</h1></div>
-        <button className="Purhcase-Certificate">Buy now</button>
-      </div>
-    );
-  };
+    const [certificate, setCertificate] = useState(null);
+    const { id } = useParams();
+
+    useEffect(() => {
+        fetch("http://localhost:5021/api/Certificates")
+            .then(response => response.json())
+            .then(data => {
+                const certificates = data.$values;
+                const foundCertificate = certificates.find(cert => cert.$id.toString() === id);
+                setCertificate(foundCertificate);
+            })
+            .catch(error => console.error('Error:', error));
+    }, [id]);
+
   
-  export default CertificateDetails;
+    if (!certificate) {
+        return <div className="fancyAnime">Loading...</div>;
+    }
+
+    return (
+        <div className="Certificate-Details-Container">
+            <div className="Certificate-Details-Title">
+                <h1>{certificate.titleOfCertificate}</h1>
+            </div>
+            <img className="Certificate-Logo" src="https://raw.githubusercontent.com/wiqrug/wiqrug.github.io/main/images/DALL%C2%B7E%202023-10-26%2018.43.43%20-%20Wide%20cartoon%20artwork%20with%20a%20gentle%20cream-colored%20backdrop.%20Playful%20anime%20clouds%20float%20around%2C%20some%20with%20cute%20expressions%2C%20ensuring%20the%20middle%20remains%20.png" alt="Certificate" />
+            <div className="Certificate-Details-Description">
+                <h1>{certificate.description}</h1>
+            </div>
+            <button className="Purhcase-Certificate">Buy now</button>
+        </div>
+    );
+};
+
+export default CertificateDetails;

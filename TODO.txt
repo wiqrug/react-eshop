@@ -7,3 +7,6 @@ ALEKOS: Print details for each certificate
 What Backend need to send:
 
 -- Home (if not  loggeIn): random 6-10 certificates from table certificates
+
+
+NOTE FROM ALEKOS: Paidia egw lew simera an thelete na gemiso ton api fakelo me oles tis HTTP methods pou thelete
