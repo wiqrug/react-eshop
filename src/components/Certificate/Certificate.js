@@ -2,20 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Certificate.css";
 
-const CertificateDetails = ({certificates}) => {
+const CertificateDetails = ({ certificates }) => {
   const [certificate, setCertificate] = useState(null);
   const { id } = useParams();
-
 
   useEffect(() => {
     if (!certificates) return;
 
-    const certificateValues = certificates.$values;
-    const foundCertificate = certificateValues.find(
+    const foundCertificate = certificates.find(
       (cert) => cert.$id.toString() === id
     );
     setCertificate(foundCertificate);
-  },[certificates, id])
+  }, [certificates, id]);
 
   if (!certificate) {
     return <div className="fancyAnime">Loading...</div>;

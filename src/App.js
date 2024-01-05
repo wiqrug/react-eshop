@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState, useEffect } from "react";
+import React from "react";
 import NavBar from "./components/NavBar";
 import NotFound from "./components/NotFound";
 import Home from "./components/Home";
@@ -9,21 +9,10 @@ import Login from "./components/Login";
 import { Routes, Route } from "react-router-dom";
 import SignUp from "./components/SignUp";
 import Exam from "./components/Exam";
+import { useCertificates } from "./hooks";
 
 const App = () => {
-  const [certificates, setCertificates] = useState(null);
-
-  const fetchMyData = () =>
-  fetch("http://localhost:5021/api/Certificates")
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error("Error fetching certificates:", error);
-    });
-
-  useEffect(() => {
-    fetchMyData().then((data) => setCertificates(data.$values));
-  }, []); // Empty dependency array to run only once
-
+  const certificates = useCertificates();
 
   return (
     <>
@@ -32,8 +21,14 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        <Route path="/Certificates" element={<Certificates certificates={certificates} />} />
-        <Route path="/Certificate/:id" element={<Certificate certificates={certificates} />} />
+        <Route
+          path="/Certificates"
+          element={<Certificates certificates={certificates} />}
+        />
+        <Route
+          path="/Certificate/:id"
+          element={<Certificate certificates={certificates} />}
+        />
 
         <Route path="/Login" element={<Login />} />
         <Route path="/SignUp" element={<SignUp />} />
