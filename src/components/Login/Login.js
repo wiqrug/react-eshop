@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 
-import { Link } from "react-router-dom";
 import { login } from "../../api";
 import { useNavigate } from "react-router-dom";
 import {
-  Avatar,
   Box,
   Button,
   Checkbox,
   Container,
   CssBaseline,
   FormControlLabel,
-  Grid,
-  LockOutlinedIcon,
-  TextField,
   ThemeProvider,
-  Typography,
   createTheme,
 } from "components/mui";
+import Header from "./Header";
+import Footer from "./Footer";
+import Inputs from "./Inputs";
 
 const defaultTheme = createTheme();
 
@@ -56,38 +53,14 @@ export default function Login() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Login
-          </Typography>
+          <Header />
           <Box
             component="form"
             onSubmit={handleSubmit}
             noValidate
             sx={{ mt: 1 }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
+            <Inputs />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
@@ -100,14 +73,7 @@ export default function Login() {
             >
               Login
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link to="/">Forgot password? Sorry, we can't help</Link>
-              </Grid>
-              <Grid item>
-                <Link to="../SignUp">{"Don't have an account? Sign Up"}</Link>
-              </Grid>
-            </Grid>
+            <Footer />
           </Box>
         </Box>
       </Container>

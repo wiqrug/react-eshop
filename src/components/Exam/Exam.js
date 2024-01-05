@@ -265,8 +265,8 @@ const Exam = () => {
       ) : (
         // Page before and after starting the exam
         <div className="container result">
-          <h1>Exam: {Exam[0]["examName"]}</h1>
-          <p>Exam: {Exam[0]["examDescriprion"]}</p>
+          <h1>Exam: {Exam[0].examName}</h1>
+          <p>Exam: {Exam[0].examDescriprion}</p>
 
           {/*  Page after exam has ended */}
           {examEnded ? (
