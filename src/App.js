@@ -14,14 +14,13 @@ import Exam from "components/Exam";
 const App = () => {
   //fetched certificates
   const certificates = useCertificates();
-
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
 
   console.log(currentUser);
 
   return (
     <>
-      <NavBar />
+      <NavBar currentUser={currentUser} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route

@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 
-const NavBar = () => {
+const NavBar = ({ currentUser }) => {
   return (
     <>
       <nav>
@@ -17,7 +17,7 @@ const NavBar = () => {
               <Link to="/Certificates">Certificates</Link>
             </li>
             <li className="login-icon">
-              <Link to="/Login">&#128100;</Link>
+              <Link to={currentUser ? "/Logout" : "/Login"}>&#128100;</Link>
             </li>
           </ul>
         </div>
