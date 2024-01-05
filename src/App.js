@@ -1,22 +1,25 @@
 // src/App.js
 import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import NotFound from "./components/NotFound";
 import Home from "./components/Home";
 import Certificates from "./components/Certificates";
 import Certificate from "./components/Certificate";
 import Login from "./components/Login";
-import { Routes, Route } from "react-router-dom";
 import SignUp from "./components/SignUp";
-import { useCertificates } from "./hooks";
 import Exam from "components/Exam";
+import { useCertificates } from "./hooks";
 
 const App = () => {
   //fetched certificates
   const certificates = useCertificates();
-  const [currentUser, setCurrentUser] = useState(null);
-
-  console.log(currentUser);
+  // dummy data for currently signed in user
+  const [currentUser, setCurrentUser] = useState({
+    email: "test@test.comp",
+    name: "pipas",
+    lastName: "dick",
+  });
 
   return (
     <>

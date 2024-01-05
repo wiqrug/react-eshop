@@ -10,7 +10,6 @@ import {
   ThemeProvider,
 } from "../mui";
 
-import { useState } from "react";
 import { login, signUp } from "../../api";
 import { useNavigate } from "react-router-dom";
 import { usePasswordValidation } from "hooks";

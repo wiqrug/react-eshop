@@ -1,6 +1,9 @@
 import { login } from "api";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Makes login request -> sets current user -> navigates to homepage
+ */
 export const useLoginUser = (setCurrentUser) => {
   const navigate = useNavigate();
 
