@@ -14,6 +14,7 @@ import { useCertificates } from "./hooks";
 const App = () => {
   //fetched certificates
   const certificates = useCertificates();
+
   // dummy data for currently signed in user
   const [currentUser, setCurrentUser] = useState({
     email: "test@test.comp",
