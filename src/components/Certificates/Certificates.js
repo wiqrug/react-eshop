@@ -2,7 +2,6 @@
 import React from "react";
 import "./Certificates.css";
 import { Link } from "react-router-dom";
-import "../../api/CertificatesApi/GetCertificates.js";
 
 //fix images
 
@@ -22,7 +21,7 @@ const Certificate = ({ src, title, price, id }) => {
   );
 };
 
-const CertificatesList = ({certificates}) => {
+const CertificatesList = ({ certificates }) => {
   return (
     <section>
       {certificates?.map(({ $id: id, titleOfCertificate, price }) => (

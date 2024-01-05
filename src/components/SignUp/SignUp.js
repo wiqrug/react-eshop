@@ -13,12 +13,11 @@ import {
   Container,
   createTheme,
   ThemeProvider,
-} from"../mui"
-
+} from "../mui";
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { LoginProcedure } from "../../api/LoginProcedure";
+import { loginProcedure } from "../../api";
 import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
@@ -95,7 +94,7 @@ export default function SignUp() {
         },
       });
       if (response.ok) {
-        setTimeout(await LoginProcedure(data, setCurrentUser), 5000);
+        setTimeout(await loginProcedure(data, setCurrentUser), 5000);
         console.log(currentUser.email);
         navigate("/");
       } else {
