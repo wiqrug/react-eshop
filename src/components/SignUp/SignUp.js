@@ -16,10 +16,10 @@ import {
 } from "../mui";
 
 import { useState } from "react";
-import { loginProcedure, signUp } from "../../api";
+import { login, signUp } from "../../api";
 import { useNavigate, Link } from "react-router-dom";
 import { usePasswordValidation } from "hooks";
-import { createSignupPayload, formatAsISO } from "utils";
+import { createSignupPayload } from "utils";
 
 const defaultTheme = createTheme();
 
@@ -33,7 +33,7 @@ export default function SignUp() {
     setPasswordError,
   } = usePasswordValidation();
 
-  const [currentUser, setCurrentUser] = useState("");
+  const [, setCurrentUser] = useState({});
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -43,33 +43,20 @@ export default function SignUp() {
       return;
     }
 
-    const data = new FormData(event.currentTarget);
-    const payload = createSignupPayload(data);
-
-    await signUp(payload);
-    loginProcedure(data, setCurrentUser);
-
     try {
-      const response = await fetch("http://localhost:5021/api/Candidates", {
-        method: "POST",
-        body: JSON.stringify(payload),
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const data = new FormData(event.currentTarget);
+      const payload = createSignupPayload(data);
+
+      await signUp(payload);
+      const user = await login(data);
+      setCurrentUser({
+        email: user.email,
+        token: user.token,
       });
-      if (response.ok) {
-        console.log(data);
-        await loginProcedure(data, setCurrentUser);
-        navigate("/");
-      } else {
-        console.error(
-          "Failed to submit form data:",
-          response.status,
-          response.statusText
-        );
-      }
-    } catch (error) {
-      console.error("An error occurred while submitting form data", error);
+
+      navigate("/");
+    } catch (e) {
+      console.log(e);
     }
   };
 

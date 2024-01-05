@@ -1,4 +1,4 @@
-export async function loginProcedure(data, setCurrentUser) {
+export const login = async (data) => {
   const jsonPayload = {
     email: data.get("email"),
     password: btoa(data.get("password")), //To btoa() function kanei encode se base-64
@@ -14,11 +14,7 @@ export async function loginProcedure(data, setCurrentUser) {
 
   if (response.ok) {
     const responseData = await response.json();
-
-    setCurrentUser({
-      email: responseData.user.email,
-      token: responseData.token,
-    });
+    return responseData;
 
     // const authenticate = await fetch(
     // "http://localhost:5021/",  //EDO MPAINEI URL OPOU O SERVER PAIRNEI PISO TO TOKEN KAI KANEI TO AUTHENTICATION
@@ -38,4 +34,4 @@ export async function loginProcedure(data, setCurrentUser) {
       response.statusText
     );
   }
-}
+};

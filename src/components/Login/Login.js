@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
-import { loginProcedure } from "../../api";
+import { login } from "../../api";
 import { useNavigate } from "react-router-dom";
 import {
   Avatar,
@@ -22,7 +22,7 @@ import {
 const defaultTheme = createTheme();
 
 export default function Login() {
-  const [, setCurrentUser] = useState("");
+  const [, setCurrentUser] = useState({});
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -30,7 +30,13 @@ export default function Login() {
     const data = new FormData(event.currentTarget);
 
     try {
-      await loginProcedure(data, setCurrentUser);
+      const user = await login(data);
+      console.log(user);
+      setCurrentUser({
+        email: user.email,
+        token: user.token,
+      });
+
       navigate("/");
     } catch (error) {
       console.error("An error occurred while submitting form data", error);
