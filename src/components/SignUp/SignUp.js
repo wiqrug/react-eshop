@@ -13,6 +13,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { LoginProcedure } from "../../api/LoginProcedure";
 
 
 const defaultTheme = createTheme();
@@ -22,6 +23,8 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [currentUser, setCurrentUser] = useState('');
+
 
   const handleSubmit = async (event) => {
     event.preventDefault(); //
@@ -55,12 +58,12 @@ export default function SignUp() {
       postalCode: data.get("postalCode"),
       landlineNumber: data.get("landlineNumber"),
       mobileNumber: data.get("mobileNumber"),
-      password: data.get("password"),
+      password: btoa(data.get("password")),
     };
 
     try {
       const response = await fetch(
-        "http://localhost:5021/api/Candidates",
+        "http://localhost:5021/api/Account/Register",
         {
           method: "POST",
           body: JSON.stringify(jsonPayload),
@@ -72,6 +75,8 @@ export default function SignUp() {
       if (response.ok) {
         const responseData = await response.json();
         console.log("Response Data:", responseData);
+        setTimeout(await LoginProcedure(data, setCurrentUser), 5000);
+        console.log(currentUser.email)
       } else {
         console.error(
           "Failed to submit form data:",
@@ -79,10 +84,10 @@ export default function SignUp() {
           response.statusText
         );
       }
-    } catch (error) {
+      } catch (error) {
       console.error("An error occurred while submitting form data", error);
-    }
-  };
+      }
+    };
 
   return (
     <ThemeProvider theme={defaultTheme}>
