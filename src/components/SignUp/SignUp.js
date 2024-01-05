@@ -1,15 +1,10 @@
 import React from "react";
 import {
-  Avatar,
-  Button,
   CssBaseline,
-  TextField,
   FormControlLabel,
   Checkbox,
   Grid,
   Box,
-  LockOutlinedIcon,
-  Typography,
   Container,
   createTheme,
   ThemeProvider,
@@ -17,9 +12,13 @@ import {
 
 import { useState } from "react";
 import { login, signUp } from "../../api";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { usePasswordValidation } from "hooks";
 import { createSignupPayload } from "utils";
+
+import { PhotoId, LocationInfo, Password, PersonalInfo } from "./inputGroups";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const defaultTheme = createTheme();
 
@@ -37,7 +36,7 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); //
+    event.preventDefault();
     if (password !== confirmPassword) {
       setPasswordError();
       return;
@@ -72,12 +71,7 @@ export default function SignUp() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
+          <Header />
           <Box
             component="form"
             noValidate
@@ -85,161 +79,16 @@ export default function SignUp() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  name="firstName"
-                  label="First Name"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField name="middleName" label="Middle Name" fullWidth />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  name="lastName"
-                  label="Last Name"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField name="gender" label="Gender" required fullWidth />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="nativeLanguage"
-                  label="Native Language"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="birthDate"
-                  label="Birth Date"
-                  required
-                  fullWidth
-                  type="date"
-                  InputLabelProps={{ shrink: true }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="photoIDType"
-                  label="Photo ID Type"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="photoIDNumber"
-                  label="Photo ID Number"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="photoIDIssueDate"
-                  label="Photo ID Issue Date"
-                  required
-                  fullWidth
-                  type="date"
-                  InputLabelProps={{ shrink: true }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="email"
-                  label="Email Address"
-                  required
-                  fullWidth
-                  type="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="password"
-                  label="Password"
-                  required
-                  fullWidth
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="Confirm Password"
-                  type="password"
-                  required
-                  fullWidth
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  error={!!passwordError}
-                  helperText={passwordError}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField name="address" label="Address" required fullWidth />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="addressLine2"
-                  label="Address Line 2"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="countryOfResidence"
-                  label="Country of Residence"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="stateOrTerritoryOrProvince"
-                  label="State or Territory or Province"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="townOrCity"
-                  label="Town or City"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="postalCode"
-                  label="Postal Code"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="landlineNumber"
-                  label="Landline Number"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="mobileNumber"
-                  label="Mobile Number"
-                  required
-                  fullWidth
-                />
-              </Grid>
+              <PersonalInfo />
+              <Password
+                password={password}
+                setPassword={setPassword}
+                confirmPassword={confirmPassword}
+                setConfirmPassword={setConfirmPassword}
+                passwordError={passwordError}
+              />
+              <PhotoId />
+              <LocationInfo />
               <Grid item xs={12}>
                 <FormControlLabel
                   control={
@@ -249,19 +98,7 @@ export default function SignUp() {
                 />
               </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link to="../Login">Already have an account? Sign in</Link>
-              </Grid>
-            </Grid>
+            <Footer />
           </Box>
         </Box>
       </Container>

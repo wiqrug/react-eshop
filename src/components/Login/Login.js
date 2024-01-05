@@ -31,7 +31,7 @@ export default function Login() {
 
     try {
       const user = await login(data);
-      console.log(user);
+
       setCurrentUser({
         email: user.email,
         token: user.token,
@@ -101,7 +101,7 @@ export default function Login() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link>Forgot password? Sorry, we can't help</Link>
+                <Link to="/">Forgot password? Sorry, we can't help</Link>
               </Grid>
               <Grid item>
                 <Link to="../SignUp">{"Don't have an account? Sign Up"}</Link>
