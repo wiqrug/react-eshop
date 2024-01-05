@@ -12,6 +12,7 @@ import { useCertificates } from "./hooks";
 import Exam from "components/Exam";
 
 const App = () => {
+  //fetched certificates
   const certificates = useCertificates();
 
   return (

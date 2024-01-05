@@ -22,6 +22,7 @@ import {
 const defaultTheme = createTheme();
 
 export default function Login() {
+  //edo eixes kai currentUser alla dne to xrisimopoiouses
   const [, setCurrentUser] = useState({});
   const navigate = useNavigate();
 

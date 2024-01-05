@@ -1,17 +1,13 @@
+import { getCertificates } from "api";
 import { useState, useEffect } from "react";
 
+/**
+ * Fetches certificates, sets state, and returns it
+ */
 export const useCertificates = () => {
   const [certificates, setCertificates] = useState(null);
-
-  const fetchMyData = () =>
-    fetch("http://localhost:5021/api/Certificates")
-      .then((response) => response.json())
-      .catch((error) => {
-        console.error("Error fetching certificates:", error);
-      });
-
   useEffect(() => {
-    fetchMyData().then((data) => setCertificates(data.$values));
+    getCertificates().then((data) => setCertificates(data.$values));
   }, []); // Empty dependency array to run only once
 
   return certificates;
