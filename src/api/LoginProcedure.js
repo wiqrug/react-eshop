@@ -35,9 +35,8 @@ export async function LoginProcedure(data, setCurrentUser) {
         //     "Content-Type": "application/json",
         //     "Authorization": currentUser.token  //O SERVER VRISKEI TO TOKEN MESO TOU AUTHORIZATION HEADER
         //     }
-        // }               //IDANIKA THA PREPEI NA EPISTREFETAI APO TON SERVER MAZI ME TIN "EPIVEVAIOSI" KAI ENA REDIRECT GIA TO 
-        // )                 //HOME I GIA TO DASHBOARD COMPONENT AN EGINE ONTOS EPIVEVAIOSI ALLIOS ERROR
-
+        // }               //kai meta redirect sto home kapos...
+        
     } else {
         console.error(
         "Failed to submit form data:",

@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { LoginProcedure } from "../../api/LoginProcedure";
+import { useNavigate } from "react-router-dom";
 
 
 const defaultTheme = createTheme();
@@ -24,7 +25,7 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [currentUser, setCurrentUser] = useState('');
-
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault(); //
@@ -76,7 +77,8 @@ export default function SignUp() {
         const responseData = await response.json();
         console.log("Response Data:", responseData);
         setTimeout(await LoginProcedure(data, setCurrentUser), 5000);
-        console.log(currentUser.email)
+        console.log(currentUser.email);
+        navigate("/");
       } else {
         console.error(
           "Failed to submit form data:",

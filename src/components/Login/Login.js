@@ -13,6 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link  } from 'react-router-dom';
 import { LoginProcedure } from '../../api/LoginProcedure';
+import { useNavigate } from "react-router-dom";
 
 
 const defaultTheme = createTheme();
@@ -20,6 +21,8 @@ const defaultTheme = createTheme();
 export default function Login() {
 
   const [currentUser, setCurrentUser] = useState('');
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,6 +30,7 @@ export default function Login() {
 
   try {
     await LoginProcedure(data, setCurrentUser);
+    navigate("/");
   } catch(error) {
       console.error("An error occurred while submitting form data", error);
   }
