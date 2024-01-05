@@ -1,11 +1,10 @@
 // src/components/Certificates/Certificates.js
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Certificates.css";
 import { Link } from "react-router-dom";
 import "../../api/CertificatesApi/GetCertificates.js";
 
 //fix images
-
 
 const Certificate = ({ src, title, price, id }) => {
   return (
@@ -23,31 +22,16 @@ const Certificate = ({ src, title, price, id }) => {
   );
 };
 
-const CertificatesList = () => {
-  const [certificates, setCertificates] = useState(null);
-
-  useEffect(() => {
-    fetch("http://localhost:5021/api/Certificates")
-      .then(response => response.json())
-      .then(data => {
-        setCertificates(data.$values); // Update the state with the fetched data
-      })
-      .catch(error => {
-        console.error('Error fetching certificates:', error);
-      }
-      );
-
-  }, []); // Empty dependency array to run only once
-
+const CertificatesList = ({certificates}) => {
   return (
     <section>
-      {certificates && certificates.map((certificate) => (
+      {certificates?.map(({ $id: id, titleOfCertificate, price }) => (
         <Certificate
-          key={certificate.$id} // Using $id as the unique key
-          id={certificate.$id} // Assuming $id as the unique ID for each certificate
+          key={id} // Using $id as the unique key
+          id={id} // Assuming $id as the unique ID for each certificate
           src={"https://image.jpg"} // Default image src
-          title={certificate.titleOfCertificate}
-          price={certificate.price} 
+          title={titleOfCertificate}
+          price={price}
         />
       ))}
     </section>
@@ -55,4 +39,3 @@ const CertificatesList = () => {
 };
 
 export default CertificatesList;
-

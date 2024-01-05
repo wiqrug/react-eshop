@@ -1,30 +1,54 @@
 import React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Grid,
+  Box,
+  LockOutlinedIcon,
+  Typography,
+  Container,
+  createTheme,
+  ThemeProvider,
+} from"../mui"
+
+
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { LoginProcedure } from "../../api/LoginProcedure";
 import { useNavigate } from "react-router-dom";
 
-
 const defaultTheme = createTheme();
 
-export default function SignUp() {
-
+const usePasswordValidation = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [currentUser, setCurrentUser] = useState('');
+
+  return {
+    password,
+    confirmPassword,
+    passwordError,
+    setPassword,
+    setConfirmPassword,
+    setPasswordError,
+  };
+};
+
+export default function SignUp() {
+  const {
+    password,
+    confirmPassword,
+    passwordError,
+    setPassword,
+    setConfirmPassword,
+    setPasswordError,
+  } = usePasswordValidation();
+
+  const [currentUser, setCurrentUser] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -63,19 +87,14 @@ export default function SignUp() {
     };
 
     try {
-      const response = await fetch(
-        "http://localhost:5021/api/Candidates",
-        {
-          method: "POST",
-          body: JSON.stringify(jsonPayload),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch("http://localhost:5021/api/Candidates", {
+        method: "POST",
+        body: JSON.stringify(jsonPayload),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (response.ok) {
-        const responseData = await response.json();
-        console.log("Response Data:", responseData);
         setTimeout(await LoginProcedure(data, setCurrentUser), 5000);
         console.log(currentUser.email);
         navigate("/");
@@ -86,10 +105,10 @@ export default function SignUp() {
           response.statusText
         );
       }
-      } catch (error) {
+    } catch (error) {
       console.error("An error occurred while submitting form data", error);
-      }
-    };
+    }
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>

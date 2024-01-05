@@ -54,17 +54,17 @@
 // When clicked on the certificate, take the certificate title and adjust to the find method 
 // in order to print the details of that certain certificate
 // to implement this, maybe we need to use Link! 
-console.log("hello");
+// console.log("hello");
 
-        fetch("http://localhost:5021/api/Certificates")
-            .then(response => response.json())
-            .then(data => {
-                const certificates = data.$values;
-                const certificate = certificates.find(certificate => certificate.titleOfCertificate === "Learn React");
-                console.log("psoli");
-                console.log(certificate);
-            })
-            .catch(error => console.error('Error:', error));
+//         fetch("http://localhost:5021/api/Certificates")
+//             .then(response => response.json())
+//             .then(data => {
+//                 const certificates = data.$values;
+//                 const certificate = certificates.find(certificate => certificate.titleOfCertificate === "Learn React");
+//                 console.log("psoli");
+//                 console.log(certificate);
+//             })
+//             .catch(error => console.error('Error:', error));
 
 
 
