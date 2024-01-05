@@ -1,14 +1,14 @@
 // src/App.js
 import React, { useState, useEffect } from "react";
-import NavBar from "./components/NavBar/NavBar";
-import NotFound from "./components/NotFound/NotFound";
-import Home from "./components/Home/Home";
-import Certificates from "./components/Certificates/Certificates";
-import Certificate from "./components/Certificate/Certificate";
-import Login from "./components/Login/Login";
+import NavBar from "./components/NavBar";
+import NotFound from "./components/NotFound";
+import Home from "./components/Home";
+import Certificates from "./components/Certificates";
+import Certificate from "./components/Certificate";
+import Login from "./components/Login";
 import { Routes, Route } from "react-router-dom";
-import SignUp from "./components/SignUp/SignUp";
-import Exam from "./components/Exam/Exam";
+import SignUp from "./components/SignUp";
+import Exam from "./components/Exam";
 
 const App = () => {
   const [certificates, setCertificates] = useState(null);

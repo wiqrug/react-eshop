@@ -1,7 +1,6 @@
 // src/components/Home/Home.js
-import React, { useState, useEffect } from 'react';
-import { Link,Routes, Route} from 'react-router-dom';
-import Certificates from '../Certificates/Certificates';
+import React, { useState } from 'react';
+import { Link} from 'react-router-dom';
 import './Home.css';
 
 export default function Home(){
