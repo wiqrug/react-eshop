@@ -1,31 +1,29 @@
 // src/components/NavBar/NavBar.js
-import React from 'react';
-import {Link, Routes, Route} from 'react-router-dom';
-import './NavBar.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./NavBar.css";
 
-
-const NavBar = (isLoggedIn) => {
-    return (
-        <>
-        
-        <nav>
-            <div className="navbar-brand">CertShop</div>
-            <div className="nav-menu">
-                <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/Certificates">Certificates</Link>
-                    </li>
-                    <li className="login-icon">
-                         <Link to={isLoggedIn ? "/Login" : "/Logout"}>&#128100;</Link>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        </>
-    );
+const NavBar = ({ currentUser }) => {
+  return (
+    <>
+      <nav>
+        <div className="navbar-brand">CertShop</div>
+        <div className="nav-menu">
+          <ul className="nav-menu-items">
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/Certificates">Certificates</Link>
+            </li>
+            <li className="login-icon">
+              <Link to={currentUser ? "/Logout" : "/Login"}>&#128100;</Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </>
+  );
 };
 
 export default NavBar;

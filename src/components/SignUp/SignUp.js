@@ -1,95 +1,61 @@
 import React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { LoginProcedure } from "../../api/LoginProcedure";
-import { useNavigate } from "react-router-dom";
+import {
+  CssBaseline,
+  FormControlLabel,
+  Checkbox,
+  Grid,
+  Box,
+  Container,
+  createTheme,
+  ThemeProvider,
+} from "../mui";
 
+import { login, signUp } from "../../api";
+import { useNavigate } from "react-router-dom";
+import { usePasswordValidation } from "hooks";
+import { createSignupPayload } from "utils";
+
+import { PhotoId, LocationInfo, Password, PersonalInfo } from "./inputGroups";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const defaultTheme = createTheme();
 
-export default function SignUp(setIsLoggedIn) {
+export default function SignUp({ setCurrentUser }) {
+  const {
+    password,
+    confirmPassword,
+    passwordError,
+    setPassword,
+    setConfirmPassword,
+    setPasswordError,
+  } = usePasswordValidation();
 
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [currentUser, setCurrentUser] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); //
+    event.preventDefault();
     if (password !== confirmPassword) {
-      setPasswordError("Passwords do not match");
+      setPasswordError();
       return;
     }
-    setPasswordError("");
-    const data = new FormData(event.currentTarget);
-
-    const formatAsISO = (dateString) => {
-      return dateString ? new Date(dateString).toISOString() : null;
-    };
-
-    const jsonPayload = {
-      firstName: data.get("firstName"),
-      middleName: data.get("middleName"),
-      lastName: data.get("lastName"),
-      gender: data.get("gender"),
-      nativeLanguage: data.get("nativeLanguage"),
-      birthDate: formatAsISO(data.get("birthDate")),
-      photoIDType: data.get("photoIDType"),
-      photoIDNumber: data.get("photoIDNumber"),
-      photoIDIssueDate: formatAsISO(data.get("photoIDIssueDate")),
-      email: data.get("email"),
-      address: data.get("address"),
-      addressLine2: data.get("addressLine2"),
-      countryOfResidence: data.get("countryOfResidence"),
-      stateOrTerritoryOrProvince: data.get("stateOrTerritoryOrProvince"),
-      townOrCity: data.get("townOrCity"),
-      postalCode: data.get("postalCode"),
-      landlineNumber: data.get("landlineNumber"),
-      mobileNumber: data.get("mobileNumber"),
-      password: btoa(data.get("password")),
-    };
 
     try {
-      const response = await fetch(
-        "http://localhost:5021/api/Account/Register",
-        {
-          method: "POST",
-          body: JSON.stringify(jsonPayload),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log("Response Data:", responseData);
-        await LoginProcedure(data, setCurrentUser, setIsLoggedIn);
-        console.log(currentUser.email);
-        navigate("/");
-      } else {
-        console.error(
-          "Failed to submit form data:",
-          response.status,
-          response.statusText
-        );
-      }
-      } catch (error) {
-      console.error("An error occurred while submitting form data", error);
-      }
-    };
+      const data = new FormData(event.currentTarget);
+      const payload = createSignupPayload(data);
+
+      await signUp(payload);
+      const user = await login(data);
+      setCurrentUser({
+        email: user.email,
+        token: user.token,
+      });
+
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -103,12 +69,7 @@ export default function SignUp(setIsLoggedIn) {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
+          <Header />
           <Box
             component="form"
             noValidate
@@ -116,161 +77,16 @@ export default function SignUp(setIsLoggedIn) {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  name="firstName"
-                  label="First Name"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField name="middleName" label="Middle Name" fullWidth />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  name="lastName"
-                  label="Last Name"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField name="gender" label="Gender" required fullWidth />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="nativeLanguage"
-                  label="Native Language"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="birthDate"
-                  label="Birth Date"
-                  required
-                  fullWidth
-                  type="date"
-                  InputLabelProps={{ shrink: true }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="photoIDType"
-                  label="Photo ID Type"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="photoIDNumber"
-                  label="Photo ID Number"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="photoIDIssueDate"
-                  label="Photo ID Issue Date"
-                  required
-                  fullWidth
-                  type="date"
-                  InputLabelProps={{ shrink: true }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="email"
-                  label="Email Address"
-                  required
-                  fullWidth
-                  type="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="password"
-                  label="Password"
-                  required
-                  fullWidth
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="Confirm Password"
-                  type="password"
-                  required
-                  fullWidth
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  error={!!passwordError}
-                  helperText={passwordError}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField name="address" label="Address" required fullWidth />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="addressLine2"
-                  label="Address Line 2"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="countryOfResidence"
-                  label="Country of Residence"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="stateOrTerritoryOrProvince"
-                  label="State or Territory or Province"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="townOrCity"
-                  label="Town or City"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="postalCode"
-                  label="Postal Code"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="landlineNumber"
-                  label="Landline Number"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="mobileNumber"
-                  label="Mobile Number"
-                  required
-                  fullWidth
-                />
-              </Grid>
+              <PersonalInfo />
+              <Password
+                password={password}
+                setPassword={setPassword}
+                confirmPassword={confirmPassword}
+                setConfirmPassword={setConfirmPassword}
+                passwordError={passwordError}
+              />
+              <PhotoId />
+              <LocationInfo />
               <Grid item xs={12}>
                 <FormControlLabel
                   control={
@@ -280,21 +96,7 @@ export default function SignUp(setIsLoggedIn) {
                 />
               </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link to="../Login" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
+            <Footer />
           </Box>
         </Box>
       </Container>

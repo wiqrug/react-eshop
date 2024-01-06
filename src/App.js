@@ -1,34 +1,49 @@
 // src/App.js
 import React, { useState } from "react";
-import NavBar from "./components/NavBar/NavBar";
-import NotFound from "./components/NotFound/NotFound";
-import Home from "./components/Home/Home";
-import Certificates from "./components/Certificates/Certificates";
-import Certificate from "./components/Certificate/Certificate";
-import Login from "./components/Login/Login";
-import { Link, Routes, Route } from "react-router-dom";
-import SignUp from "./components/SignUp/SignUp";
-import Exam from "./components/Exam/Exam";
+import { Routes, Route } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import NotFound from "./components/NotFound";
+import Home from "./components/Home";
+import Certificates from "./components/Certificates";
+import Certificate from "./components/Certificate";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import Exam from "components/Exam";
+import { useCertificates } from "./hooks";
 
 
 const App = () => {
+  //fetched certificates
+  const certificates = useCertificates();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  function updateLoginStatus(status){
-    setIsLoggedIn(status);
-  };
+  // dummy data for currently signed in user
+  const [currentUser, setCurrentUser] = useState({
+    email: "test@test.comp",
+    name: "pipas",
+    lastName: "dick",
+  });
 
   return (
     <>
-      <NavBar isLoggedIn={isLoggedIn}/>
-
+      <NavBar currentUser={currentUser} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Certificates" element={<Certificates />} />
-        <Route path="/Certificate/:id" element={<Certificate />} />
-        <Route path="/Login" element={isLoggedIn? <Home /> : <Login updateLoginStatus={updateLoginStatus}/>} /> {/* na ftiakso ena logout page */}
-        <Route path="/SignUp" element={<SignUp setIsLoggedIn={setIsLoggedIn}/>} />
+        <Route
+          path="/Certificates"
+          element={<Certificates certificates={certificates} />}
+        />
+        <Route
+          path="/Certificate/:id"
+          element={<Certificate certificates={certificates} />}
+        />
+        <Route
+          path="/Login"
+          element={<Login setCurrentUser={setCurrentUser} />}
+        />
+        <Route
+          path="/SignUp"
+          element={<SignUp setCurrentUser={setCurrentUser} />}
+        />
         <Route path="/Exam/:id" element={<Exam />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
