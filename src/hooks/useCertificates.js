@@ -1,4 +1,4 @@
-import { getCertificates } from "api";
+import { getCertificates } from "../api";
 import { useState, useEffect } from "react";
 
 /**

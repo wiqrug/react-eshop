@@ -1,4 +1,4 @@
-import { formatAsISO } from "utils";
+import { formatAsISO } from "./formatAsISO";
 
 export const createSignupPayload = (data) => ({
   firstName: data.get("firstName"),

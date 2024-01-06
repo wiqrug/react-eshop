@@ -9,11 +9,11 @@ import {
   FormControlLabel,
   ThemeProvider,
   createTheme,
-} from "components/mui";
+} from "../mui";
 import Header from "./Header";
 import Footer from "./Footer";
 import Inputs from "./Inputs";
-import { useLoginUser } from "hooks";
+import { useLoginUser } from "../../hooks";
 
 const defaultTheme = createTheme();
 

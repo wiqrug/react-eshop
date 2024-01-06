@@ -8,7 +8,7 @@ import Certificates from "./components/Certificates";
 import Certificate from "./components/Certificate";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
-import Exam from "components/Exam";
+import Exam from "./components/Exam";
 import { useCertificates } from "./hooks";
 
 
@@ -17,11 +17,7 @@ const App = () => {
   const certificates = useCertificates();
 
   // dummy data for currently signed in user
-  const [currentUser, setCurrentUser] = useState({
-    email: "test@test.comp",
-    name: "pipas",
-    lastName: "dick",
-  });
+  const [currentUser, setCurrentUser] = useState(null);
 
   return (
     <>
