@@ -3,7 +3,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 
+//App.js has a card coded user. in order to check his credentials to display
+//his certificates, we need to check
+
 const NavBar = ({ currentUser }) => {
+  console.log(currentUser);
   return (
     <>
       <nav>
@@ -16,8 +20,14 @@ const NavBar = ({ currentUser }) => {
             <li>
               <Link to="/Certificates">Certificates</Link>
             </li>
+
+            <li>
+              {currentUser.name === "pipas" && (
+                <Link to="/YourCertificates">Your Certificates</Link>
+              )}
+            </li>
             <li className="login-icon">
-              <Link to={currentUser ? "/Logout" : "/Login"}>&#128100;</Link>
+              <Link to={currentUser ? "/Login" : "/Logout"}>&#128100;</Link>
             </li>
           </ul>
         </div>
