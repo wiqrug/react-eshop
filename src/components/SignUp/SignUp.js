@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
-export default function SignUp() {
+export default function SignUp(setIsLoggedIn) {
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -64,7 +64,7 @@ export default function SignUp() {
 
     try {
       const response = await fetch(
-        "http://localhost:5021/api/Candidates",
+        "http://localhost:5021/api/Account/Register",
         {
           method: "POST",
           body: JSON.stringify(jsonPayload),
@@ -76,7 +76,7 @@ export default function SignUp() {
       if (response.ok) {
         const responseData = await response.json();
         console.log("Response Data:", responseData);
-        setTimeout(await LoginProcedure(data, setCurrentUser), 5000);
+        await LoginProcedure(data, setCurrentUser, setIsLoggedIn);
         console.log(currentUser.email);
         navigate("/");
       } else {

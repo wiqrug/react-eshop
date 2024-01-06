@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export async function LoginProcedure(data, setCurrentUser) {
+export async function LoginProcedure(data, setCurrentUser, updateLoginStatus) {
   const jsonPayload = {
     email: data.get("email"),
     password: btoa(data.get("password"))        //To btoa() function kanei encode se base-64
@@ -20,6 +20,7 @@ export async function LoginProcedure(data, setCurrentUser) {
   if (response.ok) {
     const responseData = await response.json();
     console.log("Response Data:", responseData);
+    updateLoginStatus(true);
     setCurrentUser({
       email: responseData.user.email,
       token: responseData.token,

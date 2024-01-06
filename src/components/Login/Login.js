@@ -18,10 +18,11 @@ import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
-export default function Login() {
+export default function Login(updateLoginStatus) {
 
   const [currentUser, setCurrentUser] = useState('');
   const navigate = useNavigate();
+
 
 
   const handleSubmit = async (event) => {
@@ -29,7 +30,7 @@ export default function Login() {
     const data = new FormData(event.currentTarget);
 
   try {
-    await LoginProcedure(data, setCurrentUser);
+    await LoginProcedure(data, setCurrentUser, updateLoginStatus);
     navigate("/");
   } catch(error) {
       console.error("An error occurred while submitting form data", error);

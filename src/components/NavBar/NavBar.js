@@ -4,7 +4,7 @@ import {Link, Routes, Route} from 'react-router-dom';
 import './NavBar.css';
 
 
-const NavBar = () => {
+const NavBar = (isLoggedIn) => {
     return (
         <>
         
@@ -19,7 +19,7 @@ const NavBar = () => {
                         <Link to="/Certificates">Certificates</Link>
                     </li>
                     <li className="login-icon">
-                         <Link to="/Login">&#128100;</Link>
+                         <Link to={isLoggedIn ? "/Login" : "/Logout"}>&#128100;</Link>
                     </li>
                 </ul>
             </div>

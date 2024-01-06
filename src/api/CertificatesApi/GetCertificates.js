@@ -61,7 +61,6 @@ console.log("hello");
             .then(data => {
                 const certificates = data.$values;
                 const certificate = certificates.find(certificate => certificate.titleOfCertificate === "Learn React");
-                console.log("psoli");
                 console.log(certificate);
             })
             .catch(error => console.error('Error:', error));
