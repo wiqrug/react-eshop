@@ -21,3 +21,21 @@ Add property src in the backedn in order to get the link for the image to displa
 Certificate component:
     When click on button Buy now, if user is logged in then hes able to Buy
      if use is not logged in, then it needs to redirect to the login/signup page
+
+
+
+
+
+ 
+ In order to show candidates Certificates i need to call 2 gets
+ 
+ 1) Obtained certificates
+ 2) Unobtained certificates
+ 3) New offers / Hot certificates
+
+
+In order to display the admin UI, we need backend to add in the header
+something like isAdmin, to simply check if he has the right to see that page
+
+In order to achieve that and avoid major security issuses, we will create a hard coded
+hex number

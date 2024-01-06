@@ -18,7 +18,7 @@ const App = () => {
   // dummy data for currently signed in user
   const [currentUser, setCurrentUser] = useState({
     email: "test@test.comp",
-    name: "pitsas",
+    name: "pipas",
     lastName: "dick",
   });
   console.log(currentUser);
