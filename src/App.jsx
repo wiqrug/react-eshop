@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Exam from "components/Exam";
 import { useCertificates } from "./hooks";
+import CandidateCertificates from "components/CandidateCertificates/CandidateCertificates";
 
 const App = () => {
   //fetched certificates
@@ -45,6 +46,9 @@ const App = () => {
           element={<SignUp setCurrentUser={setCurrentUser} />}
         />
         <Route path="/Exam/:id" element={<Exam />} />
+
+        <Route path="/MyCertificates" element={<CandidateCertificates />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
