@@ -18,7 +18,11 @@ const App = () => {
   const certificates = useCertificates();
 
   // dummy data for currently signed in user
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState({
+    email: "test@test.comp",
+    name: "pipas",
+    lastName: "dick",
+  });
 
   return (
     <>
