@@ -10,17 +10,25 @@ import { Link, Routes, Route } from "react-router-dom";
 import SignUp from "./components/SignUp/SignUp";
 import Exam from "./components/Exam/Exam";
 
+
 const App = () => {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  function updateLoginStatus(status){
+    setIsLoggedIn(status);
+  };
+
   return (
     <>
-      <NavBar />
+      <NavBar isLoggedIn={isLoggedIn}/>
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Certificates" element={<Certificates />} />
         <Route path="/Certificate/:id" element={<Certificate />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/Login" element={isLoggedIn? <Home /> : <Login updateLoginStatus={updateLoginStatus}/>} /> {/* na ftiakso ena logout page */}
+        <Route path="/SignUp" element={<SignUp setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="/Exam/:id" element={<Exam />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
