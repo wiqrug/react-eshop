@@ -1,4 +1,4 @@
-import { Avatar, LockOutlinedIcon, Typography } from "components/mui";
+import { Avatar, LockOutlinedIcon, Typography } from "../mui";
 import React from "react";
 
 const Header = () => (

@@ -1,4 +1,4 @@
-import { Grid } from "components/mui";
+import { Grid } from "../mui";
 import React from "react";
 import { Link } from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import { login } from "api";
+import { login } from "../api";
 import { useNavigate } from "react-router-dom";
 
 /**

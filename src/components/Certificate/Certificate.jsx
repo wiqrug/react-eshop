@@ -1,6 +1,6 @@
 import React from "react";
 import "./Certificate.css";
-import { useCertificate } from "hooks";
+import { useCertificate } from "../../hooks";
 
 const CertificateDetails = ({ certificates }) => {
   const certificate = useCertificate(certificates);

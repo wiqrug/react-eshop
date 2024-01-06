@@ -1,4 +1,4 @@
-import { Grid, TextField } from "components/mui";
+import { Grid, TextField } from "../../mui";
 import React from "react";
 
 const PhotoId = () => (
