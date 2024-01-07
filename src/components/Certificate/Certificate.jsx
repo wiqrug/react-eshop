@@ -3,6 +3,7 @@ import "./Certificate.css";
 import { useCertificate } from "../../hooks";
 
 const CertificateDetails = ({ certificates }) => {
+  
   const certificate = useCertificate(certificates);
 
   if (!certificate) {
@@ -12,7 +13,7 @@ const CertificateDetails = ({ certificates }) => {
   return (
     <div className="Certificate-Details-Container">
       <div className="Certificate-Details-Title">
-        <h1>{certificate.titleOfCertificate}</h1>
+        <h1>{certificate.title}</h1>
       </div>
       <img
         className="Certificate-Logo"

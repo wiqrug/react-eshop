@@ -1,8 +1,4 @@
-ALEKOS: Print details for each certificate
-
-
 remove uppercase in css styles 
-js to jsx
 PascalCase to camelCase for components
 Pascal-Case to kebab-case for css files
 
@@ -12,19 +8,9 @@ What Backend need to send:
 
 -- Home (if not  loggedIn): random 6-10 certificates from table certificates
 
-
-NOTE FROM ALEKOS: Paidia egw lew simera an thelete na gemiso ton api fakelo me oles tis HTTP methods pou thelete
-
-
-Add property src in the backedn in order to get the link for the image to display in the frontend
-
 Certificate component:
     When click on button Buy now, if user is logged in then hes able to Buy
      if use is not logged in, then it needs to redirect to the login/signup page
-
-
-
-
 
  
  In order to show candidates Certificates i need to call 2 gets
@@ -39,3 +25,10 @@ something like isAdmin, to simply check if he has the right to see that page
 
 In order to achieve that and avoid major security issuses, we will create a hard coded
 hex number
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Backend problems:
+
+When we initialize a CandidateCertificate, Exams should have been initialized 

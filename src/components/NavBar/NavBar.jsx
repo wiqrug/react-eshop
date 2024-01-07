@@ -23,7 +23,7 @@ const NavBar = ({ currentUser }) => {
 
             <li>
               {currentUser.name === "pipas" && (
-                <Link to="/YourCertificates">My Certificates</Link>
+                <Link to="/MyCertificates">My Certificates</Link>
               )}
             </li>
             <li className="login-icon">

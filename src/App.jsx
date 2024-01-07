@@ -22,6 +22,7 @@ const App = () => {
     email: "test@test.comp",
     name: "pipas",
     lastName: "dick",
+    candidateNumber: 1
   });
 
   return (
