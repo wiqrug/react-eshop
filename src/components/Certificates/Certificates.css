@@ -21,13 +21,27 @@ article {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   width: 300px; /* Fixed width for articles */
-  max-width: 100%; /* To ensure responsiveness on smaller screens */
+  height: 400px; /* Fixed height for articles */
   margin: 10px; /* Space between articles */
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  overflow: hidden;
+  justify-content: space-between; /* Distribute space between content and button */
+  overflow: hidden; /* Hide overflow content */
+}
+
+/* Styles for content inside article to handle overflow */
+.article-content {
+  overflow-y: auto; /* Enable vertical scroll if content overflows */
+  margin-bottom: 10px; /* Space above the button */
+}
+
+/* Other styles remain unchanged */
+
+/* Ensure button is at the bottom */
+.Purhcase-Certificate {
+  margin-top: auto; /* Push the button to the bottom */
+  /* Other button styles remain unchanged */
 }
 
 /* Ensure articles are displayed next to each other */
