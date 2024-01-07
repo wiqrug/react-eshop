@@ -4,8 +4,12 @@ section {
   display: flex;
   flex-wrap: wrap;
   justify-content: center; /* Center the articles */
-  grid-gap: 20px;
   padding: 20px;
+}
+
+/* Styling for a single article */
+section:only-child {
+  margin: 0 auto; /* Center a single article */
 }
 
 article {
@@ -16,7 +20,7 @@ article {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-  width: 300px; /* Fixed width similar to Udemy's course cards */
+  width: 300px; /* Fixed width for articles */
   max-width: 100%; /* To ensure responsiveness on smaller screens */
   margin: 10px; /* Space between articles */
 
@@ -24,6 +28,13 @@ article {
   flex-direction: column;
   align-items: center;
   overflow: hidden;
+}
+
+/* Ensure articles are displayed next to each other */
+@media (min-width: 601px) {
+  section {
+    justify-content: flex-start; /* Align articles to the start */
+  }
 }
 
 article:hover {
