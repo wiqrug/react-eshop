@@ -16,6 +16,8 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
   //isBought talks to the database.
   //returns true or false
 
+  //
+
   const checkBought = () => {};
 
   const jsonPayload = {
