@@ -59,7 +59,7 @@ nav ul li:hover a {
   display: flex; /* Flex container for vertical centering */
   align-items: center; /* Center icon vertically */
   /*background-color: #004084;*/ /* Business-like blue background */
-  color: white; /* White color for the icon */
+  /* color: white; White color for the icon */
   border-radius: 5px; /* Rounded corners for a button-like look */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
   transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
@@ -103,4 +103,20 @@ nav ul li:hover a {
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.user-icon {
+  width: 30px;
+  height: 30px;
+  background-color: #333;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+.user-icon:hover {
+  transform: scale(1.1) rotate(180deg); /* Scale up and rotate 180 degrees on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Larger shadow on hover */
 }

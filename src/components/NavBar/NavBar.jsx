@@ -21,13 +21,11 @@ const NavBar = ({ cookieValue }) => {
             </li>
 
             <li>
-              {cookieValue && (
-                <Link to="/MyCertificates">My Certificates</Link>
-              )}
+              {cookieValue && <Link to="/MyCertificates">My Certificates</Link>}
             </li>
             <li className="login-icon">
-            <div className="dropdown">
-                <button className="dropbtn">&#128100;</button>
+              <div className="dropdown">
+                <button className="dropbtn user-icon">&#128512;</button>
                 <div className="dropdown-content">
                   {!cookieValue ? (
                     <div>
@@ -38,7 +36,7 @@ const NavBar = ({ cookieValue }) => {
                     <div>
                       <Link to="/MyProfile">My Profile</Link>
                       <Link to="/Logout">Log Out</Link>
-                      </div>
+                    </div>
                   )}
                 </div>
               </div>
