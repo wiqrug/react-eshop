@@ -4,6 +4,7 @@ import { useCertificate } from "../../hooks";
 import { useCandidateInfo } from "hooks/useCandidateInfo";
 import { useCertificateInfo } from "hooks/useCertificateInfo";
 import { buyCertificate } from "api/certificates/buyCertificate";
+import { getCookie } from "utils/getCookie";
 
 const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
@@ -41,13 +42,14 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
         <div className="Certificate-Details-Description">
           <h1>{certificate.description}</h1>
         </div>
-
         {!isBought && (
           <button className="Purchase-Certificate" onClick={handleBuy}>
             Buy now
           </button>
         )}
-        {isBought && <button className="Purchased-Certificate">Bought</button>}
+        {getCookie() && isBought && (
+          <button className="Purchased-Certificate">Bought</button>
+        )}
       </div>
     )
   );
