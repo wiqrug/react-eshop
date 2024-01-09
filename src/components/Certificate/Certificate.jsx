@@ -13,7 +13,8 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
   const certTitle = useCertificateInfo(certificate);
   const [isBought, setIsBought] = useState(false);
 
-  //isBought should return true or false
+  //isBought talks to the database.
+  //returns true or false
 
   const checkBought = () => {};
 
