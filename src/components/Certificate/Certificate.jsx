@@ -13,8 +13,8 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
   const certTitle = useCertificateInfo(certificate);
   const [isBought, setIsBought] = useState(false);
 
-  //make a function that gets available certificates, if this.certificate.!isInAvailableCerts()
-  //Change the isBoughtState
+  //isBought should return true or false
+
   const checkBought = () => {};
 
   const jsonPayload = {
