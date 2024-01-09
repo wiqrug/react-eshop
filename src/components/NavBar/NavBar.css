@@ -106,19 +106,18 @@ nav ul li:hover a {
 }
 
 .user-icon {
-  width: 65px;
-  height: 65px;
+  width: 60px;
+  height: 60px;
   background-color: #333;
   color: white;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 40px;
-  transition: transform 0.8s ease, box-shadow 0.8s ease; /* Slower transition duration */
+  font-size: 20px;
 }
 
 .user-icon:hover {
-  transform: scale(1.1) rotate(180deg); /* Scale up and rotate 180 degrees on hover */
+  transform: scale(1.1) rotate(180deg); /*Scale up and rotate 180 degrees on hover */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Larger shadow on hover */
 }
