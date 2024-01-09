@@ -3,7 +3,6 @@ import "./Certificate.css";
 import { useCertificate } from "../../hooks";
 import { UseBuyCertificate } from "api/certificates/buyCertificate";
 
-
 const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
 
@@ -11,25 +10,25 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
   const [certTitle, setCertTitle] = useState(null);
 
   useEffect(() => {
-      if(cookieValue){
-          setCandNum(cookieValue.candidateNumber);
-      }
+    if (cookieValue) {
+      setCandNum(cookieValue.candidateNumber);
+    }
   }, [cookieValue]);
 
   useEffect(() => {
-      if(certificate){
-          setCertTitle(certificate.title);
-      }
+    if (certificate) {
+      setCertTitle(certificate.title);
+    }
   }, [certificate]);
 
   const jsonPayload = {
-      candidateNumber: candNum,
-      title: certTitle
+    candidateNumber: candNum,
+    title: certTitle,
   };
 
-const handleBuy = async () => {
-  await UseBuyCertificate(jsonPayload);
-}
+  const handleBuy = async () => {
+    await UseBuyCertificate(jsonPayload);
+  };
 
   // if (!certificate) {
   //   return <div className="fancyAnime">Loading...</div>;
@@ -49,7 +48,9 @@ const handleBuy = async () => {
         <div className="Certificate-Details-Description">
           <h1>{certificate.description}</h1>
         </div>
-        <button className="Purhcase-Certificate" onClick={handleBuy}>Buy now</button>
+        <button className="Purhcase-Certificate" onClick={handleBuy}>
+          Buy now
+        </button>
       </div>
     )
   );
