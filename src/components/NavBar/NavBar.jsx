@@ -6,8 +6,7 @@ import "./NavBar.css";
 //App.js has a card coded user. in order to check his credentials to display
 //his certificates, we need to check
 
-const NavBar = ({ currentUser }) => {
-  console.log(currentUser);
+const NavBar = ({ cookieValue }) => {
   return (
     <>
       <nav>
@@ -22,12 +21,24 @@ const NavBar = ({ currentUser }) => {
             </li>
 
             <li>
-              {currentUser.name === "pipas" && (
+              {cookieValue && (
                 <Link to="/MyCertificates">My Certificates</Link>
               )}
             </li>
             <li className="login-icon">
-              <Link to={currentUser ? "/Login" : "/Logout"}>&#128100;</Link>
+            <div className="dropdown">
+                <button className="dropbtn">&#128100;</button>
+                <div className="dropdown-content">
+                  {!cookieValue ? (
+                    <div>
+                      <Link to="/Login">Log In</Link>
+                      <Link to="/SignUp">Sign Up</Link>
+                    </div>
+                  ) : (
+                    <Link to="/Logout">Log Out</Link>
+                  )}
+                </div>
+              </div>
             </li>
           </ul>
         </div>

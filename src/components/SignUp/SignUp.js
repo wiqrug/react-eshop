@@ -21,7 +21,7 @@ import Footer from "./Footer";
 
 const defaultTheme = createTheme();
 
-export default function SignUp({ setCurrentUser }) {
+export default function SignUp({ handleSetCookie }) {
   const {
     password,
     confirmPassword,
@@ -46,9 +46,10 @@ export default function SignUp({ setCurrentUser }) {
 
       await signUp(payload);
       const user = await login(data);
-      setCurrentUser({
-        email: user.email,
+      handleSetCookie({
+        email: user.user.email,
         token: user.token,
+        candidateNumber: user.user.candidateNumber
       });
 
       navigate("/");

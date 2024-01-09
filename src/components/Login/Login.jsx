@@ -17,8 +17,8 @@ import { useLoginUser } from "../../hooks";
 
 const defaultTheme = createTheme();
 
-export default function Login({ setCurrentUser }) {
-  const handleSubmit = useLoginUser(setCurrentUser);
+export default function Login({ handleSetCookie }) {
+  const handleSubmit = useLoginUser({handleSetCookie});
 
   return (
     <ThemeProvider theme={defaultTheme}>

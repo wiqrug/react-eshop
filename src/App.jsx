@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import NotFound from "./components/NotFound";
@@ -11,23 +11,41 @@ import SignUp from "./components/SignUp";
 import Exam from "./components/Exam";
 import { useCertificates } from "./hooks";
 import CandidateCertificates from "components/CandidateCertificates/CandidateCertificates";
+import Cookies from "js-cookie";
+import Logout from "components/Logout/Logout";
 
 
 const App = () => {
   //fetched certificates
   const certificates = useCertificates();
 
-  // dummy data for currently signed in user
-  const [currentUser, setCurrentUser] = useState({
-    email: "test@test.comp",
-    name: "pipas",
-    lastName: "dick",
-    candidateNumber: 1
-  });
+  const [cookieValue, setcookieValue] = useState('');
+
+  useEffect(() => {
+    // Retrieve the cookie value when the component mounts
+    const storedCookie = Cookies.get('currentUser');
+    if (storedCookie) {
+      // Parse the JSON string into an object
+      setcookieValue(JSON.parse(storedCookie));
+    }
+  }, []);
+
+  const handleSetCookie = (cookie) => {
+    // Set a new cookie value with an object
+    const newValue = cookie;
+    Cookies.set('currentUser', JSON.stringify(newValue), { expires: 7 }); // Set cookie with a 7-day expiration
+    setcookieValue(newValue);
+  };
+
+  const handleRemoveCookie = () => {
+    // Remove the cookie
+    Cookies.remove('currentUser');
+    setcookieValue('');
+  };
 
   return (
     <>
-      <NavBar currentUser={currentUser} />
+      <NavBar cookieValue={cookieValue} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -36,16 +54,17 @@ const App = () => {
         />
         <Route
           path="/Certificate/:id"
-          element={<Certificate certificates={certificates} />}
+          element={<Certificate certificates={certificates} cookieValue={cookieValue}/>}
         />
         <Route
           path="/Login"
-          element={<Login setCurrentUser={setCurrentUser} />}
+          element={<Login handleSetCookie={handleSetCookie} />}
         />
         <Route
           path="/SignUp"
-          element={<SignUp setCurrentUser={setCurrentUser} />}
+          element={<SignUp handleSetCookie={handleSetCookie} />}
         />
+        <Route path="/Logout" element={<Logout handleRemoveCookie={handleRemoveCookie}/>} />
         <Route path="/Exam/:id" element={<Exam />} />
 
         <Route path="/MyCertificates" element={<CandidateCertificates />} />

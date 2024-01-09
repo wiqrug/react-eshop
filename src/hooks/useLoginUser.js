@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 /**
  * Makes login request -> sets current user -> navigates to homepage
  */
-export const useLoginUser = (setCurrentUser) => {
+export const useLoginUser = ({handleSetCookie}) => {
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -14,9 +14,10 @@ export const useLoginUser = (setCurrentUser) => {
     try {
       const user = await login(data);
 
-      setCurrentUser({
-        email: user.email,
+      handleSetCookie({
+        email: user.user.email,
         token: user.token,
+        candidateNumber: user.user.candidateNumber
       });
 
       navigate("/");

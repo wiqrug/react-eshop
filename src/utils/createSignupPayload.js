@@ -19,5 +19,5 @@ export const createSignupPayload = (data) => ({
   postalCode: data.get("postalCode"),
   landlineNumber: data.get("landlineNumber"),
   mobileNumber: data.get("mobileNumber"),
-  password: btoa(data.get("password")),
+  password: data.get("password"),
 });

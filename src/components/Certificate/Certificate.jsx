@@ -1,9 +1,12 @@
 import React from "react";
 import "./Certificate.css";
 import { useCertificate } from "../../hooks";
+import { UseBuyCertificate } from "hooks/useBuyCertificate";
 
-const CertificateDetails = ({ certificates }) => {
+const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
+
+  const handleBuy = () => UseBuyCertificate(cookieValue, certificate);
 
   // if (!certificate) {
   //   return <div className="fancyAnime">Loading...</div>;
@@ -23,7 +26,7 @@ const CertificateDetails = ({ certificates }) => {
         <div className="Certificate-Details-Description">
           <h1>{certificate.description}</h1>
         </div>
-        <button className="Purhcase-Certificate">Buy now</button>
+        <button className="Purhcase-Certificate" onClick={handleBuy}>Buy now</button>
       </div>
     )
   );

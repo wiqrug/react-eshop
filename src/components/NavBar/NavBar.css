@@ -58,7 +58,7 @@ nav ul li:hover a {
   cursor: pointer; /* Cursor pointer for the icon */
   display: flex; /* Flex container for vertical centering */
   align-items: center; /* Center icon vertically */
-  background-color: #004084; /* Business-like blue background */
+  /*background-color: #004084;*/ /* Business-like blue background */
   color: white; /* White color for the icon */
   border-radius: 5px; /* Rounded corners for a button-like look */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
@@ -78,4 +78,29 @@ nav ul li:hover a {
 .nav-menu-items a {
   padding: 10px 20px; /* Padding for button effect */
   width: 100%;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #292929;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  padding: 6px 8px;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
