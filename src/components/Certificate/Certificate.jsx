@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./Certificate.css";
 import { useCertificate } from "../../hooks";
 import { UseBuyCertificate } from "api/certificates/buyCertificate";
+import { useNavigate } from "react-router-dom";
 
 
 const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
 
+  const navigate = useNavigate();
   const [candNum, setCandNum] = useState(null);
   const [certTitle, setCertTitle] = useState(null);
 
@@ -27,8 +29,9 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
       title: certTitle
   };
 
-const handleBuy = async () => {
-  await UseBuyCertificate(jsonPayload);
+const handleBuy = async () => {       //PROBLIEMA to trexei pano apo mia fora logo rerendering kai parolo p leitourgei
+  await UseBuyCertificate(jsonPayload); //sosta stin consola petaei error. ALEXI KANE TA MAGIKA SOU KAI FTIAKSE CAPTAIN HOOK!!!
+  navigate("/");
 }
 
   // if (!certificate) {
