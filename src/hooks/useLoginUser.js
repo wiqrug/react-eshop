@@ -17,7 +17,10 @@ export const useLoginUser = ({handleSetCookie}) => {
       handleSetCookie({
         email: user.user.email,
         token: user.token,
-        candidateNumber: user.user.candidateNumber
+        candidateNumber: user.user.candidateNumber,
+        firstName: user.user.firstName,
+        lastName: user.user.lastName,
+        address: user.user.address
       });
 
       navigate("/");
