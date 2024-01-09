@@ -5,6 +5,7 @@ import { useCandidateInfo } from "hooks/useCandidateInfo";
 import { useCertificateInfo } from "hooks/useCertificateInfo";
 import { buyCertificate } from "api/certificates/buyCertificate";
 import { getCookie } from "utils/getCookie";
+import { Link } from "react-router-dom";
 
 const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
@@ -42,11 +43,19 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
         <div className="Certificate-Details-Description">
           <h1>{certificate.description}</h1>
         </div>
-        {!isBought && (
+        {getCookie() == null && !isBought && (
+          <Link to="/Login">
+            {" "}
+            <button className="Purchase-Certificate">Buy now</button>
+          </Link>
+        )}
+
+        {getCookie() && !isBought && (
           <button className="Purchase-Certificate" onClick={handleBuy}>
-            Buy now
+            Buy Now
           </button>
         )}
+
         {getCookie() && isBought && (
           <button className="Purchased-Certificate">Bought</button>
         )}
