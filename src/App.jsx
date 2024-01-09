@@ -16,16 +16,15 @@ import Logout from "components/Logout/Logout";
 import MyProfile from "components/MyProfile";
 import Admin from "components/Admin/Admin";
 
-
 const App = () => {
   //fetched certificates
   const certificates = useCertificates();
 
-  const [cookieValue, setcookieValue] = useState('');
+  const [cookieValue, setcookieValue] = useState("");
 
   useEffect(() => {
     // Retrieve the cookie value when the component mounts
-    const storedCookie = Cookies.get('currentUser');
+    const storedCookie = Cookies.get("currentUser");
     if (storedCookie) {
       // Parse the JSON string into an object
       setcookieValue(JSON.parse(storedCookie));
@@ -35,14 +34,14 @@ const App = () => {
   const handleSetCookie = (cookie) => {
     // Set a new cookie value with an object
     const newValue = cookie;
-    Cookies.set('currentUser', JSON.stringify(newValue), { expires: 7 }); // Set cookie with a 7-day expiration
+    Cookies.set("currentUser", JSON.stringify(newValue), { expires: 7 }); // Set cookie with a 7-day expiration
     setcookieValue(newValue);
   };
 
   const handleRemoveCookie = () => {
     // Remove the cookie
-    Cookies.remove('currentUser');
-    setcookieValue('');
+    Cookies.remove("currentUser");
+    setcookieValue("");
   };
 
   return (
@@ -56,7 +55,12 @@ const App = () => {
         />
         <Route
           path="/Certificate/:id"
-          element={<Certificate certificates={certificates} cookieValue={cookieValue}/>}
+          element={
+            <Certificate
+              certificates={certificates}
+              cookieValue={cookieValue}
+            />
+          }
         />
         <Route
           path="/Login"
@@ -66,11 +70,23 @@ const App = () => {
           path="/SignUp"
           element={<SignUp handleSetCookie={handleSetCookie} />}
         />
-        <Route path="/MyProfile" element={cookieValue? <MyProfile /> : <Login handleSetCookie={handleSetCookie} />} />
+        <Route
+          path="/MyProfile"
+          element={
+            cookieValue ? (
+              <MyProfile />
+            ) : (
+              <Login handleSetCookie={handleSetCookie} />
+            )
+          }
+        />
 
-        <Route path="/Logout" element={<Logout handleRemoveCookie={handleRemoveCookie}/>} />
+        <Route
+          path="/Logout"
+          element={<Logout handleRemoveCookie={handleRemoveCookie} />}
+        />
         <Route path="/Exam/:id" element={<Exam />} />
-        <Route path="/Admin" element={cookieValue? <Admin /> : <NotFound />} />
+        <Route path="/Admin" element={cookieValue ? <Admin /> : <NotFound />} />
 
         <Route path="/MyCertificates" element={<CandidateCertificates />} />
 

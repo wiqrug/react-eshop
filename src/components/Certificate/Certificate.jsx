@@ -1,32 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Certificate.css";
 import { useCertificate } from "../../hooks";
-import { buyCertificate } from "api/certificates/buyCertificate";
 import { useNavigate } from "react-router-dom";
-
+import { useCandidateInfo } from "hooks/useCandidateInfo";
+import { useCertificateInfo } from "hooks/useCertificateInfo";
+import { buyCertificate } from "api/certificates/buyCertificate";
 
 const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
+  const candNum = useCandidateInfo(cookieValue);
+  const certTitle = useCertificateInfo(certificate);
 
   const navigate = useNavigate();
-  const [candNum, setCandNum] = useState(null);
-  const [certTitle, setCertTitle] = useState(null);
-
-  useEffect(() => {
-      if(cookieValue){
-          setCandNum(cookieValue.candidateNumber);
-      }
-  }, [cookieValue]);
-
-  useEffect(() => {
-      if(certificate){
-          setCertTitle(certificate.title);
-      }
-  }, [certificate]);
 
   const jsonPayload = {
-      candidateNumber: candNum,
-      title: certTitle
+    candidateNumber: candNum,
+    title: certTitle,
   };
 
 const handleBuy = async () => {       //PROBLIEMA to trexei pano apo mia fora logo rerendering kai parolo p leitourgei
@@ -52,7 +41,9 @@ const handleBuy = async () => {       //PROBLIEMA to trexei pano apo mia fora lo
         <div className="Certificate-Details-Description">
           <h1>{certificate.description}</h1>
         </div>
-        <button className="Purhcase-Certificate" onClick={handleBuy}>Buy now</button>
+        <button className="Purhcase-Certificate" onClick={handleBuy}>
+          Buy now
+        </button>
       </div>
     )
   );
