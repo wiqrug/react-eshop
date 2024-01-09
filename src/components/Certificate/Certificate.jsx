@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Certificate.css";
 import { useCertificate } from "../../hooks";
-import { UseBuyCertificate } from "hooks/useBuyCertificate";
+import { UseBuyCertificate } from "api/certificates/buyCertificate";
+
 
 const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
 
-  const handleBuy = () => UseBuyCertificate(cookieValue, certificate);
+  const [candNum, setCandNum] = useState(null);
+  const [certTitle, setCertTitle] = useState(null);
+
+  useEffect(() => {
+      if(cookieValue){
+          setCandNum(cookieValue.candidateNumber);
+      }
+  }, [cookieValue]);
+
+  useEffect(() => {
+      if(certificate){
+          setCertTitle(certificate.title);
+      }
+  }, [certificate]);
+
+  const jsonPayload = {
+      candidateNumber: candNum,
+      title: certTitle
+  };
+
+const handleBuy = async () => {
+  await UseBuyCertificate(jsonPayload);
+}
 
   // if (!certificate) {
   //   return <div className="fancyAnime">Loading...</div>;

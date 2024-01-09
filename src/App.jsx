@@ -14,6 +14,7 @@ import CandidateCertificates from "components/CandidateCertificates/CandidateCer
 import Cookies from "js-cookie";
 import Logout from "components/Logout/Logout";
 import MyProfile from "components/MyProfile";
+import Admin from "components/Admin/Admin";
 
 
 const App = () => {
@@ -69,6 +70,7 @@ const App = () => {
 
         <Route path="/Logout" element={<Logout handleRemoveCookie={handleRemoveCookie}/>} />
         <Route path="/Exam/:id" element={<Exam />} />
+        <Route path="/Admin" element={cookieValue? <Admin /> : <NotFound />} />
 
         <Route path="/MyCertificates" element={<CandidateCertificates />} />
 
