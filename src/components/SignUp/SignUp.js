@@ -86,8 +86,8 @@ export default function SignUp({ handleSetCookie }) {
                 setConfirmPassword={setConfirmPassword}
                 passwordError={passwordError}
               />
-              <PhotoId />
-              <LocationInfo />
+              {/* <PhotoId />
+              <LocationInfo /> */}
               <Grid item xs={12}>
                 <FormControlLabel
                   control={

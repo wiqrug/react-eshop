@@ -6,15 +6,15 @@ const PersonalInfo = () => (
     <Grid item xs={12} sm={6}>
       <TextField name="firstName" label="First Name" required fullWidth />
     </Grid>
-    <Grid item xs={12} sm={6}>
+    {/* <Grid item xs={12} sm={6}>
       <TextField name="middleName" label="Middle Name" fullWidth />
-    </Grid>
+    </Grid> */}
     <Grid item xs={12} sm={6}>
       <TextField name="lastName" label="Last Name" required fullWidth />
     </Grid>
-    <Grid item xs={12} sm={6}>
+    {/* <Grid item xs={12} sm={6}>
       <TextField name="gender" label="Gender" required fullWidth />
-    </Grid>
+    </Grid> */}
     <Grid item xs={12}>
       <TextField
         name="email"
@@ -25,7 +25,7 @@ const PersonalInfo = () => (
       />
     </Grid>
 
-    <Grid item xs={12}>
+    {/* <Grid item xs={12}>
       <TextField name="landlineNumber" label="Landline Number" fullWidth />
     </Grid>
     <Grid item xs={12}>
@@ -48,7 +48,7 @@ const PersonalInfo = () => (
         type="date"
         InputLabelProps={{ shrink: true }}
       />
-    </Grid>
+    </Grid> */}
   </>
 );
 
