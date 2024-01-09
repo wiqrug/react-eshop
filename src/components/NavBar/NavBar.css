@@ -89,13 +89,13 @@ nav ul li:hover a {
   display: none;
   position: absolute;
   background-color: #292929;
-  min-width: 160px;
+  min-width: 100px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
 .dropdown-content a {
-  padding: 6px 8px;
+  padding: 6px 12px;
   text-decoration: none;
   display: block;
   font-size: 16px;

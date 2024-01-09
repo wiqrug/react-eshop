@@ -13,6 +13,7 @@ import { useCertificates } from "./hooks";
 import CandidateCertificates from "components/CandidateCertificates/CandidateCertificates";
 import Cookies from "js-cookie";
 import Logout from "components/Logout/Logout";
+import MyProfile from "components/MyProfile";
 
 
 const App = () => {
@@ -64,6 +65,8 @@ const App = () => {
           path="/SignUp"
           element={<SignUp handleSetCookie={handleSetCookie} />}
         />
+        <Route path="/MyProfile" element={cookieValue? <MyProfile /> : <Login handleSetCookie={handleSetCookie} />} />
+
         <Route path="/Logout" element={<Logout handleRemoveCookie={handleRemoveCookie}/>} />
         <Route path="/Exam/:id" element={<Exam />} />
 

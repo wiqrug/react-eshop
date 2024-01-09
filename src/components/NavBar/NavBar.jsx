@@ -35,7 +35,10 @@ const NavBar = ({ cookieValue }) => {
                       <Link to="/SignUp">Sign Up</Link>
                     </div>
                   ) : (
-                    <Link to="/Logout">Log Out</Link>
+                    <div>
+                      <Link to="/MyProfile">My Profile</Link>
+                      <Link to="/Logout">Log Out</Link>
+                      </div>
                   )}
                 </div>
               </div>
