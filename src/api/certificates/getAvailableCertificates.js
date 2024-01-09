@@ -1,8 +1,8 @@
-import Cookies from "js-cookie";
+import { getCookie } from "utils/getCookie";
 
 export const getAvailableCertificates = async () => {
   try {
-    const currentUser = JSON.parse(Cookies.get("currentUser"));
+    const currentUser = getCookie();
     if (!currentUser || !currentUser.candidateNumber) {
       throw new Error("No current user or candidate number found.");
     }
@@ -18,5 +18,6 @@ export const getAvailableCertificates = async () => {
   } catch (error) {
     console.error("Error fetching candidates available certificates", error);
     // Optionally return a default value or re-throw the error
+    return []; // Example: return an empty array if there's an error
   }
 };
