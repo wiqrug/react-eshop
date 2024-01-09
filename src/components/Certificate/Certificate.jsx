@@ -1,27 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Certificate.css";
 import { useCertificate } from "../../hooks";
-import { buyCertificate } from "api/certificates/buyCertificate";
 import { useNavigate } from "react-router-dom";
+import { useCandidateInfo } from "hooks/useCandidateInfo";
+import { useCertificateInfo } from "hooks/useCertificateInfo";
+import { buyCertificate } from "api/certificates/buyCertificate";
 
 const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
+  const candNum = useCandidateInfo(cookieValue);
+  const certTitle = useCertificateInfo(certificate);
 
   const navigate = useNavigate();
-  const [candNum, setCandNum] = useState(null);
-  const [certTitle, setCertTitle] = useState(null);
-
-  useEffect(() => {
-    if (cookieValue) {
-      setCandNum(cookieValue.candidateNumber);
-    }
-  }, [cookieValue]);
-
-  useEffect(() => {
-    if (certificate) {
-      setCertTitle(certificate.title);
-    }
-  }, [certificate]);
 
   const jsonPayload = {
     candidateNumber: candNum,
@@ -33,10 +23,6 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
     await buyCertificate(jsonPayload); //sosta stin consola petaei error. ALEXI KANE TA MAGIKA SOU KAI FTIAKSE CAPTAIN HOOK!!!
     navigate("/");
   };
-
-  // if (!certificate) {
-  //   return <div className="fancyAnime">Loading...</div>;
-  // }
 
   return (
     certificate && (
