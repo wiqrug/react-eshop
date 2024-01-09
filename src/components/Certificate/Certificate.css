@@ -20,7 +20,7 @@
   text-align: center;
 }
 
-.Purhcase-Certificate {
+.Purchase-Certificate {
   display: block;
   width: max-content;
   margin: 3vh auto; /* Use viewport height for margin */
@@ -34,8 +34,22 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
 }
+.Purchased-Certificate {
+  display: block;
+  width: max-content;
+  margin: 3vh auto; /* Use viewport height for margin */
+  padding: 1vh 2vw; /* Use viewport units for padding */
+  background-color: #00c607;
+  color: white;
+  font-size: 1.1rem; /* Use rem for scalable font size */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
 
-.Purhcase-Certificate:hover {
+.Purchase-Certificate:hover {
   background-color: #e03c1c;
 }
 

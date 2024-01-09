@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Certificate.css";
 import { useCertificate } from "../../hooks";
-import { useNavigate } from "react-router-dom";
 import { useCandidateInfo } from "hooks/useCandidateInfo";
 import { useCertificateInfo } from "hooks/useCertificateInfo";
 import { buyCertificate } from "api/certificates/buyCertificate";
@@ -10,8 +9,11 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
   const candNum = useCandidateInfo(cookieValue);
   const certTitle = useCertificateInfo(certificate);
+  const [isBought, setIsBought] = useState(false);
 
-  const navigate = useNavigate();
+  //make a function that gets available certificates, if this.certificate.!isInAvailableCerts()
+  //Change the isBoughtState
+  const checkBought = () => {};
 
   const jsonPayload = {
     candidateNumber: candNum,
@@ -21,7 +23,8 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
   const handleBuy = async () => {
     //PROBLIEMA to trexei pano apo mia fora logo rerendering kai parolo p leitourgei
     await buyCertificate(jsonPayload); //sosta stin consola petaei error. ALEXI KANE TA MAGIKA SOU KAI FTIAKSE CAPTAIN HOOK!!!
-    navigate("/");
+
+    setIsBought(true);
   };
 
   return (
@@ -38,9 +41,13 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
         <div className="Certificate-Details-Description">
           <h1>{certificate.description}</h1>
         </div>
-        <button className="Purhcase-Certificate" onClick={handleBuy}>
-          Buy now
-        </button>
+
+        {!isBought && (
+          <button className="Purchase-Certificate" onClick={handleBuy}>
+            Buy now
+          </button>
+        )}
+        {isBought && <button className="Purchased-Certificate">Bought</button>}
       </div>
     )
   );
