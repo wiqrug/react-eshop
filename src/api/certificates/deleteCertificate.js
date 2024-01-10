@@ -4,7 +4,7 @@ export const deleteCertificate = (certificates, id, fetchCertificates) => {
     console.error("Certificate not found");
     return;
   }
-
+  //%20 = " "
   const titleForUrl = encodeURIComponent(certificate.title);
   const url = `http://localhost:5021/api/Certificates/${titleForUrl}`;
 
