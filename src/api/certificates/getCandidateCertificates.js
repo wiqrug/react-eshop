@@ -1,5 +1,3 @@
-import { getCookie } from "utils";
-
 export const getCandidateCertificates = (certificateType, currentUser) => {
   if (currentUser?.candidateNumber) {
     const url = `http://localhost:5021/api/CandidateCertificates/${certificateType}/${currentUser.candidateNumber}`;

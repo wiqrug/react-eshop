@@ -19,13 +19,20 @@ const CertificateCard = ({
   // Delete Certificate feels easier so im gonna implement it first
   // Update Certificate needs another component that has a form to change whatever u want
   // The first card could be the Add Certificate Card
-  const { candidateNumber } = cookieValue;
+  const cookie = cookieValue;
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
   const handleOpenUpdateModal = () => setIsUpdateModalOpen(true);
   const handleCloseUpdateModal = () => setIsUpdateModalOpen(false);
-  const handleDelete = () =>
-    deleteCertificate(certificates, id, fetchCertificates);
+  const handleDelete = () => {
+    const certificate = certificates.find((c) => c.$id === id);
+    if (!certificate) {
+      console.error("Certificate not found");
+      return;
+    }
+
+    deleteCertificate(certificate).then(() => fetchCertificates());
+  };
 
   return (
     <>
@@ -41,7 +48,7 @@ const CertificateCard = ({
           />
           <h4 className="certificate-title">{title}</h4>
           <h4>{price} €</h4>
-          {!candidateNumber && isAdminView && (
+          {!cookie?.candidateNumber && isAdminView && (
             <div className="action-buttons">
               <button
                 className="action-button update"

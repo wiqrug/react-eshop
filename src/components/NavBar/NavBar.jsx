@@ -7,6 +7,9 @@ import "./NavBar.css";
 //his certificates, we need to check
 
 const NavBar = ({ cookieValue }) => {
+  const hasCookie = !!cookieValue;
+  const isAdmin = cookieValue?.candidateNumber !== 0;
+
   return (
     <>
       <nav>
@@ -21,12 +24,10 @@ const NavBar = ({ cookieValue }) => {
             </li>
 
             <li>
-              {cookieValue.candidateNumber !== 0 && (
+              {hasCookie && isAdmin && (
                 <Link to="/MyCertificates">My Certificates</Link>
               )}
-              {cookieValue.candidateNumber === 0 && (
-                <Link to="/Admin">Admin Panel</Link>
-              )}
+              {!isAdmin && <Link to="/Admin">Admin Panel</Link>}
             </li>
 
             <li className="login-icon">

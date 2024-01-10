@@ -26,5 +26,5 @@ export const useUserCookie = () => {
     setCookie("");
   };
 
-  return { cookieValue: cookie, handleSetCookie, handleRemoveCookie };
+  return { cookie, handleSetCookie, handleRemoveCookie };
 };
