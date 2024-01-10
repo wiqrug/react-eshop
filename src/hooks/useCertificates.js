@@ -7,7 +7,9 @@ import { useState, useEffect } from "react";
 export const useCertificates = () => {
   const [certificates, setCertificates] = useState(null);
   const fetchCertificates = () => {
-    getCertificates().then((data) => setCertificates(data.$values));
+    getCertificates().then((data) => {
+      setCertificates(data.$values);
+    });
   };
 
   useEffect(() => {

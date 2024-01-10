@@ -10,22 +10,24 @@ const CertificatesList = ({
   cookieValue,
   isAdminView = false,
   fetchCertificates,
-}) => (
-  <section>
-    {certificates?.map(({ $id: id, title, price }) => (
-      <CertificateCard
-        key={id}
-        id={id}
-        src={"https://image.jpg"}
-        title={title}
-        price={price}
-        cookieValue={cookieValue}
-        isAdminView={isAdminView}
-        certificates={certificates}
-        fetchCertificates={fetchCertificates}
-      />
-    ))}
-  </section>
-);
+}) => {
+  return (
+    <section>
+      {certificates?.map(({ $id: id, title, price }) => (
+        <CertificateCard
+          key={id}
+          id={id}
+          src={"https://image.jpg"}
+          title={title}
+          price={price}
+          cookieValue={cookieValue}
+          isAdminView={isAdminView}
+          certificates={certificates}
+          fetchCertificates={fetchCertificates}
+        />
+      ))}
+    </section>
+  );
+};
 
 export default CertificatesList;

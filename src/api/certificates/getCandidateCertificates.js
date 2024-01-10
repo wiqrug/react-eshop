@@ -3,7 +3,10 @@ export const getCandidateCertificates = (certificateType, currentUser) => {
     const url = `http://localhost:5021/api/CandidateCertificates/${certificateType}/${currentUser.candidateNumber}`;
 
     return fetch(url)
-      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
       .catch((error) => {
         console.error("Error fetching candidates obtained certificates", error);
         // Optionally return a default value or re-throw the error

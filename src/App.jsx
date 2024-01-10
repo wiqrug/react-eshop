@@ -17,8 +17,9 @@ import Admin from "components/Admin";
 
 const App = () => {
   //fetched certificates
-  const { certificates, fetchCertificates } = useCertificates();
+
   const { cookie, handleSetCookie, handleRemoveCookie } = useUserCookie();
+  const { certificates, fetchCertificates } = useCertificates();
 
   return (
     <>

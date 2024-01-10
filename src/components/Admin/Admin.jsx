@@ -27,6 +27,7 @@ import React, { useState } from "react";
 
 const Admin = ({ certificates, cookieValue, fetchCertificates }) => {
   const [selectedOption, setSelectedOption] = useState(null);
+  console.log(certificates);
 
   const handleSelectionChange = (option) => {
     setSelectedOption(option);
