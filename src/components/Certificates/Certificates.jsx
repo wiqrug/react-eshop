@@ -20,6 +20,8 @@ const Certificate = ({
   //Delete Certificate feels easier so im gonna implement it first
   //Update Certificate needs another component that has a form to change whatever u want
 
+  //The first card could be the Add Certificate Card
+
   const { candidateNumber } = cookieValue;
   return (
     <Link

@@ -5,7 +5,9 @@ export const deleteCertificate = (certificates, id, fetchCertificates) => {
     return;
   }
   //%20 = " "
-  const titleForUrl = encodeURIComponent(certificate.title);
+
+  // const titleForUrl = encodeURIComponent(certificate.title);
+  const titleForUrl = certificate.title;
   const url = `http://localhost:5021/api/Certificates/${titleForUrl}`;
 
   fetch(url, {

@@ -14,9 +14,9 @@ import React, { useState } from "react";
  * 6) Add a Candidate Certificate
  *
  * 7) Get all Certificates DONE
- * 8) Create a new Certificate
+ * 8) Add Certificate, first displayed in the UI when admin clicks Manage Certificates
  * 9) Update a Certificate ADDED BUTTON NEEDS IMPLEMENTATION
- * 10) Delete a Certificate ADDED BUTTON NEEDS IMPLEMENTATION
+ * 10) Delete a Certificate DONE
  *
  * 11) Create exams
  * 12) Update Exams
