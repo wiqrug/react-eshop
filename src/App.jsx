@@ -31,6 +31,7 @@ const App = () => {
     }
   }, []);
 
+  console.log(certificates);
   const handleSetCookie = (cookie) => {
     // Set a new cookie value with an object
     const newValue = cookie;
@@ -43,6 +44,7 @@ const App = () => {
     Cookies.remove("currentUser");
     setcookieValue("");
   };
+  console.log(cookieValue);
 
   return (
     <>
@@ -86,7 +88,12 @@ const App = () => {
           element={<Logout handleRemoveCookie={handleRemoveCookie} />}
         />
         <Route path="/Exam/:id" element={<Exam />} />
-        <Route path="/Admin" element={cookieValue ? <Admin /> : <NotFound />} />
+        <Route
+          path="/Admin"
+          element={
+            cookieValue ? <Admin certificates={certificates} /> : <NotFound />
+          }
+        />
 
         <Route path="/MyCertificates" element={<CandidateCertificates />} />
 
