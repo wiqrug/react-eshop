@@ -1,17 +1,15 @@
-import { getCookie } from "utils/getCookie";
+import { getCookie } from "utils";
 
-export const getUnobtainedCertificates = () => {
+export const getCandidateCertificates = (certificateType) => {
   const currentUser = getCookie();
-  if (currentUser && currentUser.candidateNumber) {
-    const url = `http://localhost:5021/api/CandidateCertificates/unobtained/${currentUser.candidateNumber}`;
+
+  if (currentUser?.candidateNumber) {
+    const url = `http://localhost:5021/api/CandidateCertificates/${certificateType}/${currentUser.candidateNumber}`;
 
     return fetch(url)
       .then((response) => response.json())
       .catch((error) => {
-        console.error(
-          "Error fetching candidates unobtained certificates",
-          error
-        );
+        console.error("Error fetching candidates obtained certificates", error);
         // Optionally return a default value or re-throw the error
       });
   } else {

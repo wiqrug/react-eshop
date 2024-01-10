@@ -9,6 +9,7 @@ export const useCertificates = () => {
   const fetchCertificates = () => {
     getCertificates().then((data) => setCertificates(data.$values));
   };
+
   useEffect(() => {
     fetchCertificates();
   }, []); // Empty dependency array to run only once

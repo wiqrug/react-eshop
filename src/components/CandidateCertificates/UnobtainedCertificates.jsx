@@ -1,8 +1,9 @@
-import { useUnobtainedCertificates } from "hooks/useUnobtainedCertificates";
+import { useCandidateCertificates } from "hooks";
 import React from "react";
 
 const UnobtainedCertificates = () => {
-  const unobtainedCertificates = useUnobtainedCertificates();
+  const unobtainedCertificates = useCandidateCertificates("unobtained");
+
   return (
     <section>
       {/* <div className="Certificate-Details-Title">Unobtained Certificates</div> */}

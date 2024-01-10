@@ -1,6 +1,5 @@
 import AvailableCertificates from "components/CandidateCertificates/AvailableCertificates";
 import ObtainedCertificates from "components/CandidateCertificates/ObtainedCertificates";
-import UnobtainedCertificates from "components/CandidateCertificates/UnobtainedCertificates";
 import CertificatesList from "components/Certificates/Certificates";
 import React, { useState } from "react";
 
@@ -52,7 +51,7 @@ const Admin = ({ certificates, cookieValue, fetchCertificates }) => {
         <CertificatesList
           certificates={certificates}
           cookieValue={cookieValue}
-          isAdminView={true}
+          isAdminView
           fetchCertificates={fetchCertificates}
         />
       )}

@@ -24,6 +24,8 @@ const CertificateCard = ({
 
   const handleOpenUpdateModal = () => setIsUpdateModalOpen(true);
   const handleCloseUpdateModal = () => setIsUpdateModalOpen(false);
+  const handleDelete = () =>
+    deleteCertificate(certificates, id, fetchCertificates);
 
   return (
     <>
@@ -47,12 +49,7 @@ const CertificateCard = ({
               >
                 &#9998; Update
               </button>{" "}
-              <button
-                className="action-button delete"
-                onClick={() =>
-                  deleteCertificate(certificates, id, fetchCertificates)
-                }
-              >
+              <button className="action-button delete" onClick={handleDelete}>
                 &#128465; Delete
               </button>
             </div>

@@ -55,7 +55,6 @@ const App = () => {
             <Certificates
               certificates={certificates}
               cookieValue={cookieValue}
-              isAdminView={false}
               fetchCertificates={fetchCertificates}
             />
           }

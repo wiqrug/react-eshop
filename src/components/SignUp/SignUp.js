@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { usePasswordValidation } from "../../hooks";
 import { createSignupPayload } from "../../utils";
 
-import { PhotoId, LocationInfo, Password, PersonalInfo } from "./inputGroups";
+import { Password, PersonalInfo } from "./inputGroups";
 import Header from "./Header";
 import Footer from "./Footer";
 

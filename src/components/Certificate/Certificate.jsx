@@ -4,8 +4,8 @@ import { useCertificate } from "../../hooks";
 import { useCandidateInfo } from "hooks/useCandidateInfo";
 import { useCertificateInfo } from "hooks/useCertificateInfo";
 import { buyCertificate } from "api/certificates/buyCertificate";
-import { getCookie } from "utils/getCookie";
-import { Link, json } from "react-router-dom";
+import { getCookie } from "utils";
+import { Link } from "react-router-dom";
 
 const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
@@ -24,7 +24,7 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
     candidateNumber: candNum,
     title: certTitle,
   };
-console.log(jsonPayload)
+
   const handleBuy = async () => {
     await buyCertificate(jsonPayload);
 

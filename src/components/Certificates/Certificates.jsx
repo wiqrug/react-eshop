@@ -8,7 +8,7 @@ import CertificateCard from "./CertificateCard";
 const CertificatesList = ({
   certificates,
   cookieValue,
-  isAdminView,
+  isAdminView = false,
   fetchCertificates,
 }) => (
   <section>

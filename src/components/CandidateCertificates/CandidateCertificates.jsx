@@ -23,27 +23,31 @@ import AvailableCertificates from "./AvailableCertificates";
 const CandidateCertificates = () => {
   const [selectedOption, setSelectedOption] = useState("obtained");
 
-  const handleSelectionChange = (option) => {
-    setSelectedOption(option);
-  };
+  const handleSelectionChange = (option) => setSelectedOption(option);
+
+  const onHandleSelect = (status) => () => handleSelectionChange(status);
+
+  let certificates = <ObtainedCertificates />;
+
+  if (selectedOption === "unobtained")
+    certificates = <UnobtainedCertificates />;
+  else if (selectedOption === "available")
+    certificates = <AvailableCertificates />;
 
   return (
     <>
       <div className="menu">
-        <button onClick={() => handleSelectionChange("obtained")}>
+        <button onClick={onHandleSelect("obtained")}>
           Obtained Certificates
         </button>
-        <button onClick={() => handleSelectionChange("unobtained")}>
+        <button onClick={onHandleSelect("unobtained")}>
           Unobtained Certificates
         </button>
-        <button onClick={() => handleSelectionChange("available")}>
+        <button onClick={onHandleSelect("available")}>
           Available Certificates
         </button>
       </div>
-
-      {selectedOption === "obtained" && <ObtainedCertificates />}
-      {selectedOption === "unobtained" && <UnobtainedCertificates />}
-      {selectedOption === "available" && <AvailableCertificates />}
+      {certificates}
     </>
   );
 };

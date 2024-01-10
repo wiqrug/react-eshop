@@ -1,7 +1,8 @@
-import { useAvailableCertificates } from "hooks/useAvailableCertificates";
+import { useCandidateCertificates } from "hooks";
 import React from "react";
 const AvailableCertificates = () => {
-  const availableCertificates = useAvailableCertificates();
+  const availableCertificates = useCandidateCertificates("available");
+
   return (
     <section>
       {/* <div className="Certificate-Details-Title">Available Certificates</div> */}
