@@ -1,10 +1,12 @@
 import axios from "axios";
 const Cookies = require("js-cookie");
 
+// now we only have to add the url parts that come after '.../api/'
 export const instance = axios.create({
   baseURL: "http://localhost:5021/api/",
 });
 
+// on every request add the token to the header
 instance.interceptors.request.use(
   function (config) {
     const cookie = Cookies.get("currentUser");
