@@ -53,7 +53,13 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route
           path="/Certificates"
-          element={<Certificates certificates={certificates} />}
+          element={
+            <Certificates
+              certificates={certificates}
+              cookieValue={cookieValue}
+              isAdminView={false}
+            />
+          }
         />
         <Route
           path="/Certificate/:id"
@@ -91,7 +97,11 @@ const App = () => {
         <Route
           path="/Admin"
           element={
-            cookieValue ? <Admin certificates={certificates} /> : <NotFound />
+            cookieValue ? (
+              <Admin certificates={certificates} cookieValue={cookieValue} />
+            ) : (
+              <NotFound />
+            )
           }
         />
 

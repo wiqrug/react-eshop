@@ -13,10 +13,10 @@ import React, { useState } from "react";
  * 5) See Obtained/Unobtained/Available Certificates of a certain candidate
  * 6) Add a Candidate Certificate
  *
- * 7) Get all Certificates
+ * 7) Get all Certificates DONE
  * 8) Create a new Certificate
- * 9) Update a Certificate
- * 10) Delete a Certificate
+ * 9) Update a Certificate ADDED BUTTON NEEDS IMPLEMENTATION
+ * 10) Delete a Certificate ADDED BUTTON NEEDS IMPLEMENTATION
  *
  * 11) Create exams
  * 12) Update Exams
@@ -26,7 +26,7 @@ import React, { useState } from "react";
  * 15) CRUD Questions
  */
 
-const Admin = ({ certificates }) => {
+const Admin = ({ certificates, cookieValue }) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleSelectionChange = (option) => {
@@ -49,7 +49,11 @@ const Admin = ({ certificates }) => {
 
       {selectedOption === "candidates" && <ObtainedCertificates />}
       {selectedOption === "certificates" && (
-        <CertificatesList certificates={certificates} />
+        <CertificatesList
+          certificates={certificates}
+          cookieValue={cookieValue}
+          isAdminView={true}
+        />
       )}
       {selectedOption === "exams" && <AvailableCertificates />}
     </>
