@@ -2,9 +2,19 @@
 import React from "react";
 import "./Certificates.css";
 import { Link } from "react-router-dom";
+import { deleteCertificate } from "api/certificates/deleteCertificate";
 
 //fix images
-const Certificate = ({ src, title, price, id, cookieValue, isAdminView }) => {
+const Certificate = ({
+  src,
+  title,
+  price,
+  id,
+  cookieValue,
+  isAdminView,
+  certificates,
+  fetchCertificates,
+}) => {
   //CandidateNumber returns 0 if user is an Admin, and something >0 in every other case
   //Need to update Delete and Update buttons to talk with API to update or delete certificate
   //Delete Certificate feels easier so im gonna implement it first
@@ -27,7 +37,14 @@ const Certificate = ({ src, title, price, id, cookieValue, isAdminView }) => {
         {!candidateNumber && isAdminView && (
           <div className="action-buttons">
             <button className="action-button update">&#9998; Update</button>{" "}
-            <button className="action-button delete">&#128465; Delete</button>{" "}
+            <button
+              className="action-button delete"
+              onClick={() =>
+                deleteCertificate(certificates, id, fetchCertificates)
+              }
+            >
+              &#128465; Delete
+            </button>
           </div>
         )}
       </article>
@@ -35,7 +52,12 @@ const Certificate = ({ src, title, price, id, cookieValue, isAdminView }) => {
   );
 };
 
-const CertificatesList = ({ certificates, cookieValue, isAdminView }) => (
+const CertificatesList = ({
+  certificates,
+  cookieValue,
+  isAdminView,
+  fetchCertificates,
+}) => (
   <section>
     {certificates?.map(({ $id: id, title, price }) => (
       <Certificate
@@ -46,6 +68,8 @@ const CertificatesList = ({ certificates, cookieValue, isAdminView }) => (
         price={price}
         cookieValue={cookieValue}
         isAdminView={isAdminView}
+        certificates={certificates}
+        fetchCertificates={fetchCertificates}
       />
     ))}
   </section>

@@ -18,7 +18,7 @@ import Admin from "components/Admin/Admin";
 
 const App = () => {
   //fetched certificates
-  const certificates = useCertificates();
+  const { certificates, fetchCertificates } = useCertificates();
 
   const [cookieValue, setcookieValue] = useState("");
 
@@ -31,7 +31,6 @@ const App = () => {
     }
   }, []);
 
-  console.log(certificates);
   const handleSetCookie = (cookie) => {
     // Set a new cookie value with an object
     const newValue = cookie;
@@ -44,7 +43,6 @@ const App = () => {
     Cookies.remove("currentUser");
     setcookieValue("");
   };
-  console.log(cookieValue);
 
   return (
     <>
@@ -58,6 +56,7 @@ const App = () => {
               certificates={certificates}
               cookieValue={cookieValue}
               isAdminView={false}
+              fetchCertificates={fetchCertificates}
             />
           }
         />
@@ -98,7 +97,11 @@ const App = () => {
           path="/Admin"
           element={
             cookieValue ? (
-              <Admin certificates={certificates} cookieValue={cookieValue} />
+              <Admin
+                certificates={certificates}
+                cookieValue={cookieValue}
+                fetchCertificates={fetchCertificates}
+              />
             ) : (
               <NotFound />
             )

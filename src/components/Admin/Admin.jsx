@@ -26,7 +26,7 @@ import React, { useState } from "react";
  * 15) CRUD Questions
  */
 
-const Admin = ({ certificates, cookieValue }) => {
+const Admin = ({ certificates, cookieValue, fetchCertificates }) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleSelectionChange = (option) => {
@@ -53,6 +53,7 @@ const Admin = ({ certificates, cookieValue }) => {
           certificates={certificates}
           cookieValue={cookieValue}
           isAdminView={true}
+          fetchCertificates={fetchCertificates}
         />
       )}
       {selectedOption === "exams" && <AvailableCertificates />}
