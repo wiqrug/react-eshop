@@ -1,7 +1,8 @@
+import { getCertificates } from "api";
 import AvailableCertificates from "components/CandidateCertificates/AvailableCertificates";
 import ObtainedCertificates from "components/CandidateCertificates/ObtainedCertificates";
 import CertificatesList from "components/Certificates/Certificates";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 /**
  * Admins role over candidates
@@ -25,9 +26,10 @@ import React, { useState } from "react";
  * 15) CRUD Questions
  */
 
-const Admin = ({ certificates, cookieValue, fetchCertificates }) => {
+const Admin = (props) => {
+  const { certificates, cookieValue, fetchCertificates } = props;
   const [selectedOption, setSelectedOption] = useState(null);
-  console.log(certificates);
+  console.log(props);
 
   const handleSelectionChange = (option) => {
     setSelectedOption(option);
