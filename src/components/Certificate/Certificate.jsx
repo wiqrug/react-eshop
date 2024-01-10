@@ -5,7 +5,7 @@ import { useCandidateInfo } from "hooks/useCandidateInfo";
 import { useCertificateInfo } from "hooks/useCertificateInfo";
 import { buyCertificate } from "api/certificates/buyCertificate";
 import { getCookie } from "utils/getCookie";
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
 
 const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
@@ -24,10 +24,9 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
     candidateNumber: candNum,
     title: certTitle,
   };
-
+console.log(jsonPayload)
   const handleBuy = async () => {
-    //PROBLIEMA to trexei pano apo mia fora logo rerendering kai parolo p leitourgei
-    await buyCertificate(jsonPayload); //sosta stin consola petaei error. ALEXI KANE TA MAGIKA SOU KAI FTIAKSE CAPTAIN HOOK!!!
+    await buyCertificate(jsonPayload);
 
     setIsBought(true);
   };
