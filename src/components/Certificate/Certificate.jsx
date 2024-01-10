@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "./Certificate.css";
-import { useCertificate } from "../../hooks";
+import { useCertificate, useUserCookie } from "../../hooks";
 import { useCandidateInfo } from "hooks/useCandidateInfo";
 import { useCertificateInfo } from "hooks/useCertificateInfo";
 import { buyCertificate } from "api/certificates/buyCertificate";
-import { getCookie } from "utils";
 import { Link } from "react-router-dom";
 
 const CertificateDetails = ({ certificates, cookieValue }) => {
@@ -31,6 +30,8 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
     setIsBought(true);
   };
 
+  const { cookie } = useUserCookie();
+
   return (
     certificate && (
       <div className="Certificate-Details-Container">
@@ -45,20 +46,20 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
         <div className="Certificate-Details-Description">
           <h1>{certificate.description}</h1>
         </div>
-        {getCookie() == null && !isBought && (
+        {cookie == null && !isBought && (
           <Link to="/Login">
             {" "}
             <button className="Purchase-Certificate">Buy now</button>
           </Link>
         )}
 
-        {getCookie() && !isBought && (
+        {cookie && !isBought && (
           <button className="Purchase-Certificate" onClick={handleBuy}>
             Buy Now
           </button>
         )}
 
-        {getCookie() && isBought && (
+        {cookie && isBought && (
           <button className="Purchased-Certificate">Bought</button>
         )}
       </div>

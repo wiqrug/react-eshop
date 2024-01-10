@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import NotFound from "./components/NotFound";
@@ -9,44 +9,20 @@ import Certificate from "./components/Certificate";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Exam from "./components/Exam";
-import { useCertificates } from "./hooks";
+import { useCertificates, useUserCookie } from "./hooks";
 import CandidateCertificates from "components/CandidateCertificates/CandidateCertificates";
-import Cookies from "js-cookie";
 import Logout from "components/Logout/Logout";
 import MyProfile from "components/MyProfile";
-import Admin from "components/Admin/Admin";
+import Admin from "components/Admin";
 
 const App = () => {
   //fetched certificates
   const { certificates, fetchCertificates } = useCertificates();
-
-  const [cookieValue, setcookieValue] = useState("");
-
-  useEffect(() => {
-    // Retrieve the cookie value when the component mounts
-    const storedCookie = Cookies.get("currentUser");
-    if (storedCookie) {
-      // Parse the JSON string into an object
-      setcookieValue(JSON.parse(storedCookie));
-    }
-  }, []);
-
-  const handleSetCookie = (cookie) => {
-    // Set a new cookie value with an object
-    const newValue = cookie;
-    Cookies.set("currentUser", JSON.stringify(newValue), { expires: 7 }); // Set cookie with a 7-day expiration
-    setcookieValue(newValue);
-  };
-
-  const handleRemoveCookie = () => {
-    // Remove the cookie
-    Cookies.remove("currentUser");
-    setcookieValue("");
-  };
+  const { cookie, handleSetCookie, handleRemoveCookie } = useUserCookie();
 
   return (
     <>
-      <NavBar cookieValue={cookieValue} />
+      <NavBar cookieValue={cookie} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -54,7 +30,7 @@ const App = () => {
           element={
             <Certificates
               certificates={certificates}
-              cookieValue={cookieValue}
+              cookieValue={cookie}
               fetchCertificates={fetchCertificates}
             />
           }
@@ -62,10 +38,7 @@ const App = () => {
         <Route
           path="/Certificate/:id"
           element={
-            <Certificate
-              certificates={certificates}
-              cookieValue={cookieValue}
-            />
+            <Certificate certificates={certificates} cookieValue={cookie} />
           }
         />
         <Route
@@ -79,11 +52,7 @@ const App = () => {
         <Route
           path="/MyProfile"
           element={
-            cookieValue ? (
-              <MyProfile />
-            ) : (
-              <Login handleSetCookie={handleSetCookie} />
-            )
+            cookie ? <MyProfile /> : <Login handleSetCookie={handleSetCookie} />
           }
         />
 
@@ -95,10 +64,10 @@ const App = () => {
         <Route
           path="/Admin"
           element={
-            cookieValue ? (
+            cookie ? (
               <Admin
                 certificates={certificates}
-                cookieValue={cookieValue}
+                cookieValue={cookie}
                 fetchCertificates={fetchCertificates}
               />
             ) : (

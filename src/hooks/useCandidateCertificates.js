@@ -2,19 +2,21 @@ import { getCandidateCertificates } from "api/certificates/getCandidateCertifica
 import { useState } from "react";
 import { useEffect } from "react";
 import { getCookie } from "utils";
+import { useUserCookie } from "./useUserCookie";
 
 export const useCandidateCertificates = (certificateType) => {
   const [certificates, setCertificates] = useState(null);
+  const { cookie } = useUserCookie();
 
   useEffect(() => {
     const currentUser = getCookie();
     if (currentUser) {
-      getCandidateCertificates(certificateType).then((data) => {
+      getCandidateCertificates(certificateType, cookie).then((data) => {
         // @ts-ignore
         setCertificates(data.$values);
       });
     }
-  }, [certificateType]);
+  }, [certificateType, cookie]);
 
   return certificates;
 };
