@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Timer.css'
+import { TimerContext } from './Exam';
 
 const Exam = [
     {
@@ -34,27 +35,38 @@ const calculateBorderColor = ({ examTimeLimit }, timeLeft) => {
     }
 }
 
-// PROPS: {examTimeLimit}, timeWhenExamStarted 
+// PROPS: {examTimeLimit}, timeWhenExamStarted                          DONE
 // start and examEnded need to be updated from here to parent
 const Timer = ({ examTimeLimit, examStartedTime }) => {
-    const [start, setStart] = useState(false)
-    const [examEnded, setExamEnded] = useState(false)
 
     // Additional state for border color
     const [borderColor, setBorderColor] = useState('green')
 
-
+    const timerEnded = useContext(TimerContext)
 
     // Function to calculate time left
-    const calculateTimeLeft = () => {
+    const calculateTimeLeft = (examtimelimit) => {
 
         // Initiate time left
         let timeLeft = {}
 
         // Calculate time difference
-        let fixedTime = new Date(examStartedTime)
-        fixedTime = fixedTime.setMinutes(fixedTime.getMinutes() + { examTimeLimit })
+        var fixedTime = new Date(examStartedTime)
+        // console.log("FIXED:"+ fixedTime)
+        // console.log("FIXEDMinituesFGET:"+ fixedTime.getMinutes())
+        // // console.log("FIXEDsET:"+ fixedTime.setMinutes(fixedTime.getMinutes() + { examTimeLimit }))
+        // console.log("TYPE+EXAMTIME:"+ typeof(fixedTime.getMinutes() + 1))
+        // console.log("add:"+ (fixedTime.getMinutes() + 1))
+        // console.log("set:"+ fixedTime.setMinutes(fixedTime.getMinutes() + 1))
+
+
+
+        // fixedTime = fixedTime.setMinutes(fixedTime.getMinutes() + 1,0,0)
+        fixedTime.setHours(fixedTime.getHours(),fixedTime.getMinutes()+examtimelimit,0,0);
+        // console.log("fixed"+fixedTime.setMinutes(fixedTime.getMinutes()))
         const difference = fixedTime - new Date()
+        console.log("FIXED:"+ fixedTime)
+        console.log("DIFFERENCE:"+ difference)
 
         // Convert difference to time left
         if (difference > 0) {
@@ -69,8 +81,9 @@ const Timer = ({ examTimeLimit, examStartedTime }) => {
             setBorderColor(calculatedBorderColor)
 
         } else if (difference <= 0) {
-            setStart(false)
-            setExamEnded(true)
+            // setStart(false)
+            // setExamEnded(true)
+            timerEnded()
         }
 
         return timeLeft
@@ -82,19 +95,21 @@ const Timer = ({ examTimeLimit, examStartedTime }) => {
 
 
 
+    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft({examTimeLimit}))
 
-    const [timeLeft, setTimeLeft] = useState()
 
     useEffect(() => {
+        console.log("useEffect entered")
         // Calculate initial time left
-        const initialTimeLeft = calculateTimeLeft();
-
+        const initialTimeLeft = calculateTimeLeft({examTimeLimit});
+        console.log("time left:"+ timeLeft["minutes"]+":"+timeLeft["seconds"])
         // Update the time left state
         setTimeLeft(initialTimeLeft);
+        console.log("time left2:"+ timeLeft["minutes"]+":"+timeLeft["seconds"])
 
         // Set interval to update time every 1000ms
         const timerInterval = setInterval(() => {
-            setTimeLeft(calculateTimeLeft());
+            setTimeLeft(calculateTimeLeft({examTimeLimit}));
         }, 1000);
 
         // Clear interval on component unmount or when exam ends

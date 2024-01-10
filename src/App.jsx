@@ -10,7 +10,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Exam from "./components/Exam";
 import { useCertificates } from "./hooks";
-import CandidateCertificates from "components/CandidateCertificates/CandidateCertificates";
+import CandidateCertificates from "./components/CandidateCertificates/CandidateCertificates";
 
 
 const App = () => {

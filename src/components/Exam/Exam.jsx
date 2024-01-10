@@ -1,9 +1,16 @@
 // src/components/Certificates/Certificates.js
-import React, { useEffect, useState, useMemo } from 'react';
-import './Exam.css';
+import React, { useEffect, useState, useMemo } from 'react'
+import './Exam.css'
 // import { useParams } from 'react-router-dom';
 // import Button from '@mui/material/Button';
-import { Button } from '../mui';
+import { Button } from '../mui'
+import Timer from './Timer'
+// import AnswerOption from './AnswerOption'
+import AnswerField from './AnswerField'
+import AnswerOptionContext from './AnswerOptionContext';
+
+
+export const TimerContext = React.createContext()
 
 const Exam = () => {
     const Exam = [
@@ -117,14 +124,14 @@ const Exam = () => {
             }
         }
         // Set Mark
-        console.log("count: "+ count)
-        console.log("qLength: "+ Questions.length)
-        console.log("100* divide: "+ (100*count / Questions.length))
-        console.log("typeof: "+ typeof(100*count / Questions.length))
-        console.log("Math: "+ Math.round(100*count / Questions.length))
-        console.log("Math Type: "+ typeof(Math.round(count / Questions.length)))
+        console.log("count: " + count)
+        console.log("qLength: " + Questions.length)
+        console.log("100* divide: " + (100 * count / Questions.length))
+        console.log("typeof: " + typeof (100 * count / Questions.length))
+        console.log("Math: " + Math.round(100 * count / Questions.length))
+        console.log("Math Type: " + typeof (Math.round(count / Questions.length)))
 
-        setMark(Math.round(100*count / Questions.length))
+        setMark(Math.round(100 * count / Questions.length))
     }, [examEnded])
 
     const [timeWhenExamStarted, setTimeWhenExamStarted] = useState()
@@ -139,9 +146,13 @@ const Exam = () => {
 
 
 
+    // const toggleAnswer = () =>
 
 
-
+    const timeEnded = () => {
+        setStart(false)
+        setExamEnded(true)
+    }
 
 
     const [timeLeft, setTimeLeft] = useState()
@@ -174,8 +185,7 @@ const Exam = () => {
                 setBorderColor(calculatedBorderColor)
 
             } else if (difference <= 0) {
-                setStart(false);
-                setExamEnded(true);
+                timeEnded()
             }
 
             return timeLeft;
@@ -209,17 +219,19 @@ const Exam = () => {
                             <h2 className="question">{Questions[questionNumber].question}</h2>
                         </div>
 
-                        <div className={`timer ${borderColor}`}>
+                        {/* <div className={`timer ${borderColor}`}>
                             <span className="clock">{timeLeft["hours"]}:{timeLeft["minutes"]}:{timeLeft["seconds"]}</span>
-                        </div>
-
+                        </div> */}
+                        <TimerContext.Provider value={timeEnded}>
+                            <Timer examTimeLimit={Exam[0].Time} examStartedTime={timeWhenExamStarted} />
+                        </TimerContext.Provider>
                         {/* <Timer /> */}
 
                     </div>
                     {/* End Question */}
 
                     {/* AnswerField */}
-                    <div className={`answerField ${answerFieldClassName}`}>
+                    {/* <div className={`answerField ${answerFieldClassName}`}>
                         <ul className={`answerField ${answerFieldClassName}`}>
                             <li className={`answerOption ${answerOptionClassName[0]}`} onClick={() =>
                                 setAnswerOptionClassName(["selected", "", "", ""])}>
@@ -270,7 +282,13 @@ const Exam = () => {
                                 </label>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
+
+
+                    <AnswerOptionContext.Provider value={{ answer, setAnswer, answerOptionClassName, setAnswerOptionClassName }}>
+                        <AnswerField answerOptions={Questions[questionNumber]} answerFieldClassName={answerFieldClassName} />
+                    </AnswerOptionContext.Provider>
+
                     {/* End AnswerField */}
 
                     <div className='container'>
@@ -282,7 +300,6 @@ const Exam = () => {
                     </div>
 
                 </div>
-                // </div>
 
                 // Page before and after starting the exam 
                 : <div className="container result">
@@ -292,7 +309,7 @@ const Exam = () => {
 
                     {/*  Page after exam has ended */}
                     {examEnded
-                        ? <div>Exam Completed! Your Mark is {mark} / {Questions.length}</div>
+                        ? <div>Exam Completed! Your Mark is {mark} %</div>
 
                         // Page before exam starts
                         : <div>
