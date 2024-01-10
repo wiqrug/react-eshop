@@ -49,7 +49,7 @@ export default function SignUp({ handleSetCookie }) {
       handleSetCookie({
         email: user.user.email,
         token: user.token,
-        candidateNumber: user.user.candidateNumber
+        candidateNumber: user.user.candidateNumber,
       });
 
       navigate("/");

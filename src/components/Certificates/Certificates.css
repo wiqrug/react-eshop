@@ -158,3 +158,28 @@ p,
   animation: none;
   /* Additional styling for hover state if needed */
 }
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Space between buttons */
+  margin-top: 10px; /* Space above the button area */
+}
+
+.action-button {
+  background-color: #f44336; /* Red for delete */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.action-button.update {
+  background-color: #4caf50; /* Green for update */
+}
+
+.action-button:hover {
+  opacity: 0.9; /* Slight opacity change on hover */
+}

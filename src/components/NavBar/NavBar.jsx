@@ -21,8 +21,14 @@ const NavBar = ({ cookieValue }) => {
             </li>
 
             <li>
-              {cookieValue && <Link to="/MyCertificates">My Certificates</Link>}
+              {cookieValue.candidateNumber !== 0 && (
+                <Link to="/MyCertificates">My Certificates</Link>
+              )}
+              {cookieValue.candidateNumber === 0 && (
+                <Link to="/Admin">Admin Panel</Link>
+              )}
             </li>
+
             <li className="login-icon">
               <div className="dropdown">
                 <button className="dropbtn user-icon">&#128512;</button>

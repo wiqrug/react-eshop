@@ -18,7 +18,7 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
 
   //
 
-  const checkBought = () => {};
+  // const checkBought = () => {};
 
   const jsonPayload = {
     candidateNumber: candNum,

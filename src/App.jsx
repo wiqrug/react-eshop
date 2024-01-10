@@ -18,7 +18,7 @@ import Admin from "components/Admin/Admin";
 
 const App = () => {
   //fetched certificates
-  const certificates = useCertificates();
+  const { certificates, fetchCertificates } = useCertificates();
 
   const [cookieValue, setcookieValue] = useState("");
 
@@ -51,7 +51,14 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route
           path="/Certificates"
-          element={<Certificates certificates={certificates} />}
+          element={
+            <Certificates
+              certificates={certificates}
+              cookieValue={cookieValue}
+              isAdminView={false}
+              fetchCertificates={fetchCertificates}
+            />
+          }
         />
         <Route
           path="/Certificate/:id"
@@ -86,7 +93,20 @@ const App = () => {
           element={<Logout handleRemoveCookie={handleRemoveCookie} />}
         />
         <Route path="/Exam/:id" element={<Exam />} />
-        <Route path="/Admin" element={cookieValue ? <Admin /> : <NotFound />} />
+        <Route
+          path="/Admin"
+          element={
+            cookieValue ? (
+              <Admin
+                certificates={certificates}
+                cookieValue={cookieValue}
+                fetchCertificates={fetchCertificates}
+              />
+            ) : (
+              <NotFound />
+            )
+          }
+        />
 
         <Route path="/MyCertificates" element={<CandidateCertificates />} />
 
