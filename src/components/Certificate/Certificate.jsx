@@ -12,8 +12,13 @@ import { Link } from "react-router-dom";
 
 const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
+  //Custom hook should return cookie, isBought, handleBuy
+  //Should have as arguments cookieValue
+
   const candNum = useCandidateInfo(cookieValue);
   const certTitle = useCertificateInfo(certificate);
+
+  //This is a hard one to make custom hook
 
   const [isBought, setIsBought] = useState(false);
   const availableCertificates = useCandidateCertificates("available");
@@ -36,9 +41,6 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
       candidateNumber: candNum,
       title: certTitle,
     });
-
-    // Set the bought status in local storage and update state
-    // localStorage.setItem(`certificate_${certificate.$id}_bought`, "true");
     setIsBought(true);
   };
 
