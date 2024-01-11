@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext } from 'react'
 import './AnswerOption.css'
-import AnswerOptionContext from './AnswerOptionContext';
+import AnswerOptionContext from './AnswerOptionContext'
 
 // Make the new array which is going to replace the old one in answer option 
 const newClassNameArray = (i) => {
@@ -11,6 +11,7 @@ const newClassNameArray = (i) => {
 
 const AnswerOption = ({ index, question }) => {
 
+    // Configute which answer letter is this index
     let answerOption
     switch (index) {
         case 0:

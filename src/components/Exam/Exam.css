@@ -1,10 +1,6 @@
-:root {
-  --timer-bg-color-end: #ff6347; /* Red color */
-}
-
-p {
-  text-align: left;
-}
+/* :root {
+  --timer-bg-color-end: #ff6347; /* Red color 
+} */
 
 body {
   margin: 0;
@@ -15,6 +11,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #eee;
+}
+
+p {
+  text-align: left;
 }
 
 code {
@@ -40,27 +40,16 @@ code {
   }
 }
 
-/* Result Component */
 .result {
   padding: 1.5rem 2.5rem;
 }
 
-/* Quiz Component */
-.answerField {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-/* QuestionCount Component */
 .questionCount {
   text-align: left;
   padding: 1.5rem 2.5rem 0rem;
   font-size: 15px;
-  /* background-color: rgb(255, 230, 230); */
 }
 
-/* Question Component */
 .question {
   margin: 0;
   text-align: left;
@@ -71,91 +60,6 @@ code {
     
 .question-hidden {
 opacity: 0;
-}
-
-/* AnswerOption Component */
-.answerOption {
-  border-top: 1px solid #eee;
-  list-style: none;
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.answerField-hidden {
-  opacity: 0;
-}
-
-
-li.answerOption.selected {
-  background-color: #c1e5ff;
-}
-
-.answerOption:hover {
-  background-color: #eefbfe;
-}
-
-/* .answerOption.answerOption {
-  background-color: #5ed7f3;
-} */
-
-.radioCustomButton {
-  position: absolute;
-  width: auto;
-  opacity: 0;
-}
-
-.radioCustomButton,
-.radioCustomLabel {
-  display: inline-block;
-  vertical-align: middle;
-  cursor: pointer;
-}
-
-.radioCustomLabel {
-  position: relative;
-  width: 100%;
-  margin: 0;
-  padding: 1.5rem 2.5rem 1.5rem 2.5rem;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.radioCustomButton~.radioCustomLabel:before {
-  position: absolute;
-  top: 20px;
-  left: 38px;
-  width: 28px;
-  height: 28px;
-  content: '';
-  display: inline-block;
-  vertical-align: middle;
-  background: #fff;
-  border: 1px solid #bbb;
-  border-radius: 50%;
-  transition: all 0.3s;
-}
-
-.radioCustomButton:checked~.radioCustomLabel:before {
-  content: '';
-  background: #8bc53f no-repeat;
-  background-size: 27px;
-  border-color: #8bc53f;
-}
-
-.button {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  padding: 1.5rem 2.5rem 1.5rem;
-}
-
-.center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  transform: translateX(340px);
 }
 
 .questionAndTimer {
@@ -173,39 +77,9 @@ li.answerOption.selected {
 opacity: 0;
 }
 
-/* Chat gpt timer */
-.timer {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: rgb(65, 65, 65);
-  color: #fff;
-  font-size: 24px;
-  text-align: center;
-  line-height: 110px;
-  margin-left: auto;
-  margin-right: 20px;
-  border: 7px solid rgb(57, 57, 57); /* Initial border color */
-  border-top-color: rgb(65, 184, 131); /* Initial top border color */
-  transition: border-color 1s ease-in-out; /* Transition for border color */
-}
-
-.timer.red {
-  border-color: red; /* Final border color */
-  border-top-color: red; /* Final top border color */
-}
-
-.timer.orange {
-  border-color: orange; /* Intermediate border color */
-  border-top-color: orange; /* Intermediate top border color */
-}
-
-.timer.green {
-  border-color: green; /* Initial border color */
-  border-top-color: green; /* Initial top border color */
-}
-
-.clock {
-  padding-left: 5px;
-  padding-right: 5px;
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateX(340px);
 }
