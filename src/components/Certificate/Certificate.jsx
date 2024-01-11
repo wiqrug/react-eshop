@@ -14,6 +14,7 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
 
   useEffect(() => {
     // Check local storage for the bought status of the certificate
+    //There is for sure a better implementation of this!
     if (certificate) {
       const boughtStatus = localStorage.getItem(
         `certificate_${certificate.$id}_bought`
@@ -23,7 +24,7 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
   }, [certificate]);
 
   const handleBuy = async () => {
-    const result = await buyCertificate({
+    await buyCertificate({
       candidateNumber: candNum,
       title: certTitle,
     });
