@@ -1,12 +1,12 @@
+import { useUserCookie } from "hooks";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 
-export default function MyProfile(){
-
-    // Initial user data
+export default function MyProfile() {
+  // Initial user data
   const initialUserData = {
-    firstName: 'John',
-    lastName: 'Doe',
+    firstName: "John",
+    lastName: "Doe",
     email: "email",
     // Add more fields as needed
   };
@@ -29,69 +29,69 @@ export default function MyProfile(){
     setIsEditMode(false);
   };
 
-  useEffect(() => {
-    const cookieValue = Cookies.get("currentUser");
-    if (cookieValue) {
-      const cookieData = JSON.parse(cookieValue);
-      setUserData((prevUserData) => ({ ...prevUserData, ...cookieData }));
-    }
-  }, []);
+  const { cookie } = useUserCookie();
 
-    return (
+  useEffect(() => {
+    if (cookie) {
+      setUserData((prevUserData) => ({ ...prevUserData, ...cookie }));
+    }
+  }, [cookie]);
+
+  return (
+    <div>
+      <h1>My Profile</h1>
+      {isEditMode ? (
+        // Edit mode form
+        <form onSubmit={handleSubmit}>
+          <label>
+            First Name:
+            <input
+              type="text"
+              name="firstName"
+              value={userData.firstName}
+              onChange={handleInputChange}
+            />
+          </label>
+          <br />
+          <label>
+            Last Name:
+            <input
+              type="text"
+              name="lastName"
+              value={userData.lastName}
+              onChange={handleInputChange}
+            />
+          </label>
+          <br />
+          <label>
+            Email:
+            <input
+              type="email"
+              name="email"
+              value={userData.email}
+              onChange={handleInputChange}
+            />
+          </label>
+          <br />
+          {/* Add more fields as needed */}
+          <button type="submit">Save</button>
+        </form>
+      ) : (
+        // Display mode
         <div>
-          <h1>My Profile</h1>
-          {isEditMode ? (
-            // Edit mode form
-            <form onSubmit={handleSubmit}>
-              <label>
-                First Name:
-                <input
-                  type="text"
-                  name="firstName"
-                  value={userData.firstName}
-                  onChange={handleInputChange}
-                />
-              </label>
-              <br />
-              <label>
-                Last Name:
-                <input
-                  type="text"
-                  name="lastName"
-                  value={userData.lastName}
-                  onChange={handleInputChange}
-                />
-              </label>
-              <br />
-              <label>
-                Email:
-                <input
-                  type="email"
-                  name="email"
-                  value={userData.email}
-                  onChange={handleInputChange}
-                />
-              </label>
-              <br />
-              {/* Add more fields as needed */}
-              <button type="submit">Save</button>
-            </form>
-          ) : (
-            // Display mode
-            <div>
-              <p>
-                <strong>First Name:</strong> {userData.firstName}
-              </p>
-              <p>
-                <strong>Last Name:</strong> {userData.lastName}
-              </p>
-              <p>
-                <strong>Email:</strong> {userData.email}
-              </p>
-              {/* Display more fields as needed */}
-              <button onClick={() => setIsEditMode(true)}>Edit</button>
-            </div>
-          )}
+          <p>
+            <strong>First Name:</strong> {userData.firstName}
+          </p>
+          <p>
+            <strong>Last Name:</strong> {userData.lastName}
+          </p>
+          <p>
+            <strong>Email:</strong> {userData.email}
+          </p>
+          {/* Display more fields as needed */}
+          <button onClick={() => setIsEditMode(true)}>Edit</button>
         </div>
-      );
-};
+      )}
+    </div>
+  );
+}

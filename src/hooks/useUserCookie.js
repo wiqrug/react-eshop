@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 
 export const useUserCookie = () => {
-  const [cookie, setCookie] = useState("");
+  const [cookie, setCookie] = useState(null);
 
   useEffect(() => {
     // Retrieve the cookie value when the component mounts

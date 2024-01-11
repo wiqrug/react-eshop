@@ -1,26 +1,28 @@
 // src/App.js
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import NavBar from "./components/NavBar";
-import NotFound from "./components/NotFound";
-import Home from "./components/Home";
-import Certificates from "./components/Certificates";
-import Certificate from "./components/Certificate";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
-import Exam from "./components/Exam";
-import { useCertificates, useUserCookie } from "./hooks";
-import CandidateCertificates from "components/CandidateCertificates/CandidateCertificates";
-import Logout from "components/Logout/Logout";
-import MyProfile from "components/MyProfile";
-import Admin from "components/Admin";
+import { useUserCookie, useCertificates } from "hooks";
+import {
+  NavBar,
+  NotFound,
+  Home,
+  Certificates,
+  Certificate,
+  Login,
+  SignUp,
+  Exam,
+  CandidateCertificates,
+  Logout,
+  MyProfile,
+  Admin,
+} from "./components";
 
 const App = () => {
   //fetched certificates
-
   const { cookie, handleSetCookie, handleRemoveCookie } = useUserCookie();
   const { certificates, fetchCertificates } = useCertificates();
 
+  // extract CertificateRoutes, AuthRoutes, etc.
   return (
     <>
       <NavBar cookieValue={cookie} />
