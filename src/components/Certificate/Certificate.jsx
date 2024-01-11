@@ -14,9 +14,8 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
   const candNum = useCandidateInfo(cookieValue);
   const certTitle = useCertificateInfo(certificate);
-  const [isBought, setIsBought] = useState(false);
-  const [isUnavailable, setIsUnavailable] = useState(false);
 
+  const [isBought, setIsBought] = useState(false);
   const availableCertificates = useCandidateCertificates("available");
 
   useEffect(() => {
@@ -28,7 +27,7 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
       const isCertificateAvailable = availableCertificates.some(
         (cert) => cert.$id === certificate.$id
       );
-      setIsUnavailable(!isCertificateAvailable);
+      setIsBought(!isCertificateAvailable);
     }
   }, [availableCertificates, certificate]);
 
@@ -60,19 +59,19 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
           <h1>{certificate.description}</h1>
         </div>
 
-        {cookie == null && !isBought && !isUnavailable && (
+        {cookie == null && !isBought && (
           <Link to="/Login">
             <button className="Purchase-Certificate">Buy now</button>
           </Link>
         )}
 
-        {cookie && !isBought && !isUnavailable && (
+        {cookie && !isBought && (
           <button className="Purchase-Certificate" onClick={handleBuy}>
             Buy Now
           </button>
         )}
 
-        {cookie && (isBought || isUnavailable) && (
+        {cookie && isBought && (
           <button className="Purchased-Certificate">Bought</button>
         )}
       </div>
