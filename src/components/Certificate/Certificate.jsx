@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./Certificate.css";
-import { useCertificate, useUserCookie } from "../../hooks";
+import {
+  useCandidateCertificates,
+  useCertificate,
+  useUserCookie,
+} from "../../hooks";
 import { useCandidateInfo } from "hooks/useCandidateInfo";
 import { useCertificateInfo } from "hooks/useCertificateInfo";
 import { buyCertificate } from "api/certificates/buyCertificate";
@@ -11,17 +15,22 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
   const candNum = useCandidateInfo(cookieValue);
   const certTitle = useCertificateInfo(certificate);
   const [isBought, setIsBought] = useState(false);
+  const [isUnavailable, setIsUnavailable] = useState(false);
+
+  const availableCertificates = useCandidateCertificates("available");
 
   useEffect(() => {
-    // Check local storage for the bought status of the certificate
-    //There is for sure a better implementation of this!
-    if (certificate) {
-      const boughtStatus = localStorage.getItem(
-        `certificate_${certificate.$id}_bought`
+    if (
+      availableCertificates &&
+      Array.isArray(availableCertificates) &&
+      certificate
+    ) {
+      const isCertificateAvailable = availableCertificates.some(
+        (cert) => cert.$id === certificate.$id
       );
-      setIsBought(boughtStatus === "true");
+      setIsUnavailable(!isCertificateAvailable);
     }
-  }, [certificate]);
+  }, [availableCertificates, certificate]);
 
   const handleBuy = async () => {
     await buyCertificate({
@@ -30,7 +39,7 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
     });
 
     // Set the bought status in local storage and update state
-    localStorage.setItem(`certificate_${certificate.$id}_bought`, "true");
+    // localStorage.setItem(`certificate_${certificate.$id}_bought`, "true");
     setIsBought(true);
   };
 
@@ -51,19 +60,19 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
           <h1>{certificate.description}</h1>
         </div>
 
-        {cookie == null && !isBought && (
+        {cookie == null && !isBought && !isUnavailable && (
           <Link to="/Login">
             <button className="Purchase-Certificate">Buy now</button>
           </Link>
         )}
 
-        {cookie && !isBought && (
+        {cookie && !isBought && !isUnavailable && (
           <button className="Purchase-Certificate" onClick={handleBuy}>
             Buy Now
           </button>
         )}
 
-        {cookie && isBought && (
+        {cookie && (isBought || isUnavailable) && (
           <button className="Purchased-Certificate">Bought</button>
         )}
       </div>
