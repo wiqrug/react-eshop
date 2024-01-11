@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Certificate.css";
 import { useCertificate, useUserCookie } from "../../hooks";
 import { useCandidateInfo } from "hooks/useCandidateInfo";
@@ -12,21 +12,24 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
   const certTitle = useCertificateInfo(certificate);
   const [isBought, setIsBought] = useState(false);
 
-  //isBought talks to the database.
-  //returns true or false
-
-  //
-
-  // const checkBought = () => {};
-
-  const jsonPayload = {
-    candidateNumber: candNum,
-    title: certTitle,
-  };
+  useEffect(() => {
+    // Check local storage for the bought status of the certificate
+    if (certificate) {
+      const boughtStatus = localStorage.getItem(
+        `certificate_${certificate.$id}_bought`
+      );
+      setIsBought(boughtStatus === "true");
+    }
+  }, [certificate]);
 
   const handleBuy = async () => {
-    await buyCertificate(jsonPayload);
+    const result = await buyCertificate({
+      candidateNumber: candNum,
+      title: certTitle,
+    });
 
+    // Set the bought status in local storage and update state
+    localStorage.setItem(`certificate_${certificate.$id}_bought`, "true");
     setIsBought(true);
   };
 
@@ -46,9 +49,9 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
         <div className="Certificate-Details-Description">
           <h1>{certificate.description}</h1>
         </div>
+
         {cookie == null && !isBought && (
           <Link to="/Login">
-            {" "}
             <button className="Purchase-Certificate">Buy now</button>
           </Link>
         )}
