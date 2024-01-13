@@ -1,10 +1,9 @@
-import { getCertificates } from "api";
 import { instance } from "api/axios";
 import AvailableCertificates from "components/CandidateCertificates/AvailableCertificates";
 import ObtainedCertificates from "components/CandidateCertificates/ObtainedCertificates";
 import { AddCertificateModal } from "components/Certificates/AddCertificateModal";
 import CertificatesList from "components/Certificates/Certificates";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 /**
  * Admins role over candidates
