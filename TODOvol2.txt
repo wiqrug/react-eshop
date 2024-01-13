@@ -1,0 +1,6 @@
+refactor and merge code because its repetitive.
+
+when user has an unobtained certificate, needs to be able to give exams
+
+when user has an obtained certificate, needs to be able to print it in pdf format
+
