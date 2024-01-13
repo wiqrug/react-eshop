@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import UpdateCertificateModal from "./UpdateCertificateModal";
 import { deleteCertificate } from "api/certificates/deleteCertificate";
+import { updateCertificateByTitle } from "api/certificates/updateCertificateByTitle";
 
 const CertificateCard = ({
   src,
@@ -24,6 +25,7 @@ const CertificateCard = ({
 
   const handleOpenUpdateModal = () => setIsUpdateModalOpen(true);
   const handleCloseUpdateModal = () => setIsUpdateModalOpen(false);
+
   const handleDelete = () => {
     const certificate = certificates.find((c) => c.$id === id);
     if (!certificate) {
@@ -33,6 +35,14 @@ const CertificateCard = ({
 
     deleteCertificate(certificate).then(() => fetchCertificates());
   };
+
+  const handleUpdate = async (updatedData) => {
+    await updateCertificateByTitle({ title }, updatedData);
+    fetchCertificates();
+    handleCloseUpdateModal();
+  };
+
+  //Make a function that
 
   return (
     <>
@@ -67,6 +77,7 @@ const CertificateCard = ({
         open={isUpdateModalOpen}
         onClose={handleCloseUpdateModal}
         certificate={{ title, price, id }}
+        onUpdate={handleUpdate}
       />
     </>
   );

@@ -1,29 +1,80 @@
-// UpdateCertificateModal.js
-import React from "react";
+import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
+import { TextField } from "@mui/material";
 
-//I need to add the fields needed in order to update the certificate
-//When user clicks on the button Save Changes, i should update the database
-//And then fetch to get the new certificates.
-//Remember the fetch method is in the useCertificates custom hook
+const UpdateCertificateModal = ({ open, onClose, certificate, onUpdate }) => {
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [imageSrc, setImageSrc] = useState(null);
+  const [price, setPrice] = useState(null);
 
-//This form should make a JSONpayload that is going to be sent through the form to the backend
+  const payload = {
+    title: title,
+    description: description,
+    price: price,
+    imageSrc: imageSrc,
+  };
 
-const UpdateCertificateModal = ({ open, onClose, certificate }) => {
+  const handleSaveChanges = () => {
+    onUpdate(payload);
+    onClose();
+  };
+
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Update Certificate</DialogTitle>
       <DialogContent>
-        {/* Here i can add my form fields and handle whatever i want  */}
+        <p>
+          Fields marked with an asterisk (*) are optional. Leave them empty to
+          keep the existing values.
+        </p>
+        <TextField
+          margin="dense"
+          label="Title *"
+          type="text"
+          fullWidth
+          variant="outlined"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <TextField
+          margin="dense"
+          label="Description *"
+          type="text"
+          fullWidth
+          multiline
+          rows={4}
+          variant="outlined"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <TextField
+          margin="dense"
+          label="Price *"
+          type="number"
+          fullWidth
+          variant="outlined"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
+        <TextField
+          margin="dense"
+          label="Image Source *"
+          type="text"
+          fullWidth
+          variant="outlined"
+          value={imageSrc}
+          onChange={(e) => setImageSrc(e.target.value)}
+        />
         <p>Update form for: {certificate?.title}</p>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={onClose}>Save Changes</Button>
+        <Button onClick={handleSaveChanges}>Save Changes</Button>
       </DialogActions>
     </Dialog>
   );

@@ -18,12 +18,17 @@ import React, { useEffect, useState } from "react";
  * 9) Update a Certificate ADDED BUTTON NEEDS IMPLEMENTATION
  * 10) Delete a Certificate DONE
  *
+ *
+ *
  * 11) Create exams
  * 12) Update Exams
  * 13) Delete exams
  * 14) Get exams
  *
  * 15) CRUD Questions
+ *
+ *
+ * Update certificate -> if Value = " " then the value stays as it previously was
  */
 
 const Admin = (props) => {
