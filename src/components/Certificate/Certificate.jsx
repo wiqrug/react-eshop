@@ -12,13 +12,11 @@ import { Link } from "react-router-dom";
 
 const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
-  //Custom hook should return cookie, isBought, handleBuy
-  //Should have as arguments cookieValue
-
   const candNum = useCandidateInfo(cookieValue);
   const certTitle = useCertificateInfo(certificate);
+  // @ts-ignore
 
-  //This is a hard one to make custom hook
+  // This is a hard one to make custom hook
 
   const [isBought, setIsBought] = useState(false);
   const availableCertificates = useCandidateCertificates("available");
@@ -45,6 +43,8 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
   };
 
   const { cookie } = useUserCookie();
+  //Custom hook should return cookie, isBought, handleBuy
+  //Should have as arguments cookieValue
 
   return (
     certificate && (
