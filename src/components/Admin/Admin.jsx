@@ -1,4 +1,5 @@
 import { getCertificates } from "api";
+import { instance } from "api/axios";
 import AvailableCertificates from "components/CandidateCertificates/AvailableCertificates";
 import ObtainedCertificates from "components/CandidateCertificates/ObtainedCertificates";
 import { AddCertificateModal } from "components/Certificates/AddCertificateModal";
@@ -44,6 +45,18 @@ const Admin = (props) => {
   const handleCloseAddCertificateModal = () =>
     setIsAddCertificateModalOpen(false);
 
+  const handleAddCertificate = async (certificateData) => {
+    console.log("Received data for saving:", certificateData); // Log to verify data structure
+    try {
+      const response = await instance.post("Certificates", certificateData);
+      if (response.status === 200) {
+        console.log("Certificate added successfully");
+        fetchCertificates(); // Fetch the updated list of certificates
+      }
+    } catch (error) {
+      console.error("Error adding certificate:", error);
+    }
+  };
   const handleSelectionChange = (option) => {
     setSelectedOption(option);
   };
@@ -79,6 +92,7 @@ const Admin = (props) => {
           <AddCertificateModal
             open={isAddCertificateModalOpen}
             onClose={handleCloseAddCertificateModal}
+            onSave={handleAddCertificate}
           />
         </>
       )}

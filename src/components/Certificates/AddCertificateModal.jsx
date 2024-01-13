@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
-export const AddCertificateModal = ({ open, onClose }) => {
+export const AddCertificateModal = ({ open, onClose, onSave }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -31,15 +31,19 @@ export const AddCertificateModal = ({ open, onClose }) => {
     // Check if there's any error
     const hasError = Object.values(newError).some((isError) => isError);
 
-    if (hasError) {
-      // Prevent saving if there are errors
-      console.log("Please fill in all required fields.");
-      return;
-    }
+    if (!hasError) {
+      const certificateData = {
+        title,
+        description,
+        price: Number(price), // Ensuring price is a number
+        imageSrc,
+      };
 
-    // Add your save functionality here
-    console.log("Saving certificate data...");
-    onClose(); // Close modal after saving
+      onSave(certificateData);
+      onClose(); // Close modal after saving
+    } else {
+      console.log("Please fill in all required fields.");
+    }
   };
 
   return (
