@@ -1,6 +1,7 @@
 import { getCertificates } from "api";
 import AvailableCertificates from "components/CandidateCertificates/AvailableCertificates";
 import ObtainedCertificates from "components/CandidateCertificates/ObtainedCertificates";
+import { AddCertificateModal } from "components/Certificates/AddCertificateModal";
 import CertificatesList from "components/Certificates/Certificates";
 import React, { useEffect, useState } from "react";
 
@@ -34,7 +35,14 @@ import React, { useEffect, useState } from "react";
 const Admin = (props) => {
   const { certificates, cookieValue, fetchCertificates } = props;
   const [selectedOption, setSelectedOption] = useState(null);
-  console.log(props);
+  const [isAddCertificateModalOpen, setIsAddCertificateModalOpen] =
+    useState(false);
+
+  const handleOpenAddCertificateModal = () =>
+    setIsAddCertificateModalOpen(true);
+
+  const handleCloseAddCertificateModal = () =>
+    setIsAddCertificateModalOpen(false);
 
   const handleSelectionChange = (option) => {
     setSelectedOption(option);
@@ -58,13 +66,19 @@ const Admin = (props) => {
       {selectedOption === "certificates" && (
         <>
           <div className="add-certificate">
-            <button>Add Certificate</button>
+            <button onClick={handleOpenAddCertificateModal}>
+              Add Certificate
+            </button>
           </div>
           <CertificatesList
             certificates={certificates}
             cookieValue={cookieValue}
             isAdminView
             fetchCertificates={fetchCertificates}
+          />
+          <AddCertificateModal
+            open={isAddCertificateModalOpen}
+            onClose={handleCloseAddCertificateModal}
           />
         </>
       )}
