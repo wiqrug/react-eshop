@@ -56,12 +56,17 @@ const Admin = (props) => {
 
       {selectedOption === "candidates" && <ObtainedCertificates />}
       {selectedOption === "certificates" && (
-        <CertificatesList
-          certificates={certificates}
-          cookieValue={cookieValue}
-          isAdminView
-          fetchCertificates={fetchCertificates}
-        />
+        <>
+          <div className="add-certificate">
+            <button>Add Certificate</button>
+          </div>
+          <CertificatesList
+            certificates={certificates}
+            cookieValue={cookieValue}
+            isAdminView
+            fetchCertificates={fetchCertificates}
+          />
+        </>
       )}
       {selectedOption === "exams" && <AvailableCertificates />}
     </>
