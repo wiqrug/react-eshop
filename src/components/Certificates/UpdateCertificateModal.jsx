@@ -3,47 +3,42 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
-
-import { useCertificateProperties } from "hooks/useCertificateProperties";
 import CertificateFormFields from "./CreateFormFields";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const UpdateCertificateModal = ({ open, onClose, certificate, onUpdate }) => {
-  //fix the null issue on the backend i think i cannot do that here right now
+  // Initialize state with current certificate values
+  const [title, setTitle] = useState(certificate?.title || "");
+  const [description, setDescription] = useState(
+    certificate?.description || ""
+  );
+  const [price, setPrice] = useState(certificate?.price || 0);
+  const [imageSrc, setImageSrc] = useState(certificate?.imageSrc || "");
 
-  const {
-    title,
-    setTitle,
-    description,
-    setDescription,
-    price,
-    setPrice,
-    imageSrc,
-    setImageSrc,
-  } = useCertificateProperties();
+  // Update state when the certificate changes
+  useEffect(() => {
+    setTitle(certificate?.title || "");
+    setDescription(certificate?.description || "");
+    setPrice(certificate?.price || 0);
+    setImageSrc(certificate?.imageSrc || "");
+  }, [certificate]);
 
-  //fkin fixed!
   const handleSaveChanges = () => {
     const updatedData = {
-      title: title !== null ? title : certificate?.title,
-      description:
-        description !== null ? description : certificate?.description,
-      price: price !== null ? Number(price) : certificate?.price,
-      imageSrc: imageSrc !== null ? imageSrc : certificate?.imageSrc,
+      title,
+      description,
+      price: Number(price),
+      imageSrc,
     };
 
     onUpdate(updatedData);
     onClose();
   };
+
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Update Certificate</DialogTitle>
       <DialogContent>
-        <p>
-          Fields marked with an asterisk (*) are optional. Leave them empty to
-          keep the existing values.
-        </p>
-
         <CertificateFormFields
           title={title}
           setTitle={setTitle}
