@@ -4,3 +4,5 @@ when user has an unobtained certificate, needs to be able to give exams
 
 when user has an obtained certificate, needs to be able to print it in pdf format
 
+price isnt updated, why? maybe because of type? sometimes its working,idk
+

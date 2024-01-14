@@ -21,6 +21,7 @@ const CertificateCard = ({
   // Update Certificate needs another component that has a form to change whatever u want
   // The first card could be the Add Certificate Card
   const cookie = cookieValue;
+
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
   const handleOpenUpdateModal = () => setIsUpdateModalOpen(true);

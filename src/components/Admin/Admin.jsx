@@ -3,6 +3,7 @@ import AvailableCertificates from "components/CandidateCertificates/AvailableCer
 import ObtainedCertificates from "components/CandidateCertificates/ObtainedCertificates";
 import { AddCertificateModal } from "components/Certificates/AddCertificateModal";
 import CertificatesList from "components/Certificates/Certificates";
+import { useModal } from "hooks/useModal";
 import React, { useState } from "react";
 
 /**
@@ -28,15 +29,21 @@ import React, { useState } from "react";
 
 const Admin = (props) => {
   const { certificates, cookieValue, fetchCertificates } = props;
+
   const [selectedOption, setSelectedOption] = useState(null);
-  const [isAddCertificateModalOpen, setIsAddCertificateModalOpen] =
-    useState(false);
 
-  const handleOpenAddCertificateModal = () =>
-    setIsAddCertificateModalOpen(true);
+  // const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
 
-  const handleCloseAddCertificateModal = () =>
-    setIsAddCertificateModalOpen(false);
+  const createAndFetchCertificate = async (certificateData) => {
+    await createCertificate(certificateData);
+    fetchCertificates();
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => setIsModalOpen(true);
+
+  const handleCloseModal = () => setIsModalOpen(false);
 
   const handleSelectionChange = (option) => {
     setSelectedOption(option);
@@ -60,9 +67,7 @@ const Admin = (props) => {
       {selectedOption === "certificates" && (
         <>
           <div className="add-certificate">
-            <button onClick={handleOpenAddCertificateModal}>
-              Add Certificate
-            </button>
+            <button onClick={handleOpenModal}>Add Certificate</button>
           </div>
           <CertificatesList
             certificates={certificates}
@@ -71,9 +76,9 @@ const Admin = (props) => {
             fetchCertificates={fetchCertificates}
           />
           <AddCertificateModal
-            open={isAddCertificateModalOpen}
-            onClose={handleCloseAddCertificateModal}
-            onSave={createCertificate}
+            open={isModalOpen}
+            onClose={handleCloseModal}
+            onSave={createAndFetchCertificate}
           />
         </>
       )}
