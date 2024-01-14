@@ -6,13 +6,14 @@ import AnswerField from './AnswerField'
 import AnswerOptionContext from './AnswerOptionContext'
 import TimerContext from './TimerContext'
 import ManageExams from './Admin/ManageExams'
-
+import ManageCandidates from './Admin/ManageCandidates'
+import ManageQuestions from './Admin/ManageQuestions'
 
 const exam = () => {
     return (
         <>
             <div>
-                <ManageExams/>
+                <ManageCandidates/>
             </div>
         </>
     )
