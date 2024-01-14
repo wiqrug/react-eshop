@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react'
 import './Timer.css'
-import TimerContext from './TimerContext';
+import TimerContext from './TimerContext'
 
 // Converts int to string with 2 digits
 const convert = (n) => {
@@ -20,7 +20,7 @@ const Timer = ({ examTimeLimit, examStartedTime }) => {
         const ALERT_THRESHOLD_PERCENTAGE = (15 / 100) * (examTimeLimit * 60 * 1000)
         const WARNING_THRESHOLD_PERCENTAGE = (40 / 100) * (examTimeLimit * 60 * 1000)
 
-        // Function to calculate border color based on time left
+        // Condition to calculate border color based on time left
         if (timeleft <= ALERT_THRESHOLD_PERCENTAGE) {
             return 'red'
         } else if (timeleft <= WARNING_THRESHOLD_PERCENTAGE) {
@@ -65,10 +65,9 @@ const Timer = ({ examTimeLimit, examStartedTime }) => {
     const [timeLeft, setTimeLeft] = useState(new Date())
 
     useEffect(() => {
-        // Calculate initial time left
-        const initialTimeLeft = calculateTimeLeft()
-        // Update the time left state
-        setTimeLeft(initialTimeLeft)
+        
+        const initialTimeLeft = calculateTimeLeft()         // Calculate initial time left
+        setTimeLeft(initialTimeLeft)                        // Update the time left state
 
         // Set interval to update time every 1000ms
         const timerInterval = setInterval(() => {
