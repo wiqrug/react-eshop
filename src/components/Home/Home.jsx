@@ -6,7 +6,7 @@ import "./Home.css";
 export default function Home() {
   // const [url, setUrl] = useState("http://localhost:3000/");
   // const [data, setData] = useState();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // const redirectOnCertificates = (e) => {
   //     e.preventDefault();
