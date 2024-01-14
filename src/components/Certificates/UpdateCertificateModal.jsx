@@ -7,6 +7,8 @@ import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 
 const UpdateCertificateModal = ({ open, onClose, certificate, onUpdate }) => {
+  //fix the null issue on the backend i think i cannot do that here right now
+
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [imageSrc, setImageSrc] = useState(null);
@@ -19,11 +21,19 @@ const UpdateCertificateModal = ({ open, onClose, certificate, onUpdate }) => {
     imageSrc: imageSrc,
   };
 
+  //fkin fixed!
   const handleSaveChanges = () => {
-    onUpdate(payload);
+    const updatedData = {
+      title: title !== null ? title : certificate?.title,
+      description:
+        description !== null ? description : certificate?.description,
+      price: price !== null ? Number(price) : certificate?.price,
+      imageSrc: imageSrc !== null ? imageSrc : certificate?.imageSrc,
+    };
+
+    onUpdate(updatedData);
     onClose();
   };
-
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Update Certificate</DialogTitle>
