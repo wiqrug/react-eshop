@@ -35,7 +35,7 @@ export const AddCertificateModal = ({ open, onClose, onSave }) => {
       };
 
       onSave(certificateData);
-      onClose(); // Close modal after saving
+      onClose();
     } else {
       console.log("Please fill in all required fields.");
     }
