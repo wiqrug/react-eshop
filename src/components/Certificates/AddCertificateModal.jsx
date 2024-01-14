@@ -1,10 +1,4 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  TextField,
-} from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import React, { useState } from "react";
 import CertificateFormFields from "./CreateFormFields";
 
@@ -13,7 +7,7 @@ export const AddCertificateModal = ({ open, onClose, onSave }) => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [imageSrc, setImageSrc] = useState("");
-  const [error, setError] = useState({
+  const [, setError] = useState({
     title: false,
     description: false,
     price: false,
