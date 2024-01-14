@@ -15,6 +15,5 @@ export const updateCertificateByTitle = async (certificate, payload) => {
     }
   } catch (error) {
     console.error("Error in UPDATE request:", error);
-    // Error handling
   }
 };

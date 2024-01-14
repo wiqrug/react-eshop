@@ -8,3 +8,4 @@ price isnt updated, why? maybe because of type? sometimes its working,idk
 
 SOS, when updating an existing certificates, its being accepted only if all the fields are not null
 
+see if i can merge custom hooks

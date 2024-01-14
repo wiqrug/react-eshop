@@ -1,5 +1,3 @@
-// Adjust the import path as needed
-
 import { instance as axios } from "api/axios";
 
 export const getCandidateCertificates = async (
@@ -12,11 +10,11 @@ export const getCandidateCertificates = async (
     try {
       const response = await axios.get(url);
       console.log(response);
-      return response.data; // Axios automatically parses the JSON response
+      return response.data;
     } catch (error) {
       console.error("Error fetching candidates obtained certificates", error);
       // Optionally return a default value or re-throw the error
-      throw error; // or return a default value
+      throw error;
     }
   } else {
     // Handle the case where there is no current user or candidate number

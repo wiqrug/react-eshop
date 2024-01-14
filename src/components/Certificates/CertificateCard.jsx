@@ -36,8 +36,6 @@ const CertificateCard = ({
     handleCloseModal();
   };
 
-  //Make a function that
-
   return (
     <>
       <Link

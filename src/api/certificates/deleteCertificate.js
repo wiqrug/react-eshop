@@ -1,8 +1,7 @@
 import { instance as axios } from "api/axios";
 
 export const deleteCertificate = async (certificate) => {
-  const titleForUrl = encodeURIComponent(certificate.title); // Use this if titles can have special characters
-  // const titleForUrl = certificate.title; // Use this if you are sure titles are URL-safe
+  const titleForUrl = encodeURIComponent(certificate.title);
 
   try {
     const url = `Certificates/${titleForUrl}`;

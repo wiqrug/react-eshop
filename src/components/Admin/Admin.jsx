@@ -32,6 +32,7 @@ const Admin = (props) => {
 
   const [selectedOption, setSelectedOption] = useState(null);
 
+  //Should this have higher-level names?
   const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
 
   const createAndFetchCertificate = async (certificateData) => {
