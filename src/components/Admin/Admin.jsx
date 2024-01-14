@@ -32,18 +32,12 @@ const Admin = (props) => {
 
   const [selectedOption, setSelectedOption] = useState(null);
 
-  // const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
+  const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
 
   const createAndFetchCertificate = async (certificateData) => {
     await createCertificate(certificateData);
     fetchCertificates();
   };
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpenModal = () => setIsModalOpen(true);
-
-  const handleCloseModal = () => setIsModalOpen(false);
 
   const handleSelectionChange = (option) => {
     setSelectedOption(option);
