@@ -6,6 +6,7 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
+import CertificateFormFields from "./CreateFormFields";
 
 export const AddCertificateModal = ({ open, onClose, onSave }) => {
   const [title, setTitle] = useState("");
@@ -49,49 +50,16 @@ export const AddCertificateModal = ({ open, onClose, onSave }) => {
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogContent>
-        <TextField
-          error={error.title}
-          helperText={error.title && "Title is required."}
-          margin="dense"
-          label="Title "
-          type="text"
-          fullWidth
-          variant="outlined"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <TextField
-          error={error.description}
-          helperText={error.description && "Description is required."}
-          margin="dense"
-          label="Description "
-          type="text"
-          fullWidth
-          multiline
-          rows={4}
-          variant="outlined"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <TextField
-          error={error.price}
-          helperText={error.price && "Price is required."}
-          margin="dense"
-          label="Price "
-          type="number"
-          fullWidth
-          variant="outlined"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-        <TextField
-          margin="dense"
-          label="Image Source "
-          type="text"
-          fullWidth
-          variant="outlined"
-          value={imageSrc}
-          onChange={(e) => setImageSrc(e.target.value)}
+        <CertificateFormFields
+          title={title}
+          setTitle={setTitle}
+          description={description}
+          setDescription={setDescription}
+          price={price}
+          setPrice={setPrice}
+          imageSrc={imageSrc}
+          setImageSrc={setImageSrc}
+          certificate={""}
         />
       </DialogContent>
       <DialogActions style={{ justifyContent: "space-between" }}>

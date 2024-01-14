@@ -5,21 +5,22 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
+import { useCertificateProperties } from "hooks/useCertificateProperties";
+import CertificateFormFields from "./CreateFormFields";
 
 const UpdateCertificateModal = ({ open, onClose, certificate, onUpdate }) => {
   //fix the null issue on the backend i think i cannot do that here right now
 
-  const [title, setTitle] = useState(null);
-  const [description, setDescription] = useState(null);
-  const [imageSrc, setImageSrc] = useState(null);
-  const [price, setPrice] = useState(null);
-
-  const payload = {
-    title: title,
-    description: description,
-    price: price,
-    imageSrc: imageSrc,
-  };
+  const {
+    title,
+    setTitle,
+    description,
+    setDescription,
+    price,
+    setPrice,
+    imageSrc,
+    setImageSrc,
+  } = useCertificateProperties();
 
   //fkin fixed!
   const handleSaveChanges = () => {
@@ -42,45 +43,18 @@ const UpdateCertificateModal = ({ open, onClose, certificate, onUpdate }) => {
           Fields marked with an asterisk (*) are optional. Leave them empty to
           keep the existing values.
         </p>
-        <TextField
-          margin="dense"
-          label="Title *"
-          type="text"
-          fullWidth
-          variant="outlined"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+        {/* Use the extracted form fields component */}
+        <CertificateFormFields
+          title={title}
+          setTitle={setTitle}
+          description={description}
+          setDescription={setDescription}
+          price={price}
+          setPrice={setPrice}
+          imageSrc={imageSrc}
+          setImageSrc={setImageSrc}
+          certificate={certificate}
         />
-        <TextField
-          margin="dense"
-          label="Description *"
-          type="text"
-          fullWidth
-          multiline
-          rows={4}
-          variant="outlined"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <TextField
-          margin="dense"
-          label="Price *"
-          type="number"
-          fullWidth
-          variant="outlined"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-        <TextField
-          margin="dense"
-          label="Image Source *"
-          type="text"
-          fullWidth
-          variant="outlined"
-          value={imageSrc}
-          onChange={(e) => setImageSrc(e.target.value)}
-        />
-        <p>Update form for: {certificate?.title}</p>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>
