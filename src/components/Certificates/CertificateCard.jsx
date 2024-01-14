@@ -17,10 +17,6 @@ const CertificateCard = ({
   fetchCertificates,
 }) => {
   // CandidateNumber returns 0 if user is an Admin, and something >0 in every other case
-  // Need to update Delete and Update buttons to talk with API to update or delete certificate
-  // Delete Certificate feels easier so im gonna implement it first
-  // Update Certificate needs another component that has a form to change whatever u want
-  // The first card could be the Add Certificate Card
   const cookie = cookieValue;
 
   const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
