@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import UpdateCertificateModal from "./UpdateCertificateModal";
 import { deleteCertificate } from "api/certificates/deleteCertificate";
 import { updateCertificateByTitle } from "api/certificates/updateCertificateByTitle";
+import { useModal } from "hooks/useModal";
 
 const CertificateCard = ({
   src,
@@ -22,10 +23,7 @@ const CertificateCard = ({
   // The first card could be the Add Certificate Card
   const cookie = cookieValue;
 
-  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-
-  const handleOpenUpdateModal = () => setIsUpdateModalOpen(true);
-  const handleCloseUpdateModal = () => setIsUpdateModalOpen(false);
+  const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
 
   const handleDelete = () => {
     const certificate = certificates.find((c) => c.$id === id);
@@ -40,7 +38,7 @@ const CertificateCard = ({
   const handleUpdate = async (updatedData) => {
     await updateCertificateByTitle({ title }, updatedData);
     fetchCertificates();
-    handleCloseUpdateModal();
+    handleCloseModal();
   };
 
   //Make a function that
@@ -63,7 +61,7 @@ const CertificateCard = ({
             <div className="action-buttons">
               <button
                 className="action-button update"
-                onClick={handleOpenUpdateModal}
+                onClick={handleOpenModal}
               >
                 &#9998; Update
               </button>{" "}
@@ -75,8 +73,8 @@ const CertificateCard = ({
         </article>
       </Link>
       <UpdateCertificateModal
-        open={isUpdateModalOpen}
-        onClose={handleCloseUpdateModal}
+        open={isModalOpen}
+        onClose={handleCloseModal}
         certificate={{ title, price, id }}
         onUpdate={handleUpdate}
       />
