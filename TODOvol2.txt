@@ -7,5 +7,14 @@ when user has an obtained certificate, needs to be able to print it in pdf forma
 price isnt updated, why? maybe because of type? sometimes its working,idk
 
 SOS, when updating an existing certificates, its being accepted only if all the fields are not null
+the problem is that it needs first to be fully updated and then it checks 
 
 see if i can merge custom hooks
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+fix, because unavailable certificates do not have green button 
+
+fix update certificates because they update in a weird way 
+
+

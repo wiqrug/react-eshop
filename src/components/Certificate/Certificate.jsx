@@ -28,7 +28,7 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
       certificate
     ) {
       const isCertificateAvailable = availableCertificates.some(
-        (cert) => cert.$id === certificate.$id
+        (cert) => cert.title === certificate.title
       );
       setIsBought(!isCertificateAvailable);
     }
