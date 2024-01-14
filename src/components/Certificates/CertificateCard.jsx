@@ -39,7 +39,7 @@ const CertificateCard = ({
   return (
     <>
       <Link
-        to={isAdminView ? "./" : `/Certificate/${id}`}
+        to={isAdminView ? "./" : `/Certificate/${encodeURIComponent(title)}`}
         style={{ textDecoration: "none" }}
         className="certificate-link"
       >

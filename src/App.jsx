@@ -39,7 +39,7 @@ const App = () => {
           }
         />
         <Route
-          path="/Certificate/:id"
+          path="/Certificate/:title"
           element={
             <Certificate certificates={certificates} cookieValue={cookie} />
           }
