@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +13,6 @@ export default function Logout({handleRemoveCookie}) {
 
     return (<div>
         <h2>If you want to log out click here</h2>
-        <button onClick={handleClick}>Log out</button>
+        <Button onClick={handleClick} variant="contained" sx={{ mt: 3, mb: 2 }}>Log out</Button>
     </div>)
 };

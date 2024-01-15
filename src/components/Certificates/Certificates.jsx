@@ -13,11 +13,11 @@ const CertificatesList = ({
 }) => {
   return (
     <section>
-      {certificates?.map(({ $id: id, title, price }) => (
+      {certificates?.map(({ $id: id, title, price, imageSrc }) => (
         <CertificateCard
           key={id}
           id={id}
-          src={"https://image.jpg"}
+          src={imageSrc}
           title={title}
           price={price}
           cookieValue={cookieValue}
