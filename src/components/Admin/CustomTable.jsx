@@ -46,11 +46,12 @@ const CustomTable = ({
       <Button
         sx={{ margin: "30px 10px" }}
         variant="contained"
+        color="success"
         disableElevation
         onClick={handleAdd}
         endIcon={<AddIcon />}
       >
-        ADD NEW EXAM
+        ADD
       </Button>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -58,7 +59,7 @@ const CustomTable = ({
             <TableRow>
               {columns.map((column) => (
                 <TableCell
-                  key={column.id}
+                  key={column.label}
                   align="center"
                   style={{ minWidth: MINWIDTH, width: WIDTH }}
                 >
@@ -76,9 +77,9 @@ const CustomTable = ({
                 return (
                   <TableRow hover key={row.id}>
                     {columns.map((column) => {
-                      const value = row[column.id];
+                      const value = row[column.label];
                       return (
-                        <TableCell key={column.id} align="center">
+                        <TableCell key={column.label} align="center">
                           {value === "UPDATE" || value === "DELETE" ? (
                             <Button
                               variant="contained"

@@ -1,10 +1,10 @@
 import { createCertificate } from "api/certificates/createCertificate";
 import AvailableCertificates from "components/CandidateCertificates/AvailableCertificates";
-import ObtainedCertificates from "components/CandidateCertificates/ObtainedCertificates";
 import { AddCertificateModal } from "components/Certificates/AddCertificateModal";
 import CertificatesList from "components/Certificates/Certificates";
 import { useModal } from "hooks/useModal";
 import React, { useState } from "react";
+import ManageCandidates from "./ManageCandidates";
 
 /**
  * Admins role over candidates
@@ -22,6 +22,7 @@ import React, { useState } from "react";
  * 14) Get exams
  *
  * 15) CRUD Questions
+ *
  *
  *
  * Update certificate -> if Value = " " then the value stays as it previously was
@@ -58,7 +59,7 @@ const Admin = (props) => {
         </button>
       </div>
 
-      {selectedOption === "candidates" && <ObtainedCertificates />}
+      {selectedOption === "candidates" && <ManageCandidates />}
       {selectedOption === "certificates" && (
         <>
           <div className="add-certificate">
