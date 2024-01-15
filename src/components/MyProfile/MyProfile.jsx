@@ -1,5 +1,4 @@
 import { useUserCookie } from "hooks";
-import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 
 export default function MyProfile() {
