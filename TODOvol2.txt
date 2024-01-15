@@ -17,4 +17,21 @@ fix, because unavailable certificates do not have green button
 
 fix update certificates because they update in a weird way 
 
+````````````````````````````````````````````````````````````````````````````````````````````````````
+
+1.Create Beautiful homepage 
+2.Fix my profile in order to update candidates details (if he wants to)
+3.Create Manage Candidates (which is CRUD candidates)
+4.Create Manage Candidate certificates
+5.Create Manage exams
+6.Create Manage Questions
+7.Fix button click here to give exams
+8.When a certificate is obtained, must be pdf printed 
+
+Copy paste Exams->Admin from Giannis Branch
+
+Copy paste mui.js
+
+
+
 
