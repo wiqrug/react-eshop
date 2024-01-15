@@ -5,6 +5,7 @@ import Timer from "./Timer";
 import AnswerField from "./AnswerField";
 import AnswerOptionContext from "./AnswerOptionContext";
 import TimerContext from "./TimerContext";
+import { useExam } from "hooks";
 
 const Exam = () => {
   const Exam = [
@@ -71,16 +72,56 @@ const Exam = () => {
     },
   ];
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // const { useCandidateExam, useQuestionsForExam, useSpecificExam } = useExam()
+  // const { candidateExam, fetchCandidateExam } = useCandidateExam()
+  // const { questionsForExam, fetchQuestionsForExam } = useQuestionsForExam()
+  // const { specificExam, fetchSpecificExam } = useSpecificExam()
+
+  // useEffect(() => {
+  //   try {
+  //     fetchCandidateExam()                                  // Fetch
+  //     fetchQuestionsForExam()                               // Fetch
+  //     fetchSpecificExam()                                   // Fetch
+  //   } catch (error) {
+  //     console.error("Failed to fetch Exam:", error);
+  //   }
+  // }, []);
+
+
+
+
+
   const [start, setStart] = useState(false);
   const [examEnded, setExamEnded] = useState(false);
   const [mark, setMark] = useState();
   const [answers, setAnswers] = useState([]);
-  const [answerOptionClassName, setAnswerOptionClassName] = useState([
-    "",
-    "",
-    "",
-    "",
-  ]);
+  const [answerOptionClassName, setAnswerOptionClassName] = useState(["", "", "", "",]);
   const [answer, setAnswer] = useState("");
   const [questionNumber, setQuestionNumber] = useState(0);
   const [questionClassName, setQuestionClassName] = useState("");
