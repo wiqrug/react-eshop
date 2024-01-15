@@ -3,9 +3,12 @@ import { useModal } from "hooks/useModal";
 import { AddCertificateModal } from "components/Certificates/AddCertificateModal";
 import CertificatesList from "components/Certificates/Certificates";
 import { createCertificate } from "api/certificates/createCertificate";
+import { useCertificates } from "hooks";
 
 const ManageCertificates = (props) => {
-    const { certificates, cookieValue, fetchCertificates } = props;
+    const { cookieValue } = props;
+    const { certificates, fetchCertificates } = useCertificates();
+    // console.log("certificates:"+ certificates)
 
     //Should this have higher-level names?
     const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
@@ -14,6 +17,7 @@ const ManageCertificates = (props) => {
         await createCertificate(certificateData);
         fetchCertificates();
     };
+    // console.log("certificates:"+ certificates)
 
     return (
         <>

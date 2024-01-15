@@ -69,9 +69,7 @@ const App = () => {
           element={
             cookie ? (
               <Admin
-                certificates={certificates}
                 cookieValue={cookie}
-                fetchCertificates={fetchCertificates}
               />
             ) : (
               <NotFound />

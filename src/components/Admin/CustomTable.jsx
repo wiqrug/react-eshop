@@ -22,14 +22,14 @@ const CustomTable = ({
   handleDelete,
   handleUpdate,
 }) => {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(0);                            // Page used for Table UI
+  const [rowsPerPage, setRowsPerPage] = useState(10);             // Row per Page used for Table UI
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (event, newPage) => {                  // Used for navigation between Pages in Table
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = (event) => {                    // Used for changing Rows per Page
     setRowsPerPage(+event.target.value);
     setPage(0);
   };

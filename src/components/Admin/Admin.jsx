@@ -34,7 +34,7 @@ import ManageCertificates from "./ManageCertificates";
  */
 
 const Admin = (props) => {
-  const { certificates, cookieValue, fetchCertificates } = props;
+  const { cookieValue } = props;
 
   const [page, setPage] = useState(<ManageCandidates />)
 
@@ -44,7 +44,7 @@ const Admin = (props) => {
         setPage(<ManageCandidates />)
         break;
       case "ManageCertificates":
-        setPage(<ManageCertificates certificates={certificates} cookieValue={cookieValue} fetchCertificates={fetchCertificates} />)
+        setPage(<ManageCertificates cookieValue={cookieValue} />)
         break;
       case "ManageExams":
         setPage(<ManageExams />)
