@@ -4,7 +4,12 @@ import { AddCertificateModal } from "components/Certificates/AddCertificateModal
 import CertificatesList from "components/Certificates/Certificates";
 import { useModal } from "hooks/useModal";
 import React, { useState } from "react";
+import ManageExams from "./ManageExams";
 import ManageCandidates from "./ManageCandidates";
+import ManageCandidateCertificates from "./ManageCandidateCertificates";
+import ManageCandidateExams from "./ManageCandidateExams";
+import ManageQuestions from "./ManageQuestions";
+import ManageCertificates from "./ManageCertificates";
 
 /**
  * Admins role over candidates
@@ -31,54 +36,58 @@ import ManageCandidates from "./ManageCandidates";
 const Admin = (props) => {
   const { certificates, cookieValue, fetchCertificates } = props;
 
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  //Should this have higher-level names?
-  const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
-
-  const createAndFetchCertificate = async (certificateData) => {
-    await createCertificate(certificateData);
-    fetchCertificates();
-  };
+  const [page, setPage] = useState(<ManageCandidates />)
 
   const handleSelectionChange = (option) => {
-    setSelectedOption(option);
+    switch (option) {
+      case "ManageCandidates":
+        setPage(<ManageCandidates />)
+        break;
+      case "ManageCertificates":
+        setPage(<ManageCertificates certificates={certificates} cookieValue={cookieValue} fetchCertificates={fetchCertificates} />)
+        break;
+      case "ManageExams":
+        setPage(<ManageExams />)
+        break;
+      case "ManageCandidateCertificates":
+        setPage(<ManageCandidateCertificates />)
+        break;
+      case "ManageCandidateExams":
+        setPage(<ManageCandidateExams />)
+        break;
+      case "ManageQuestions":
+        setPage(<ManageQuestions />)
+        break;
+      default:
+        setPage(<ManageCandidates />)
+    }
   };
 
   return (
     <>
       <div className="menu">
-        <button onClick={() => handleSelectionChange("candidates")}>
+        <button onClick={() => handleSelectionChange("ManageCandidates")}>
           Manage Candidates
         </button>
-        <button onClick={() => handleSelectionChange("certificates")}>
+        <button onClick={() => handleSelectionChange("ManageCertificates")}>
           Manage Certificates
         </button>
-        <button onClick={() => handleSelectionChange("exams")}>
+        <button onClick={() => handleSelectionChange("ManageExams")}>
           Manage Exams
+        </button>
+        <button onClick={() => handleSelectionChange("ManageCandidateCertificates")}>
+          Manage Candidates-Certificates
+        </button>
+        <button onClick={() => handleSelectionChange("ManageCandidateExams")}>
+          Manage Candidates-Exams
+        </button>
+        <button onClick={() => handleSelectionChange("ManageQuestions")}>
+          Manage Questions
         </button>
       </div>
 
-      {selectedOption === "candidates" && <ManageCandidates />}
-      {selectedOption === "certificates" && (
-        <>
-          <div className="add-certificate">
-            <button onClick={handleOpenModal}>Add Certificate</button>
-          </div>
-          <CertificatesList
-            certificates={certificates}
-            cookieValue={cookieValue}
-            isAdminView
-            fetchCertificates={fetchCertificates}
-          />
-          <AddCertificateModal
-            open={isModalOpen}
-            onClose={handleCloseModal}
-            onSave={createAndFetchCertificate}
-          />
-        </>
-      )}
-      {selectedOption === "exams" && <AvailableCertificates />}
+      {/* Show Page of selection */}
+      {page}
     </>
   );
 };
