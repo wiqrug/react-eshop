@@ -136,6 +136,7 @@ const ManageQuestions = () => {
       handleAdd={handleAdd}
       handleDelete={handleDelete}
       handleUpdate={handleUpdate}
+      identifierField={undefined}
     />
   );
 };

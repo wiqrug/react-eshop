@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import CustomTable from "./CustomTable";
 import { getCandidates } from "api/candidates/getCandidates";
 import { deleteCandidateByNumber } from "api/candidates/deleteCandidateByNumber";
+import { useModal } from "hooks/useModal";
+import AddCandidateModal from "components/Modals/AddCandidateModal";
+import { createCandidate } from "api/candidates/createCandidate";
 
 //rows and columns should have the same label
 
@@ -9,6 +12,8 @@ const ManageCandidates = () => {
   const [candidates, setCandidates] = useState([]);
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
+  const { isModalOpen, setIsModalOpen, handleCloseModal, handleOpenModal } =
+    useModal();
 
   const fetchCandidates = async () => {
     try {
@@ -39,13 +44,25 @@ const ManageCandidates = () => {
 
   //get the name of the properties
   // console.log(columns);
-  console.log(candidates);
+  // console.log(candidates);
 
   const handleAdd = () => {
-    // Not implemented yet
+    // Implement the logic for opening the modal here
+    handleOpenModal();
   };
 
   const handleUpdate = () => {};
+  const handleSave = async (newCandidateData) => {
+    try {
+      // Call API function to add the new candidate
+      await createCandidate(newCandidateData);
+
+      // Fetch the updated list of candidates after adding the new one
+      await fetchCandidates();
+    } catch (error) {
+      console.error("Failed to add candidate:", error);
+    }
+  };
 
   const handleDelete = async (candidateNumber) => {
     try {
@@ -64,14 +81,21 @@ const ManageCandidates = () => {
   };
 
   return (
-    <CustomTable
-      columns={columns}
-      rows={rows}
-      handleAdd={handleAdd}
-      handleDelete={handleDelete}
-      handleUpdate={handleUpdate}
-      identifierField={"candidateNumber"}
-    />
+    <>
+      <CustomTable
+        columns={columns}
+        rows={rows}
+        handleAdd={handleAdd}
+        handleDelete={handleDelete}
+        handleUpdate={handleUpdate}
+        identifierField={"candidateNumber"}
+      />
+      <AddCandidateModal
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        onSave={handleSave}
+      />
+    </>
   );
 };
 
