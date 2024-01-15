@@ -5,6 +5,11 @@ import { AddCertificateModal } from "components/Certificates/AddCertificateModal
 import CertificatesList from "components/Certificates/Certificates";
 import { useModal } from "hooks/useModal";
 import React, { useState } from "react";
+import ManageExams from "./ManageExams";
+import ManageCandidates from "./ManageCandidates";
+import ManageCandidateCertificates from "./ManageCandidateCertificates";
+import ManageCandidateExams from "./ManageCandidateExams";
+import ManageQuestions from "./ManageQuestions";
 
 /**
  * Admins role over candidates
@@ -30,8 +35,8 @@ import React, { useState } from "react";
 const Admin = (props) => {
   const { certificates, cookieValue, fetchCertificates } = props;
 
-  const [selectedOption, setSelectedOption] = useState(null);
-
+  // const [selectedOption, setSelectedOption] = useState(null);
+  const [page,setPage] = useState(<ManageExams/>)
   //Should this have higher-level names?
   const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
 
@@ -41,24 +46,69 @@ const Admin = (props) => {
   };
 
   const handleSelectionChange = (option) => {
-    setSelectedOption(option);
+    // setSelectedOption(option);
+
+    switch (option) {
+      case "ManageCandidates":
+        setPage(<ManageCandidates/>)
+        break;
+      case "certificates":
+        setPage(<>
+          <div className="add-certificate">
+            <button onClick={handleOpenModal}>Add Certificate</button>
+          </div>
+          <CertificatesList
+            certificates={certificates}
+            cookieValue={cookieValue}
+            isAdminView
+            fetchCertificates={fetchCertificates}
+          />
+          <AddCertificateModal
+            open={isModalOpen}
+            onClose={handleCloseModal}
+            onSave={createAndFetchCertificate}
+          />
+        </>)
+        break;
+      case "ManageExams":
+         setPage(<ManageExams/>)
+        break;
+      case "ManageCandidateCertificates":
+        setPage(<ManageCandidateCertificates/>)
+        break;
+      case "ManageCandidateExams":
+        setPage(<ManageCandidateExams/>)
+        break;
+      case "ManageQuestions":
+        setPage(<ManageQuestions/>)
+    }
   };
 
   return (
     <>
       <div className="menu">
-        <button onClick={() => handleSelectionChange("candidates")}>
+        <button onClick={() => handleSelectionChange("ManageCandidates")}>
           Manage Candidates
         </button>
         <button onClick={() => handleSelectionChange("certificates")}>
           Manage Certificates
         </button>
-        <button onClick={() => handleSelectionChange("exams")}>
+        <button onClick={() => handleSelectionChange("ManageExams")}>
           Manage Exams
+        </button>
+        <button onClick={() => handleSelectionChange("ManageCandidateCertificates")}>
+          Manage Candidates-Certificates
+        </button>
+        <button onClick={() => handleSelectionChange("ManageCandidateExams")}>
+          Manage Candidates-Exams
+        </button>
+        <button onClick={() => handleSelectionChange("ManageQuestions")}>
+          Manage Questions
         </button>
       </div>
 
-      {selectedOption === "candidates" && <ObtainedCertificates />}
+      {page}
+      {/* {selectedOption === "candidates" && <ObtainedCertificates />}
       {selectedOption === "certificates" && (
         <>
           <div className="add-certificate">
@@ -77,8 +127,8 @@ const Admin = (props) => {
           />
         </>
       )}
-      {selectedOption === "exams" && <AvailableCertificates />}
-    </>
+      {selectedOption === "exams" && <AvailableCertificates />}*/}
+    </> 
   );
 };
 
