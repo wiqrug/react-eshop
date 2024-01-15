@@ -16,6 +16,8 @@ import {
   MyProfile,
   Admin,
 } from "./components";
+import { createTheme } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
 
 const App = () => {
   //fetched certificates
@@ -23,8 +25,17 @@ const App = () => {
   const { certificates, fetchCertificates } = useCertificates();
 
   // extract CertificateRoutes, AuthRoutes, etc.
+  const theme = createTheme({
+    palette: {
+      background: {
+        paper: '#ffffff'
+      },
+    },
+  }
+);
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <NavBar cookieValue={cookie} />
       <Routes>
       <Route path="/" element={<Home certificates={certificates} cookie={cookie}/>} />
@@ -83,7 +94,7 @@ const App = () => {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </ThemeProvider>
   );
 };
 

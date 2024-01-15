@@ -15,7 +15,7 @@ export default function Home({certificates, cookie}) {
   const theme = createTheme({
       palette: {
         background: {
-          paper: '#ffffff', // your color
+          paper: '#ffffff'
         },
       },
     }

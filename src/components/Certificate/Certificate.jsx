@@ -8,12 +8,13 @@ import {
 import { useCandidateInfo } from "hooks/useCandidateInfo";
 import { useCertificateInfo } from "hooks/useCertificateInfo";
 import { buyCertificate } from "api/certificates/buyCertificate";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
   const candNum = useCandidateInfo(cookieValue);
   const certTitle = useCertificateInfo(certificate);
+  const navigate = useNavigate();
   // @ts-ignore
 
   // This is a hard one to make custom hook
@@ -42,6 +43,10 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
     setIsBought(true);
   };
 
+  const handleClick = (title) => {
+    navigate(`/Exam/${title}`);
+  }
+
   const { cookie } = useUserCookie();
   //Custom hook should return cookie, isBought, handleBuy
   //Should have as arguments cookieValue
@@ -54,7 +59,7 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
         </div>
         <img
           className="Certificate-Logo"
-          src="https://raw.githubusercontent.com/wiqrug/wiqrug.github.io/main/images/DALL%C2%B7E%202023-10-26%2018.43.43%20-%20Wide%20cartoon%20artwork%20with%20a%20gentle%20cream-colored%20backdrop.%20Playful%20anime%20clouds%20float%20around%2C%20some%20with%20cute%20expressions%2C%20ensuring%20the%20middle%20remains%20.png"
+          src={certificate.imageSrc}
           alt="Certificate"
         />
         <div className="Certificate-Details-Description">
@@ -74,7 +79,10 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
         )}
 
         {cookie && isBought && (
+          <>
           <button className="Purchased-Certificate">Bought</button>
+          <button className="Purchased-Certificate" onClick={() => {handleClick(certificate.title)}}>Ready to take the test? Click here!</button>
+          </>
         )}
       </div>
     )

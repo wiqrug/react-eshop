@@ -17,7 +17,7 @@ const CertificatesList = ({
         <CertificateCard
           key={id}
           id={id}
-          src={imageSrc}
+          imageSrc={imageSrc}
           title={title}
           price={price}
           cookieValue={cookieValue}
