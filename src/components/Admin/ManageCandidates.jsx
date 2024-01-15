@@ -1,26 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import CustomTable from "./CustomTable";
 
+//rows and columns should have the same label
 const columns = [
-  { id: "FirstName", label: "Question ID" },
-  { id: "MiddleName", label: "Exam ID" },
-  { id: "LastName", label: "LastName" },
-  { id: "Email", label: "Option A" },
-  { id: "Password", label: "Option B" },
-  { id: "Gender", label: "Option C" },
-  { id: "NativeLanguage", label: "Option D" },
-  { id: "BirthDate", label: "Image URL" },
-  { id: "PhotoIDType", label: "Correct Answer" },
-  { id: "PhotoIDNumber", label: "Option C" },
-  { id: "PhotoIDIssueDate", label: "Option D" },
-  { id: "Address", label: "Image URL" },
-  { id: "AddressLine2", label: "Correct Answer" },
-  { id: "CountryOfResidence", label: "Image URL" },
-  { id: "StateOrTerritoryOrProvince", label: "Correct Answer" },
-  { id: "TownOrCity", label: "Option C" },
-  { id: "PostalCode", label: "Option D" },
-  { id: "LandlineNumber", label: "Image URL" },
-  { id: "MobileNumber", label: "Correct Answer" },
+  { label: "FirstName" },
+  { label: "MiddleName" },
+  { label: "LastName" },
+  { label: "Email" },
+  { label: "Password" },
+  { label: "Gender" },
+  { label: "NativeLanguage" },
+  { label: "BirthDate" },
+  { label: "PhotoIDType" },
+  { label: "PhotoIDNumber" },
+  { label: "PhotoIDIssueDate" },
+  { label: "Address" },
+  { label: "AddressLine2" },
+  { label: "CountryOfResidence" },
+  { label: "StateOrTerritoryOrProvince" },
+  { label: "TownOrCity" },
+  { label: "PostalCode" },
+  { label: "LandlineNumber" },
+  { label: "MobileNumber" },
 ];
 
 const createData = (
@@ -68,7 +69,7 @@ const createData = (
     MobileNumber,
   };
 };
-
+//1,2,3.....should be replaced byCandidateNumber
 const rows = [
   createData(
     1,
@@ -116,7 +117,7 @@ const rows = [
   createData(15, "Brazil", "BR", 210147125, 8515767, 30),
 ];
 
-const ManageQuestions = () => {
+const ManageCandidates = () => {
   const handleAdd = () => {
     // Not implemented yet
   };
@@ -140,4 +141,4 @@ const ManageQuestions = () => {
   );
 };
 
-export default ManageQuestions;
+export default ManageCandidates;
