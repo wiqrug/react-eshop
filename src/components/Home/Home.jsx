@@ -40,7 +40,7 @@ export default function Home({certificates, cookie}) {
                 <CardMedia
                   component="img"
                   height="194"
-                  image={imageSrc}
+                  image={imageSrc? imageSrc : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"}
                   sx={{objectFit: 'contain' }}
                 />
                 <CardHeader 
@@ -80,7 +80,7 @@ export default function Home({certificates, cookie}) {
                   <CardMedia
                     component="img"
                     height="194"
-                    image={imageSrc}
+                    image={imageSrc? imageSrc : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"}
                     sx={{objectFit: 'contain' }}
                   />
                   <CardContent>

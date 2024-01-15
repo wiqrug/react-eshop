@@ -66,7 +66,7 @@ const App = () => {
         <Route
           path="/MyProfile"
           element={
-            cookie ? <MyProfile /> : <Login handleSetCookie={handleSetCookie} />
+            cookie ? <MyProfile cookieValue={cookie}/> : <Login handleSetCookie={handleSetCookie} />
           }
         />
 

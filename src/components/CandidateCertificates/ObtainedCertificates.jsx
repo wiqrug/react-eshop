@@ -17,7 +17,7 @@ const ObtainedCertificates = () => {
           <button style={{ textDecoration: 'none', border: 'none', cursor: 'pointer'}} onClick={() => {handleClick(title)}}>
           <article key={title}>
             <img
-              src={imageSrc}
+              src={imageSrc? imageSrc : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"}
               alt="img-logo"
               style={{ maxWidth: '100%', minHeight: '50%', maxHeight: '50%' }}
             />

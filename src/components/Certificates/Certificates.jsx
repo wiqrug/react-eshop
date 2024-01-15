@@ -17,7 +17,7 @@ const CertificatesList = ({
         <CertificateCard
           key={id}
           id={id}
-          imageSrc={imageSrc}
+          imageSrc={imageSrc!=null? imageSrc : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"}
           title={title}
           price={price}
           cookieValue={cookieValue}

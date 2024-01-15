@@ -45,7 +45,7 @@ const CertificateCard = ({
       >
         <article>
           <img
-            src={imageSrc}
+            src={imageSrc? imageSrc : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"}
             alt="Certificate"
           />
           <h4 className="certificate-title">{title}</h4>

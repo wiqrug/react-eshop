@@ -2,16 +2,36 @@ import { useUserCookie } from "hooks";
 import React, { useEffect, useState } from "react";
 import "./MyProfile.css";
 
-export default function MyProfile() {
-  // Initial user data
-  const initialUserData = {
-    firstName: "John",
-    lastName: "Doe",
-    email: "email",
-    // Add more fields as needed
-  };
-  // State to manage user data
-  const [userData, setUserData] = useState(initialUserData);
+export default function MyProfile({ cookieValue }) {
+  const [candidate, setCandidate] = useState({});
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5021/api/Candidates/${cookieValue.candidateNumber}`, {
+          method: "GET",
+          headers: {
+            'Authorization': `Bearer ${cookieValue.token}`, // Assuming token is a JWT token
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          const candidateData = await response.json();
+          setCandidate(candidateData); // Set user data assuming it's similar to candidate data
+          console.log(candidateData)
+        } else {
+          console.error('Fetch error:', response.status);
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+      }
+    };
+
+    if (cookieValue) {
+      fetchData();
+    }
+  }, [cookieValue]);
 
   // State to track whether the user is in edit mode
   const [isEditMode, setIsEditMode] = useState(false);
@@ -19,7 +39,7 @@ export default function MyProfile() {
   // Function to handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
+    setCandidate({ ...candidate, [name]: value });
   };
 
   // Function to handle form submission
@@ -33,7 +53,7 @@ export default function MyProfile() {
 
   useEffect(() => {
     if (cookie) {
-      setUserData((prevUserData) => ({ ...prevUserData, ...cookie }));
+      setCandidate((prevcandidate) => ({ ...prevcandidate, ...cookie }));
     }
   }, [cookie]);
 
@@ -51,7 +71,7 @@ export default function MyProfile() {
               type="text"
               id="firstName"
               name="firstName"
-              value={userData.firstName}
+              value={candidate.firstName}
               onChange={handleInputChange}
               className="myprofile-input"
             />
@@ -64,7 +84,7 @@ export default function MyProfile() {
               type="text"
               id="lastName"
               name="lastName"
-              value={userData.lastName}
+              value={candidate.lastName}
               onChange={handleInputChange}
               className="myprofile-input"
             />
@@ -77,7 +97,7 @@ export default function MyProfile() {
               type="email"
               id="email"
               name="email"
-              value={userData.email}
+              value={candidate.email}
               onChange={handleInputChange}
               className="myprofile-input"
             />
@@ -91,13 +111,13 @@ export default function MyProfile() {
         // Display mode
         <div className="myprofile-details">
           <p>
-            <strong>First Name:</strong> {userData.firstName}
+            <strong>First Name:</strong> {candidate && candidate.firstName}
           </p>
           <p>
-            <strong>Last Name:</strong> {userData.lastName}
+            <strong>Last Name:</strong> {candidate.lastName}
           </p>
           <p>
-            <strong>Email:</strong> {userData.email}
+            <strong>Email:</strong> {candidate.email}
           </p>
           {/* Display more fields as needed */}
           <button

@@ -25,6 +25,6 @@ export const useUserCookie = () => {
     Cookies.remove("currentUser");
     setCookie("");
   };
-
+  
   return { cookie, handleSetCookie, handleRemoveCookie };
 };
