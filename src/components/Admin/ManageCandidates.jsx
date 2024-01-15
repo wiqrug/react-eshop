@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CustomTable from "./CustomTable";
 import { getCandidates } from "api/candidates/getCandidates";
+import { deleteCandidateByNumber } from "api/candidates/deleteCandidateByNumber";
 
 //rows and columns should have the same label
 
@@ -44,12 +45,22 @@ const ManageCandidates = () => {
     // Not implemented yet
   };
 
-  const handleUpdate = () => {
-    // Not implemented yet
-  };
+  const handleUpdate = () => {};
 
-  const handleDelete = () => {
-    // Not implemented yet
+  const handleDelete = async (candidateNumber) => {
+    try {
+      // Assuming deleteCandidateByNumber is an API call that deletes the candidate based on candidateNumber
+      await deleteCandidateByNumber(candidateNumber);
+
+      // Update the state to remove the candidate from the UI
+      setCandidates(
+        candidates.filter(
+          (candidate) => candidate.candidateNumber !== candidateNumber
+        )
+      );
+    } catch (error) {
+      console.error("Failed to delete candidate:", error);
+    }
   };
 
   return (
@@ -59,6 +70,7 @@ const ManageCandidates = () => {
       handleAdd={handleAdd}
       handleDelete={handleDelete}
       handleUpdate={handleUpdate}
+      identifierField={"candidateNumber"}
     />
   );
 };

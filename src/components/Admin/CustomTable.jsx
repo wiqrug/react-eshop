@@ -21,6 +21,7 @@ const CustomTable = ({
   handleAdd,
   handleDelete,
   handleUpdate,
+  identifierField,
 }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -111,7 +112,7 @@ const CustomTable = ({
                       <Button
                         variant="contained"
                         color="error"
-                        onClick={handleDelete}
+                        onClick={() => handleDelete(row[identifierField])}
                         startIcon={<DeleteIcon />}
                       >
                         DELETE
