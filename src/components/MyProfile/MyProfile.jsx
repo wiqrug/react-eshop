@@ -1,5 +1,6 @@
 import { useUserCookie } from "hooks";
 import React, { useEffect, useState } from "react";
+import "./myprofile.css";
 
 export default function MyProfile() {
   // Initial user data
@@ -37,47 +38,58 @@ export default function MyProfile() {
   }, [cookie]);
 
   return (
-    <div>
-      <h1>My Profile</h1>
+    <div className="myprofile-container">
+      <h1 className="myprofile-title">My Profile</h1>
       {isEditMode ? (
         // Edit mode form
-        <form onSubmit={handleSubmit}>
-          <label>
-            First Name:
+        <form onSubmit={handleSubmit} className="myprofile-form">
+          <div className="myprofile-form-group">
+            <label htmlFor="firstName" className="myprofile-label">
+              First Name:
+            </label>
             <input
               type="text"
+              id="firstName"
               name="firstName"
               value={userData.firstName}
               onChange={handleInputChange}
+              className="myprofile-input"
             />
-          </label>
-          <br />
-          <label>
-            Last Name:
+          </div>
+          <div className="myprofile-form-group">
+            <label htmlFor="lastName" className="myprofile-label">
+              Last Name:
+            </label>
             <input
               type="text"
+              id="lastName"
               name="lastName"
               value={userData.lastName}
               onChange={handleInputChange}
+              className="myprofile-input"
             />
-          </label>
-          <br />
-          <label>
-            Email:
+          </div>
+          <div className="myprofile-form-group">
+            <label htmlFor="email" className="myprofile-label">
+              Email:
+            </label>
             <input
               type="email"
+              id="email"
               name="email"
               value={userData.email}
               onChange={handleInputChange}
+              className="myprofile-input"
             />
-          </label>
-          <br />
+          </div>
           {/* Add more fields as needed */}
-          <button type="submit">Save</button>
+          <button type="submit" className="myprofile-button">
+            Save
+          </button>
         </form>
       ) : (
         // Display mode
-        <div>
+        <div className="myprofile-details">
           <p>
             <strong>First Name:</strong> {userData.firstName}
           </p>
@@ -88,7 +100,12 @@ export default function MyProfile() {
             <strong>Email:</strong> {userData.email}
           </p>
           {/* Display more fields as needed */}
-          <button onClick={() => setIsEditMode(true)}>Edit</button>
+          <button
+            onClick={() => setIsEditMode(true)}
+            className="myprofile-button"
+          >
+            Edit
+          </button>
         </div>
       )}
     </div>
