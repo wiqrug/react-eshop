@@ -1,29 +1,18 @@
-// src/components/Certificates/Certificates.js
 import React, { useEffect, useState, useMemo } from "react";
 import "./Exam.css";
-// import { useParams } from 'react-router-dom';
 import { Button } from "../mui";
+import Timer from "./Timer";
+import AnswerField from "./AnswerField";
+import AnswerOptionContext from "./AnswerOptionContext";
+import TimerContext from "./TimerContext";
 
 const Exam = () => {
-  const [start, setStart] = useState(false);
-  const [examEnded, setExamEnded] = useState(false);
-  const [mark, setMark] = useState();
-  const [answers, setAnswers] = useState([]);
-  const [listClassName, setListClassName] = useState([
-    "answerOption",
-    "answerOption",
-    "answerOption",
-    "answerOption",
-  ]);
-  const [answer, setAnswer] = useState("");
-  const [questionNumber, setQuestionNumber] = useState(0);
-  // const { id } = useParams()
   const Exam = [
     {
       examName: "Exam Name",
-      examDescription:
+      examDescriprion:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      Time: 60,
+      Time: 1,
     },
   ];
 
@@ -33,6 +22,8 @@ const Exam = () => {
     B: "B",
     C: "C",
     D: "D",
+    image:
+      "https://www.ticketmastersport.com/wp-content/uploads/2019/09/Iraklis20FC-1.jpg",
     correctAnswer: "A",
   });
 
@@ -45,199 +36,167 @@ const Exam = () => {
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       ),
       dummyAnswer("ply dummy text of the printing and typesetting industry."),
-      dummyAnswer("Lorem Ipsum is simply du industry."),
-      dummyAnswer("xt of the printing and typesetting industry."),
-      dummyAnswer("Lorem Ipsum is simstry."),
       dummyAnswer(
         "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry."
       ),
       dummyAnswer("Lorem Ipsum is simply dummy ustry."),
+      {
+        question:
+          "Lorem IpLorem Ipsum is simply dummy texLorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.t of the printing and typesetting industry.printing and typesetting industry.",
+        A: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
+        B: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
+        C: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
+        D: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
+        image: "",
+        correctAnswer: "D",
+      },
+      {
+        question: "",
+        A: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
+        B: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
+        C: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
+        D: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
+        image:
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.cG9zeaNG2T9xG1xOKNDXdQHaIG%26pid%3DApi&f=1&ipt=e38a4a26c79740fe3a03a579c48a3be44a202dd41ddb4508c14c2eda24d98481&ipo=images",
+        correctAnswer: "D",
+      },
     ],
     // Create array once on initial render, never re-create the object
     []
   );
 
-  const handleNext = () => {
-    if (answer) {
-      //Update Answers and move to next question
-      setAnswers([...answers, answer]);
-      setQuestionNumber(questionNumber + 1);
+  const CandidateExam = [
+    {
+      examMark: null,
+    },
+  ];
 
-      //Reset the answer value
-      setAnswer("");
-
-      //Refresh selected
-      setListClassName([
-        "answerOption",
-        "answerOption",
-        "answerOption",
-        "answerOption",
-      ]);
-    }
-  };
-
-  //need to fix the unupdated array on last submit
-  const handleSubmit = () => {
-    // console.log("answers:[" + answers + "]=" + answers.length)
-    // console.log("handlesubmit")
-    // answer !== "" && setQuestionNumber(questionNumber + 1)
-    // console.log("answers:[" + answers + "]=" + answers.length)
-
-    // console.log("Questions[Correctanswer]: " + Questions[correctAnswer])
-
-    // let count = 0;
-    // for (let i = 0; i <= Questions.length - 1; i++) {
-    //     // console.log("i: " + i)
-
-    //     if (Questions[i]["correctAnswer"] === answers[i]) {
-    //         // console.log(answers[i])
-
-    //         count++
-    //     }
-    // }
-    handleNext();
-    // Exam has ended
-    setStart(false);
-    setExamEnded(true);
-
-    // // Set Mark
-    // console.log("your score is " + count + " out of " + Questions.length)
-  };
-
-  // const evaluateMark = () => {
-  //     console.log("evaluate mark has been called")
-  //     let count = 0;
-  //     for (let i = 0; i < Questions.length; i++) {
-  //         // console.log("i: " + i)
-
-  //         if (Questions[i]["correctAnswer"] === answers[i]) {
-  //             // console.log(answers[i])
-
-  //             count++
-  //         }
-  //     }
-  //     console.log("your score is " + count + " out of " + Questions.length)
-  //     console.log("Answers: " + answers + " , length of " + answers.length)
-  //     setMark(count)
-  // }
+  const [start, setStart] = useState(false);
+  const [examEnded, setExamEnded] = useState(false);
+  const [mark, setMark] = useState();
+  const [answers, setAnswers] = useState([]);
+  const [answerOptionClassName, setAnswerOptionClassName] = useState([
+    "",
+    "",
+    "",
+    "",
+  ]);
+  const [answer, setAnswer] = useState("");
+  const [questionNumber, setQuestionNumber] = useState(0);
+  const [questionClassName, setQuestionClassName] = useState("");
+  const [answerFieldClassName, setAnswerFieldClassName] = useState("");
+  const [timeWhenExamStarted, setTimeWhenExamStarted] = useState();
 
   // Evaluate Mark
   useEffect(() => {
-    const count = Questions.filter(
-      (question, index) => question.correctAnswer === answers[index]
-    ).length;
+    let count = 0;
+    // For each question check if the answeer is correct
+    for (let i = 0; i < Questions.length; i++) {
+      if (Questions[i]["correctAnswer"] === answers[i]) {
+        count++;
+      }
+    }
 
     // Set Mark
-    setMark(count);
-  }, [examEnded, Questions, answers]);
+    // @ts-ignore
+    setMark(Math.round((100 * count) / Questions.length));
+  }, [examEnded]);
 
-  return (
-    <>
-      {start ? (
-        <div className="container">
+  // Handles submit button click
+  const handleNext = () => {
+    if (answer !== "") {
+      setAnswers([...answers, answer]); // Update Answers
+      setAnswer(""); // Reset the answer value
+      setAnswerFieldClassName("answerField-hidden"); // Add a class to fade out the current answer options
+      setQuestionClassName("question-hidden"); // Add a class to fade out the current question
+
+      // Set a timeout to move to the next question after the fade-out effect
+      setTimeout(() => {
+        setQuestionNumber(questionNumber + 1); // Move to next question
+        setAnswerFieldClassName(""); // Remove the fade-out class for the new answer options
+        setQuestionClassName(""); // Remove the fade-out class for the new question
+        setAnswerOptionClassName(["", "", "", ""]); // Restart the style of the answer options
+      }, 500); // Adjust the duration based on your transition duration
+    }
+  };
+
+  // Handles submit button click
+  const handleSubmit = () => {
+    handleNext(); // Handle Next Question
+    setStart(false); // Change Star to false
+    setExamEnded(true); // Change ExamEnded to true
+    // Must set mark to candidateExam throught post request
+  };
+
+  // This functions is called int Timer Child Component when the timer hits zero
+  const timeEnded = () => {
+    setStart(false);
+    setExamEnded(true);
+  };
+
+  if (CandidateExam[0].examMark !== null) {
+    return (
+      <>
+        <div className="container result">
+          <h1>{Exam[0].examName}</h1>
+          <hr />
+          <p>About the exam:</p>
+          <p>{Exam[0].examDescriprion}</p>
+
+          {/*  Page after exam has ended */}
+          <div>Your Mark is {CandidateExam[0].examMark} %</div>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <>
+        {start ? (
           <div className="container">
-            <div className="questionCount">
-              Question {questionNumber + 1} of {Questions.length}:
+            {/* Question */}
+            <div className="questionAndTimer">
+              <div className={`questionContainer ${questionClassName}`}>
+                <div className="questionCount">
+                  Question {questionNumber + 1} of {Questions.length}:
+                </div>
+                <h2 className="question">
+                  {Questions[questionNumber].question}
+                </h2>
+              </div>
+
+              {/* <Timer /> */}
+              <TimerContext.Provider value={timeEnded}>
+                <Timer
+                  examTimeLimit={Exam[0].Time}
+                  examStartedTime={timeWhenExamStarted}
+                />
+              </TimerContext.Provider>
             </div>
-            <h2 className="question">
-              {Questions[questionNumber]["question"]}
-            </h2>
-            <div className="answerOptions">
-              <ul className="answerOptions">
-                <li
-                  className={listClassName[0]}
-                  onClick={(e) =>
-                    setListClassName([
-                      "answerOptionSelected",
-                      "answerOptions",
-                      "answerOptions",
-                      "answerOptions",
-                    ])
-                  }
-                >
-                  <label className="radioCustomLabel">
-                    <input
-                      type="radio"
-                      className="radioCustomButton"
-                      name="myRadio"
-                      value="A"
-                      checked={answer === "A"}
-                      onClick={(e) => setAnswer(e.target.value)}
-                    />
-                    {Questions[questionNumber]["A"]}
-                  </label>
-                </li>
-                <li
-                  className={listClassName[1]}
-                  onClick={(e) =>
-                    setListClassName([
-                      "answerOption",
-                      "answerOptionSelected",
-                      "answerOptions",
-                      "answerOptions",
-                    ])
-                  }
-                >
-                  <label className="radioCustomLabel">
-                    <input
-                      type="radio"
-                      className="radioCustomButton"
-                      name="myRadio"
-                      value="B"
-                      checked={answer === "B"}
-                      onChange={(e) => setAnswer(e.target.value)}
-                    />
-                    {Questions[questionNumber]["B"]}
-                  </label>
-                </li>
-                <li
-                  className={listClassName[2]}
-                  onClick={(e) =>
-                    setListClassName([
-                      "answerOptions",
-                      "answerOptions",
-                      "answerOptionSelected",
-                      "answerOptions",
-                    ])
-                  }
-                >
-                  <label className="radioCustomLabel">
-                    <input
-                      type="radio"
-                      className="radioCustomButton"
-                      name="myRadio"
-                      value="C"
-                      checked={answer === "C"}
-                      onChange={(e) => setAnswer(e.target.value)}
-                    />
-                    {Questions[questionNumber]["C"]}
-                  </label>
-                </li>
-                <li
-                  className={listClassName[3]}
-                  onClick={(e) =>
-                    setListClassName([
-                      "answerOptions",
-                      "answerOptions",
-                      "answerOptions",
-                      "answerOptionSelected",
-                    ])
-                  }
-                >
-                  <label className="radioCustomLabel">
-                    <input
-                      type="radio"
-                      className="radioCustomButton"
-                      name="myRadio"
-                      value="D"
-                      checked={answer === "D"}
-                      onChange={(e) => setAnswer(e.target.value)}
-                    />
-                    {Questions[questionNumber]["D"]}
-                  </label>
-                </li>
-              </ul>
-            </div>
+            {Questions[questionNumber].image !== "" && (
+              <div className={`questionContainer ${questionClassName}`}>
+                <img
+                  src={Questions[questionNumber].image}
+                  // src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.PvQ6hvlsjJhHpuP5qZfNrAHaHa%26pid%3DApi&f=1&ipt=d9cf3324541dff5b768690113a9f99d6a472aac8c0f18dc45495f2ed2b8cb28b&ipo=images"
+                  // src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.cG9zeaNG2T9xG1xOKNDXdQHaIG%26pid%3DApi&f=1&ipt=e38a4a26c79740fe3a03a579c48a3be44a202dd41ddb4508c14c2eda24d98481&ipo=images"
+                  alt="QuestionImage"
+                  className="image"
+                />
+              </div>
+            )}
+            {/* AnswerField */}
+            <AnswerOptionContext.Provider
+              value={{
+                answer,
+                setAnswer,
+                answerOptionClassName,
+                setAnswerOptionClassName,
+              }}
+            >
+              <AnswerField
+                answerOptions={Questions[questionNumber]}
+                answerFieldClassName={answerFieldClassName}
+              />
+            </AnswerOptionContext.Provider>
 
             <div className="container">
               <div className="center">
@@ -261,36 +220,42 @@ const Exam = () => {
               </div>
             </div>
           </div>
-        </div>
-      ) : (
-        // Page before and after starting the exam
-        <div className="container result">
-          <h1>Exam: {Exam[0].examName}</h1>
-          <p>Exam: {Exam[0].examDescriprion}</p>
+        ) : (
+          // Page before and after starting the exam
+          <div className="container result">
+            <h1>{Exam[0].examName}</h1>
+            <hr />
+            <p>About the exam:</p>
+            <p>{Exam[0].examDescriprion}</p>
 
-          {/*  Page after exam has ended */}
-          {examEnded ? (
-            <div>Exam Completed! Your Mark is {mark} / 10</div>
-          ) : (
-            // Page before exam starts
-            <div>
-              <p>
-                For this exam you need to answer {Questions.length} questions in{" "}
-                {Exam[0]["Time"]} minutes!
-              </p>
-              <Button
-                variant="contained"
-                disableElevation
-                onClick={() => setStart(!start)}
-              >
-                Let's Start
-              </Button>
-            </div>
-          )}
-        </div>
-      )}
-    </>
-  );
+            {/*  Page after exam has ended */}
+            {examEnded ? (
+              <div>Exam Completed! Your Mark is {mark} %</div>
+            ) : (
+              // Page before exam starts
+              <div>
+                <p>
+                  For this exam you need to answer {Questions.length} questions
+                  in {Exam[0].Time} minutes!
+                </p>
+                <Button
+                  variant="contained"
+                  disableElevation
+                  onClick={() => {
+                    setStart(!start);
+                    // @ts-ignore
+                    setTimeWhenExamStarted(new Date());
+                  }}
+                >
+                  Let's Start
+                </Button>
+              </div>
+            )}
+          </div>
+        )}
+      </>
+    );
+  }
 };
 
 export default Exam;
