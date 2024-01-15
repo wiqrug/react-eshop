@@ -1,6 +1,6 @@
 // src/components/Home/Home.js
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -9,6 +9,8 @@ import { ThemeProvider } from "@emotion/react";
 
 
 export default function Home({certificates, cookie}) {
+
+  const navigate = useNavigate();
 
   const theme = createTheme({
       palette: {
@@ -19,6 +21,10 @@ export default function Home({certificates, cookie}) {
     }
   );
   
+  const handleClick = () => {
+    navigate("/Certificates");
+  }
+
   return (
     <div className="backgroundGrad">
     <ThemeProvider theme={theme}>
@@ -55,10 +61,8 @@ export default function Home({certificates, cookie}) {
             
           </div>
           {certificates && certificates.length > 3 && (
-            <Button variant="contained" size="large" sx={{  m: "10px auto", display: "block" }}>
-              <Link to="/Certificates" style={{ textDecoration: "none", width: '100%', display: 'block' }}>
+            <Button variant="contained" size="large" sx={{  m: "10px auto", display: "block" }} onClick={handleClick} disableElevation>
                 View All Certificates
-              </Link>
             </Button>            )}
         </>
         <h2>Awesome Discounts</h2>
