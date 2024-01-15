@@ -1,0 +1,1 @@
+export { getAllCandidateCertificates } from "./getCandidateCertificates";

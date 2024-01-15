@@ -1,0 +1,1 @@
+export { getAllCandidateExams } from "./getCandidateExams";
