@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Timer.css";
 import TimerContext from "./TimerContext";
+import { useLocalStorage } from "hooks";
 
 // Converts int to string with 2 digits
 const convert = (n) => {
@@ -12,6 +13,8 @@ const convert = (n) => {
 const Timer = ({ examTimeLimit, examStartedTime }) => {
   // Additional state for border color
   const [borderColor, setBorderColor] = useState("green");
+
+  const { setItem } = useLocalStorage()
 
   const calculateBorderColor = (timeleft) => {
     // Constants for threshold percentage values, exam time must be converted to milliseconds
@@ -37,7 +40,7 @@ const Timer = ({ examTimeLimit, examStartedTime }) => {
     let timeLeft = {};
 
     // Calculate time difference
-    var fixedTime = new Date(examStartedTime);
+    let fixedTime = new Date(examStartedTime);
     fixedTime.setMinutes(fixedTime.getMinutes() + examTimeLimit);
     const difference = fixedTime - new Date();
 
@@ -48,6 +51,9 @@ const Timer = ({ examTimeLimit, examStartedTime }) => {
         minutes: convert(Math.floor((difference / 1000 / 60) % 60)),
         seconds: convert(Math.floor((difference / 1000) % 60)),
       };
+
+      // Set Timer to Local Storage
+      setItem("Timer", timeLeft)
 
       // Update border color based on time left
       const calculatedBorderColor = calculateBorderColor(difference);
