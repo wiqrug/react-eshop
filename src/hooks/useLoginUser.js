@@ -13,7 +13,7 @@ export const useLoginUser = ({handleSetCookie}) => {
 
     try {
       const user = await login(data);
-
+console.log(user)
       handleSetCookie({
         token: user.token,
         candidateNumber: user.user.candidateNumber,

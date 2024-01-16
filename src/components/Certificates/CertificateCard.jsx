@@ -47,6 +47,7 @@ const CertificateCard = ({
           <img
             src={imageSrc? imageSrc : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"}
             alt="Certificate"
+            style={{ maxWidth: '100%', minHeight: '50%', maxHeight: '50%' }}
           />
           <h4 className="certificate-title">{title}</h4>
           <h4>{price} €</h4>

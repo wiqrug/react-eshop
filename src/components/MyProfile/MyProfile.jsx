@@ -1,6 +1,8 @@
-import { useUserCookie } from "hooks";
 import React, { useEffect, useState } from "react";
 import "./MyProfile.css";
+import  DisplayMode  from "./modes/DisplayMode";
+import { createUpdateCandPayload } from "utils";
+import EditMode from "./modes/EditMode";
 
 export default function MyProfile({ cookieValue }) {
   const [candidate, setCandidate] = useState({});
@@ -12,7 +14,8 @@ export default function MyProfile({ cookieValue }) {
           method: "GET",
           headers: {
             'Authorization': `Bearer ${cookieValue.token}`, // Assuming token is a JWT token
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'currentUser': `${JSON.stringify(cookieValue)}`
           }
         });
 
@@ -33,6 +36,7 @@ export default function MyProfile({ cookieValue }) {
     }
   }, [cookieValue]);
 
+
   // State to track whether the user is in edit mode
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -43,90 +47,34 @@ export default function MyProfile({ cookieValue }) {
   };
 
   // Function to handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can add logic here to save the updated user data
+    const payload = createUpdateCandPayload(candidate);
+    console.log(payload)
+    
+    await fetch(`http://localhost:5021/api/Candidates/${cookieValue.candidateNumber}`,
+    {
+      method: 'PUT',
+      body: JSON.stringify(candidate),
+      headers: {
+        'Authorization': `Bearer ${cookieValue.token}`,
+        'Content-Type': 'application/json',
+        'currentUser': `${JSON.stringify(cookieValue)}`
+      }
+    });
     setIsEditMode(false);
   };
-
-  const { cookie } = useUserCookie();
-
-  useEffect(() => {
-    if (cookie) {
-      setCandidate((prevcandidate) => ({ ...prevcandidate, ...cookie }));
-    }
-  }, [cookie]);
 
   return (
     <div className="myprofile-container">
       <h1 className="myprofile-title">My Profile</h1>
       {isEditMode ? (
         // Edit mode form
-        <form onSubmit={handleSubmit} className="myprofile-form">
-          <div className="myprofile-form-group">
-            <label htmlFor="firstName" className="myprofile-label">
-              First Name:
-            </label>
-            <input
-              type="text"
-              id="firstName"
-              name="firstName"
-              value={candidate.firstName}
-              onChange={handleInputChange}
-              className="myprofile-input"
-            />
-          </div>
-          <div className="myprofile-form-group">
-            <label htmlFor="lastName" className="myprofile-label">
-              Last Name:
-            </label>
-            <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              value={candidate.lastName}
-              onChange={handleInputChange}
-              className="myprofile-input"
-            />
-          </div>
-          <div className="myprofile-form-group">
-            <label htmlFor="email" className="myprofile-label">
-              Email:
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={candidate.email}
-              onChange={handleInputChange}
-              className="myprofile-input"
-            />
-          </div>
-          {/* Add more fields as needed */}
-          <button type="submit" className="myprofile-button">
-            Save
-          </button>
-        </form>
+       <EditMode candidate={candidate} handleInputChange={handleInputChange} handleSubmit={handleSubmit}/>
       ) : (
         // Display mode
-        <div className="myprofile-details">
-          <p>
-            <strong>First Name:</strong> {candidate && candidate.firstName}
-          </p>
-          <p>
-            <strong>Last Name:</strong> {candidate.lastName}
-          </p>
-          <p>
-            <strong>Email:</strong> {candidate.email}
-          </p>
-          {/* Display more fields as needed */}
-          <button
-            onClick={() => setIsEditMode(true)}
-            className="myprofile-button"
-          >
-            Edit
-          </button>
-        </div>
+        <DisplayMode candidate={candidate} setIsEditMode={setIsEditMode}/>
+        
       )}
     </div>
   );
