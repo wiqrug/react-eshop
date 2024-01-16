@@ -48,6 +48,8 @@ const AddCandidateModal = ({ open, onClose, onSave }) => {
       password,
     };
 
+    console.log("From Add Candidate Modal");
+    console.log(candidateData);
     onSave(candidateData);
     onClose();
   };

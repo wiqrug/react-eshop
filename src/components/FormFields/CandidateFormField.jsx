@@ -44,7 +44,9 @@ const CandidateFormFields = ({
   setEmail,
 }) => {
   const handleDateChange = (setter, dateValue) => {
-    setter(formatAsISO(dateValue));
+    // Convert to ISO format
+    const formattedDate = formatAsISO(dateValue);
+    setter(formattedDate);
   };
   return (
     <Grid container spacing={2}>
@@ -99,7 +101,7 @@ const CandidateFormFields = ({
           type="date"
           fullWidth
           InputLabelProps={{ shrink: true }}
-          value={convertFromISOToYYYYMMDD(birthDate)} // Convert to yyyy-MM-dd format for display
+          value={convertFromISOToYYYYMMDD(birthDate)} // Display in yyyy-MM-dd format
           onChange={(e) => handleDateChange(setBirthDate, e.target.value)}
         />
       </Grid>
@@ -127,7 +129,7 @@ const CandidateFormFields = ({
           type="date"
           fullWidth
           InputLabelProps={{ shrink: true }}
-          value={convertFromISOToYYYYMMDD(photoIDIssueDate)}
+          value={convertFromISOToYYYYMMDD(photoIDIssueDate)} // Display in yyyy-MM-dd format
           onChange={(e) =>
             handleDateChange(setPhotoIDIssueDate, e.target.value)
           }

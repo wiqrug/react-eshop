@@ -56,6 +56,8 @@ const ManageCandidates = () => {
     try {
       // Call API function to add the new candidate
       await createCandidate(newCandidateData);
+      console.log("from Manage Candidates");
+      console.log(newCandidateData);
 
       // Fetch the updated list of candidates after adding the new one
       await fetchCandidates();
