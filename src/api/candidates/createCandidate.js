@@ -1,7 +1,7 @@
 import { instance as axios } from "api/axios";
 export const createCandidate = async (candidateData) => {
   try {
-    const response = await axios.post("admin/add-candidate", candidateData);
+    const response = await axios.post("Admins/addCandidate", candidateData);
     console.log("Candidate added successfully", response.data);
     return response.data; // Assuming a successful response contains the added candidate data
   } catch (error) {
