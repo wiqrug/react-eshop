@@ -6,7 +6,6 @@ import { useModal } from "hooks/useModal";
 import AddCandidateModal from "components/Modals/AddCandidateModal";
 import { createCandidate } from "api/candidates/createCandidate";
 import { UpdateCandidateModal } from "components/Modals/UpdateCandidateModal";
-import { getCandidateByNumber } from "api/candidates/getCandidateByNumber";
 import { updateCandidateByNumber } from "../../api/candidates/updateCandidateByNumber";
 
 //rows and columns should have the same label
@@ -24,6 +23,7 @@ const ManageCandidates = () => {
   const [updatedCandidatesNumber, setUpdatedCandidatesNumber] = useState(null);
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
+
   const {
     isModalOpen: isAddModalOpen,
     handleCloseModal: handleCloseAddModal,
@@ -107,6 +107,8 @@ const ManageCandidates = () => {
     }
     console.log(`Updated DAta ${updatedData}`);
   };
+  // console.log(`From manage candidate ${rows}`);
+  // console.log(`From manage candidate ${columns}`);
 
   return (
     <>
