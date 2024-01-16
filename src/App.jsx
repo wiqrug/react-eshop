@@ -16,6 +16,7 @@ import {
   MyProfile,
   Admin,
 } from "./components";
+import CertificateStatus from "components/Certificate/CertificateStatus";
 
 const App = () => {
   //fetched certificates
@@ -81,6 +82,10 @@ const App = () => {
 
         <Route path="/MyCertificates" element={<CandidateCertificates />} />
 
+        <Route
+          path="/Certificate/:title/Status"
+          element={<CertificateStatus />}
+        ></Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
