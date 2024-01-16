@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Timer.css";
 import TimerContext from "./TimerContext";
+import { useLocalStorage } from "hooks";
 
 // Converts int to string with 2 digits
 const convert = (n) => {
@@ -10,8 +11,12 @@ const convert = (n) => {
 };
 
 const Timer = ({ examTimeLimit, examStartedTime }) => {
-  // Additional state for border color
-  const [borderColor, setBorderColor] = useState("green");
+  const [borderColor, setBorderColor] = useState("green"); // Additional state for border color
+  const [timeLeft, setTimeLeft] = useState(new Date()); // Time left on timer
+
+  const timerEnded = useContext(TimerContext);
+
+  const { setItem } = useLocalStorage();
 
   const calculateBorderColor = (timeleft) => {
     // Constants for threshold percentage values, exam time must be converted to milliseconds
@@ -29,15 +34,13 @@ const Timer = ({ examTimeLimit, examStartedTime }) => {
     }
   };
 
-  const timerEnded = useContext(TimerContext);
-
   // Function to calculate time left
   const calculateTimeLeft = () => {
     // Initiate time left
     let timeLeft = {};
 
     // Calculate time difference
-    var fixedTime = new Date(examStartedTime);
+    let fixedTime = new Date(examStartedTime);
     fixedTime.setMinutes(fixedTime.getMinutes() + examTimeLimit);
     const difference = fixedTime - new Date();
 
@@ -49,6 +52,9 @@ const Timer = ({ examTimeLimit, examStartedTime }) => {
         seconds: convert(Math.floor((difference / 1000) % 60)),
       };
 
+      // Set Timer to Local Storage
+      setItem("Timer", timeLeft);
+
       // Update border color based on time left
       const calculatedBorderColor = calculateBorderColor(difference);
       setBorderColor(calculatedBorderColor);
@@ -59,20 +65,18 @@ const Timer = ({ examTimeLimit, examStartedTime }) => {
     return timeLeft;
   };
 
-  const [timeLeft, setTimeLeft] = useState(new Date());
-
   useEffect(() => {
     const initialTimeLeft = calculateTimeLeft(); // Calculate initial time left
+    // @ts-ignore
     setTimeLeft(initialTimeLeft); // Update the time left state
 
-    // Set interval to update time every 1000ms
     const timerInterval = setInterval(() => {
+      // Set interval to update time every 1000ms
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
-    // Clear interval on component unmount or when exam ends
     return () => {
-      clearInterval(timerInterval);
+      clearInterval(timerInterval); // Clear interval on component unmount or when exam ends
     };
   }, []);
 

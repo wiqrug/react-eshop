@@ -1,2 +1,2 @@
-import Exam from "./Exam"
-export default Exam
+import Exam from "./Exam";
+export default Exam;
