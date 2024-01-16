@@ -42,6 +42,7 @@ const ManageCandidates = () => {
       setCandidates(data);
 
       //creating the columns of the array
+
       if (data.length > 0) {
         const dynamicColumns = Object.keys(data[0]).map((key) => ({
           label: key,

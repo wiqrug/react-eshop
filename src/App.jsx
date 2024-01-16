@@ -16,6 +16,7 @@ import {
   MyProfile,
   Admin,
 } from "./components";
+import CertificateStatus from "components/Certificate/CertificateStatus";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 
@@ -92,6 +93,10 @@ const App = () => {
 
         <Route path="/MyCertificates" element={<CandidateCertificates />} />
 
+        <Route
+          path="/Certificate/:title/Status"
+          element={<CertificateStatus />}
+        ></Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </ThemeProvider>
