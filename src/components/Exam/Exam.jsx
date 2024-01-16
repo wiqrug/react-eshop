@@ -7,6 +7,10 @@ import AnswerOptionContext from "./AnswerOptionContext";
 import TimerContext from "./TimerContext";
 import { useExam, useLocalStorage } from "hooks";
 
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
+
 const Exam = () => {
   const Exam = [
     {
@@ -118,17 +122,17 @@ const Exam = () => {
 
 
 
-
-  const [start, setStart] = useState(false);
-  const [examEnded, setExamEnded] = useState(false);
-  const [mark, setMark] = useState(NaN);
-  const [answers, setAnswers] = useState(Answers);
-  const [answerOptionClassName, setAnswerOptionClassName] = useState(["", "", "", "",]);
-  const [answer, setAnswer] = useState("");
-  const [questionNumber, setQuestionNumber] = useState(Answers.length);
-  const [questionClassName, setQuestionClassName] = useState("");
-  const [answerFieldClassName, setAnswerFieldClassName] = useState("");
-  const [timeWhenExamStarted, setTimeWhenExamStarted] = useState();
+  const [alert, setAlert] = useState(false);
+  const [start, setStart] = useState(false);                                                    // Used in start Exam
+  const [examEnded, setExamEnded] = useState(false);                                            // Used when Exam ends
+  const [mark, setMark] = useState(NaN);                                                        // Used when calculate Mark
+  const [answers, setAnswers] = useState(Answers);                                              // Contains user Answers, equal to Answers from Local Storage
+  const [answerOptionClassName, setAnswerOptionClassName] = useState(["", "", "", "",]);        // Used to fade an answer option
+  const [answer, setAnswer] = useState("");                                                     // Used when user chooses an option-answer
+  const [questionNumber, setQuestionNumber] = useState(Answers.length);                         // The question number equals to as many answers are in Local Storage
+  const [questionClassName, setQuestionClassName] = useState("");                               // Used to fade the Question and Image
+  const [answerFieldClassName, setAnswerFieldClassName] = useState("");                         // Used to fade the answer field
+  const [timeWhenExamStarted, setTimeWhenExamStarted] = useState();                             // Contains the time when the button start is pressed, considered by the time left from Local Storage
 
   // Evaluate Mark
   useEffect(() => {
@@ -140,8 +144,8 @@ const Exam = () => {
     }
 
     setMark(Math.round((100 * count) / Questions.length));      // Set Mark
-    removeItem("Answers")                                       // Remove Answers from Local Storage
-    removeItem("Timer")                                       // Remove Timer from Local Storage
+    removeItem("Answers");                                      // Remove Answers from Local Storage
+    removeItem("Timer");                                        // Remove Timer from Local Storage
 
   }, [examEnded]);
 
@@ -183,17 +187,23 @@ const Exam = () => {
 
 
   const handleStart = () => {
+    
+    if (getItem("Exam") && getItem("Exam") !== Exam[0].examName) {
+      console.log("Your previous exam you given is unfinished. You must complete that in order to start a new one!")
+      setAlert(true)
+      return
+    }
 
     setStart(!start);
-    if (!timer) {
-      const newDate = new Date();
-      // @ts-ignore
-      setTimeWhenExamStarted(newDate);
+    setItem("Exam", Exam[0].examName);          // Set the name of the exam in local storage     
+    let time;
+
+    if (!timer) {                               // When no timer exists in Local storage set time as Now
+      time = new Date();
     }
     else {
-
       const datetimeNow = new Date();
-      const time = new Date(
+      time = new Date(                          // Calculate the time now minus the time that remains from Local Storage
         datetimeNow.getFullYear(),
         datetimeNow.getMonth(),
         datetimeNow.getDate(),
@@ -201,15 +211,15 @@ const Exam = () => {
         datetimeNow.getMinutes(),
         datetimeNow.getSeconds() - (Exam[0].Time * 60 - Number(timer.hours) * 60 * 60 - Number(timer.minutes) * 60 - Number(timer.seconds))
       );
-
-      // @ts-ignore
-      setTimeWhenExamStarted(time);
     }
+
+    setTimeWhenExamStarted(time);               // Set time
   }
 
 
-  if (CandidateExam[0].examMark !== null) {
-    return (
+  if (CandidateExam[0].examMark)              // Consider if the exam has been already taken
+  {
+    return (                                   // Return a Page with the mark shown
       <>
         <div className="container result">
           <h1>{Exam[0].examName}</h1>
@@ -222,8 +232,9 @@ const Exam = () => {
         </div>
       </>
     );
-  } else {
-    return (
+  }
+  else {
+    return (                                    // Return a Page with the Exam Shield
       <>
         {start ? (
           <div className="container">
@@ -297,6 +308,12 @@ const Exam = () => {
         ) : (
           // Page before and after starting the exam
           <div className="container result">
+            {alert &&
+              <Alert severity="error" onClose={() => {setAlert(false)}}>
+                <AlertTitle>Error</AlertTitle>
+                Your previous exam you given is unfinished. You must complete that in order to start a new one!
+              </Alert>
+            }
             <h1>{Exam[0].examName}</h1>
             <hr />
             <p className="paragraph">About the exam:</p>

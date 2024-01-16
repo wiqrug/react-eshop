@@ -11,16 +11,17 @@ const convert = (n) => {
 };
 
 const Timer = ({ examTimeLimit, examStartedTime }) => {
-  // Additional state for border color
-  const [borderColor, setBorderColor] = useState("green");
+  const [borderColor, setBorderColor] = useState("green");      // Additional state for border color
+  const [timeLeft, setTimeLeft] = useState(new Date());         // Time left on timer
+
+  const timerEnded = useContext(TimerContext);
 
   const { setItem } = useLocalStorage()
 
   const calculateBorderColor = (timeleft) => {
     // Constants for threshold percentage values, exam time must be converted to milliseconds
     const ALERT_THRESHOLD_PERCENTAGE = (15 / 100) * (examTimeLimit * 60 * 1000);
-    const WARNING_THRESHOLD_PERCENTAGE =
-      (40 / 100) * (examTimeLimit * 60 * 1000);
+    const WARNING_THRESHOLD_PERCENTAGE = (40 / 100) * (examTimeLimit * 60 * 1000);
 
     // Condition to calculate border color based on time left
     if (timeleft <= ALERT_THRESHOLD_PERCENTAGE) {
@@ -31,8 +32,6 @@ const Timer = ({ examTimeLimit, examStartedTime }) => {
       return "green";
     }
   };
-
-  const timerEnded = useContext(TimerContext);
 
   // Function to calculate time left
   const calculateTimeLeft = () => {
@@ -65,20 +64,17 @@ const Timer = ({ examTimeLimit, examStartedTime }) => {
     return timeLeft;
   };
 
-  const [timeLeft, setTimeLeft] = useState(new Date());
-
   useEffect(() => {
-    const initialTimeLeft = calculateTimeLeft(); // Calculate initial time left
-    setTimeLeft(initialTimeLeft); // Update the time left state
+    const initialTimeLeft = calculateTimeLeft();        // Calculate initial time left
+    setTimeLeft(initialTimeLeft);                       // Update the time left state
 
-    // Set interval to update time every 1000ms
-    const timerInterval = setInterval(() => {
+    const timerInterval = setInterval(() => {           // Set interval to update time every 1000ms
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
-    // Clear interval on component unmount or when exam ends
+    
     return () => {
-      clearInterval(timerInterval);
+      clearInterval(timerInterval);                     // Clear interval on component unmount or when exam ends
     };
   }, []);
 
