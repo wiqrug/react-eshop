@@ -1,7 +1,7 @@
 import { instance as axios } from "api/axios";
 
 export const getCandidates = async () => {
-  const url = "Admins/admin/get-candidates";
+  const url = "Admins/getCandidates";
   try {
     const response = await axios.get(url);
     // Map over the array and exclude the $id property from each object
