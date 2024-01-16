@@ -102,7 +102,7 @@ const CustomTable = ({
                       <Button
                         variant="contained"
                         color="success"
-                        onClick={handleUpdate}
+                        onClick={() => handleUpdate(row[identifierField])}
                         startIcon={<CreateIcon />}
                       >
                         UPDATE

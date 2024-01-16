@@ -5,27 +5,49 @@ import { deleteCandidateByNumber } from "api/candidates/deleteCandidateByNumber"
 import { useModal } from "hooks/useModal";
 import AddCandidateModal from "components/Modals/AddCandidateModal";
 import { createCandidate } from "api/candidates/createCandidate";
+import { UpdateCandidateModal } from "components/Modals/UpdateCandidateModal";
+import { getCandidateByNumber } from "api/candidates/getCandidateByNumber";
 
 //rows and columns should have the same label
 
+//create 2 axios, one for get candidates details by candidate number,
+// one for post candidate details by candidate number
+// the handleSaveUpdated, should accept as argument the updated data frmo the UpdateCandidateModal
+// and should do the post request.
+
+//also in the UpdateCandidateModal i have an unimplemented useEffect
+// this useEffect is to prepopulate the data for the UI to make it easier for the admin
+
 const ManageCandidates = () => {
   const [candidates, setCandidates] = useState([]);
+  const [updatedCandidatesNumber, setUpdatedCandidatesNumber] = useState();
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
-  const { isModalOpen, setIsModalOpen, handleCloseModal, handleOpenModal } =
-    useModal();
+  const {
+    isModalOpen: isAddModalOpen,
+    handleCloseModal: handleCloseAddModal,
+    handleOpenModal: handleOpenAddModal,
+  } = useModal();
+
+  const {
+    isModalOpen: isUpdateModalOpen,
+    handleCloseModal: handleCloseUpdateModal,
+    handleOpenModal: handleOpenUpdateModal,
+  } = useModal();
 
   const fetchCandidates = async () => {
     try {
       const data = await getCandidates();
       setCandidates(data);
 
+      //creating the columns of the array
       if (data.length > 0) {
         const dynamicColumns = Object.keys(data[0]).map((key) => ({
           label: key,
         }));
         setColumns(dynamicColumns);
-        setRows(data); // Set rows here after fetching data
+        //creating the rows of the array
+        setRows(data);
       }
     } catch (error) {
       console.error("Failed to fetch candidates:", error);
@@ -34,24 +56,17 @@ const ManageCandidates = () => {
 
   useEffect(() => {
     fetchCandidates();
-
-    // Set up a polling mechanism to refetch candidates every X milliseconds
-    const intervalId = setInterval(fetchCandidates, 5000); // Poll every 5 seconds, adjust as needed
-
-    // Clean up the interval on component unmount
-    return () => clearInterval(intervalId);
-  }, []);
-
-  //get the name of the properties
-  // console.log(columns);
-  // console.log(candidates);
+  }, [candidates]);
 
   const handleAdd = () => {
-    // Implement the logic for opening the modal here
-    handleOpenModal();
+    handleOpenAddModal();
   };
 
-  const handleUpdate = () => {};
+  const handleUpdate = (candidateNumber) => {
+    setUpdatedCandidatesNumber(candidateNumber);
+    handleOpenUpdateModal();
+  };
+
   const handleSave = async (newCandidateData) => {
     try {
       // Call API function to add the new candidate
@@ -65,7 +80,6 @@ const ManageCandidates = () => {
       console.error("Failed to add candidate:", error);
     }
   };
-
   const handleDelete = async (candidateNumber) => {
     try {
       // Assuming deleteCandidateByNumber is an API call that deletes the candidate based on candidateNumber
@@ -82,6 +96,9 @@ const ManageCandidates = () => {
     }
   };
 
+  //needs implementation
+  const handleSaveUpdated = () => {};
+
   return (
     <>
       <CustomTable
@@ -93,9 +110,17 @@ const ManageCandidates = () => {
         identifierField={"candidateNumber"}
       />
       <AddCandidateModal
-        open={isModalOpen}
-        onClose={handleCloseModal}
+        open={isAddModalOpen}
+        onClose={handleCloseAddModal}
         onSave={handleSave}
+      />
+      {/* Change the state of the candidate with candidateNumber (which comes from
+      handleUpdate) */}
+      <UpdateCandidateModal
+        open={isUpdateModalOpen}
+        onClose={handleCloseUpdateModal}
+        onSave={handleSaveUpdated}
+        candidateNumber={updatedCandidatesNumber}
       />
     </>
   );
