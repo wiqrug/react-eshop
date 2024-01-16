@@ -1,7 +1,7 @@
 import { instance as axios } from "api/axios";
 
-export const getCandidateByNumber = async (candidateNumber, payload) => {
-  const url = `Admins/admin/get-candidate-by-number/${candidateNumber}`;
+export const updateCandidateByNumber = async (candidateNumber, payload) => {
+  const url = `Admins/admin/update-candidate/${candidateNumber}`;
   try {
     const response = await axios.put(url, payload);
     return response.data; // Assuming the response data contains the candidate details

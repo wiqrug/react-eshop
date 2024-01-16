@@ -7,6 +7,7 @@ import AddCandidateModal from "components/Modals/AddCandidateModal";
 import { createCandidate } from "api/candidates/createCandidate";
 import { UpdateCandidateModal } from "components/Modals/UpdateCandidateModal";
 import { getCandidateByNumber } from "api/candidates/getCandidateByNumber";
+import { updateCandidateByNumber } from "../../api/candidates/updateCandidateByNumber";
 
 //rows and columns should have the same label
 
@@ -20,7 +21,7 @@ import { getCandidateByNumber } from "api/candidates/getCandidateByNumber";
 
 const ManageCandidates = () => {
   const [candidates, setCandidates] = useState([]);
-  const [updatedCandidatesNumber, setUpdatedCandidatesNumber] = useState();
+  const [updatedCandidatesNumber, setUpdatedCandidatesNumber] = useState(null);
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
   const {
@@ -97,7 +98,15 @@ const ManageCandidates = () => {
   };
 
   //needs implementation
-  const handleSaveUpdated = () => {};
+  const handleSaveUpdated = async (updatedData) => {
+    try {
+      await updateCandidateByNumber(updatedCandidatesNumber, updatedData);
+      await getCandidates();
+    } catch (error) {
+      console.error("failed to update candidate ");
+    }
+    console.log(`Updated DAta ${updatedData}`);
+  };
 
   return (
     <>

@@ -28,12 +28,12 @@ export const UpdateCandidateModal = ({
   const [mobileNumber, setMobileNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  useEffect(() => {
-    // Fetch candidate data using candidateNumber and populate states
-    // This could be an API call or a lookup in local state
-    // setFirstName(fetchedData.firstName);
-    // ... set other fields
-  }, [candidateNumber]);
+  //   useEffect(() => {
+  //     // Fetch candidate data using candidateNumber and populate states
+  //     // This could be an API call or a lookup in local state
+  //     // setFirstName(fetchedData.firstName);
+  //     // ... set other fields
+  //   }, [candidateNumber]);
   const handleSaveClick = () => {
     // Assuming you have state variables and setters for each field
     const updatedData = {
@@ -59,6 +59,7 @@ export const UpdateCandidateModal = ({
     };
 
     onSave(updatedData);
+    console.log("Updated Data", updatedData);
     onClose();
   };
 
