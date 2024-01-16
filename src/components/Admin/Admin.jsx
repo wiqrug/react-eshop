@@ -1,10 +1,11 @@
 import { createCertificate } from "api/certificates/createCertificate";
-import AvailableCertificates from "components/CandidateCertificates/AvailableCertificates";
 import { AddCertificateModal } from "components/Certificates/AddCertificateModal";
 import CertificatesList from "components/Certificates/Certificates";
 import { useModal } from "hooks/useModal";
 import React, { useState } from "react";
 import ManageCandidates from "./ManageCandidates";
+import ManageExams from "./ManageExams";
+import ManageQuestions from "./ManageQuestions";
 
 /**
  * Admins role over candidates
@@ -57,6 +58,9 @@ const Admin = (props) => {
         <button onClick={() => handleSelectionChange("exams")}>
           Manage Exams
         </button>
+        <button onClick={() => handleSelectionChange("questions")}>
+          Manage Questions
+        </button>
       </div>
 
       {selectedOption === "candidates" && <ManageCandidates />}
@@ -78,7 +82,8 @@ const Admin = (props) => {
           />
         </>
       )}
-      {selectedOption === "exams" && <AvailableCertificates />}
+      {selectedOption === "exams" && <ManageExams />}
+      {selectedOption === "questions" && <ManageQuestions />}
     </>
   );
 };
