@@ -4,10 +4,6 @@ const { default: React } = require("react");
 const { useParams } = require("react-router-dom");
 
 const CertificateStatus = () => {
-  const { title: peos } = useParams();
-
-  console.log(peos);
-
   return (
     <CustomTable
       columns={undefined}
