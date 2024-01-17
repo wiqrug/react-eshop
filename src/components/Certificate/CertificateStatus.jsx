@@ -9,10 +9,11 @@ const CertificateStatus = () => {
   const [candidates, setCandidates] = useState([]);
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
+  const { title } = useParams();
 
   const fetchCandidates = async () => {
     try {
-      const data = await getCandidatesOfCertainCertificate("pipi");
+      const data = await getCandidatesOfCertainCertificate(title);
       setCandidates(data);
 
       //creating the columns of the array
@@ -30,7 +31,9 @@ const CertificateStatus = () => {
   };
   useEffect(() => {
     fetchCandidates();
-  }, []);
+  }, [title]);
+
+  //Needs implementation
   const handleAdd = () => {};
 
   const handleDelete = async (recordId) => {
@@ -47,6 +50,7 @@ const CertificateStatus = () => {
     }
   };
 
+  //needs implementation
   const handleUpdate = () => {};
 
   return (

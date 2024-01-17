@@ -5,4 +5,4 @@ export { getCandidateExam } from "./getCandidateExam";
 export { deleteExam } from "./deleteExam";
 export { addExam } from "./addExam";
 export { updateExam } from "./updateExam";
-
+export { getSpecificExam } from "./getSpecificExam";
