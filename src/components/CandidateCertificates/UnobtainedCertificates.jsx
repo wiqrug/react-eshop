@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const UnobtainedCertificates = () => {
   const unobtainedCertificates = useCandidateCertificates("unobtained");
+  }
 
   return (
     <section>
