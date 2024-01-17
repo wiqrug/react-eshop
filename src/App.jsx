@@ -21,7 +21,6 @@ import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 
 const App = () => {
-  //fetched certificates
   const { cookie, handleSetCookie, handleRemoveCookie } = useUserCookie();
   const { certificates, fetchCertificates } = useCertificates();
 
@@ -39,7 +38,10 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <NavBar cookieValue={cookie} />
       <Routes>
-      <Route path="/" element={<Home certificates={certificates} cookie={cookie}/>} />
+        <Route
+          path="/"
+          element={<Home certificates={certificates} cookie={cookie} />}
+        />
         <Route
           path="/Certificates"
           element={

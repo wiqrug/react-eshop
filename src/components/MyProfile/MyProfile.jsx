@@ -37,10 +37,8 @@ export default function MyProfile({ cookieValue }) {
   }, [cookieValue]);
 
 
-  // State to track whether the user is in edit mode
   const [isEditMode, setIsEditMode] = useState(false);
 
-  // Function to handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCandidate({ ...candidate, [name]: value });

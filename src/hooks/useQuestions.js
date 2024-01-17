@@ -1,9 +1,6 @@
 import { getQuestions } from "../api";
 import { useState, useEffect } from "react";
 
-/**
- * Fetches questions, sets state, and returns it
- */
 export const useQuestions = () => {
   const [questions, setQuestions] = useState(null);
   const fetchQuestions = () => {
@@ -17,7 +14,7 @@ export const useQuestions = () => {
 
   useEffect(() => {
     fetchQuestions();
-  }, []); // Empty dependency array to run only once
+  }, []);
 
   return { questions, fetchQuestions };
 };

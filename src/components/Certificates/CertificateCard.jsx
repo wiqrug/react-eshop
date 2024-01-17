@@ -33,40 +33,46 @@ const CertificateCard = ({
     handleCloseModal();
   };
 
-  const linkPath = isAdminView
+  const detailsPath = isAdminView
     ? `/CertificateStatus/${encodeURIComponent(title)}`
     : `/Certificate/${encodeURIComponent(title)}`;
 
   return (
     <>
-      <Link
-        to={linkPath}
-        style={{ textDecoration: "none" }}
-        className="certificate-link"
-      >
-        <article>
-          <img
-            src={imageSrc? imageSrc : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"}
-            alt="Certificate"
-            style={{ maxWidth: '100%', minHeight: '50%', maxHeight: '50%' }}
-          />
-          <h4 className="certificate-title">{title.substring(0, 30)}{title.length>30 && "..."}</h4>
-          <h4>{price} €</h4>
-          {!cookieValue?.candidateNumber && isAdminView && (
-            <div className="action-buttons">
-              <button
-                className="action-button update"
-                onClick={handleOpenModal}
-              >
-                &#9998; Update
-              </button>
-              <button className="action-button delete" onClick={handleDelete}>
-                &#128465; Delete
-              </button>
-            </div>
-          )}
-        </article>
-      </Link>
+      <article>
+        {isAdminView ? (
+          <>
+            <img
+              src="https://raw.githubusercontent.com/wiqrug/wiqrug.github.io/main/images/DALL%C2%B7E%202023-10-26%2018.43.43%20-%20Wide%20cartoon%20artwork%20with%20a%20gentle%20cream-colored%20backdrop.%20Playful%20anime%20clouds%20float%20around%2C%20some%20with%20cute%20expressions%2C%20ensuring%20the%20middle%20remains%20.png"
+              alt="Certificate"
+            />
+            <h4 className="certificate-title">{title}</h4>
+          </>
+        ) : (
+          <Link to={detailsPath}>
+            <img
+              src="https://raw.githubusercontent.com/wiqrug/wiqrug.github.io/main/images/DALL%C2%B7E%202023-10-26%2018.43.43%20-%20Wide%20cartoon%20artwork%20with%20a%20gentle%20cream-colored%20backdrop.%20Playful%20anime%20clouds%20float%20around%2C%20some%20with%20cute%20expressions%2C%20ensuring%20the%20middle%20remains%20.png
+"
+              alt="Certificate"
+            />
+            <h4 className="certificate-title">{title}</h4>
+          </Link>
+        )}
+        <h4>{price} €</h4>
+        {isAdminView && (
+          <div className="action-buttons">
+            <button className="action-button update" onClick={handleOpenModal}>
+              &#9998; Update
+            </button>
+            <button className="action-button delete" onClick={handleDelete}>
+              &#128465; Delete
+            </button>
+            <Link to={detailsPath} className="action-button details">
+              &#10148; Details
+            </Link>
+          </div>
+        )}
+      </article>
       <UpdateCertificateModal
         open={isModalOpen}
         onClose={handleCloseModal}

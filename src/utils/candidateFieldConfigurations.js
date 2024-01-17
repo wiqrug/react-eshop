@@ -3,6 +3,8 @@ export const candidateFieldConfigurations = () => {
     { name: "firstName", label: "First Name", type: "text" },
     { name: "middleName", label: "Middle Name", type: "text" },
     { name: "lastName", label: "Last Name", type: "text" },
+    { name: "email", label: "Email", type: "email" },
+    { name: "password", label: "Password", type: "password" },
     { name: "gender", label: "Gender", type: "text" },
     { name: "nativeLanguage", label: "Native Language", type: "text" },
     { name: "birthDate", label: "Birth Date", type: "date", convert: true },
@@ -26,9 +28,6 @@ export const candidateFieldConfigurations = () => {
     { name: "postalCode", label: "Postal Code", type: "text" },
     { name: "landlineNumber", label: "Landline Number", type: "text" },
     { name: "mobileNumber", label: "Mobile Number", type: "text" },
-    { name: "email", label: "Email", type: "email" },
-    { name: "password", label: "Password", type: "password" },
-    // Add any additional fields here in the same format
   ];
   return fieldConfig;
 };
