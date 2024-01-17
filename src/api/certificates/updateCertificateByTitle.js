@@ -9,7 +9,6 @@ export const updateCertificateByTitle = async (certificate, payload) => {
 
     if (response.status === 200) {
       console.log("Certificate updated successfully");
-      // Additional success handling
     } else {
       console.error("Failed to update certificate with non-200 response");
     }

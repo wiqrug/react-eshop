@@ -19,11 +19,9 @@ import {
 import CertificateStatus from "components/Certificate/CertificateStatus";
 
 const App = () => {
-  //fetched certificates
   const { cookie, handleSetCookie, handleRemoveCookie } = useUserCookie();
   const { certificates, fetchCertificates } = useCertificates();
 
-  // extract CertificateRoutes, AuthRoutes, etc.
   return (
     <>
       <NavBar cookieValue={cookie} />

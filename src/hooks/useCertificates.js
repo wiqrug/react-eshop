@@ -14,7 +14,7 @@ export const useCertificates = () => {
 
   useEffect(() => {
     fetchCertificates();
-  }, []); // Empty dependency array to run only once
+  }, []);
 
   return { certificates, fetchCertificates };
 };

@@ -6,7 +6,6 @@ const AvailableCertificates = () => {
 
   return (
     <section>
-      {/* <div className="Certificate-Details-Title">Available Certificates</div> */}
       {availableCertificates
         // @ts-ignore
         ?.map(({ title, description, price }) => (

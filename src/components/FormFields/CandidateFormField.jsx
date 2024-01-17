@@ -6,11 +6,10 @@ import { candidateFieldConfigurations } from "utils/candidateFieldConfigurations
 
 const CandidateFormFields = ({ onChange, ...fields }) => {
   const handleDateChange = (fieldName, dateValue) => {
-    // Convert to ISO format and trigger onChange
     const event = {
       target: {
         name: fieldName,
-        value: dateValue, // Assuming dateValue is already in the desired format
+        value: dateValue,
       },
     };
     onChange(event);
@@ -52,10 +51,10 @@ export default CandidateFormFields;
 // import { candidateFieldConfigurations } from "utils/candidateFieldConfigurations";
 
 // const CandidateFormFields = ({ onChange, ...fields }) => {
-    
+
 //     return (
 //       <FormField onChange={onChange} {...fields} fieldConfigurations={candidateFieldConfigurations} />
 //     );
 //   };
-  
+
 //   export default CandidateFormFields;

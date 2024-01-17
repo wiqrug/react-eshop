@@ -36,6 +36,6 @@ export const getCandidatesOfCertainCertificate = async (certificateTitle) => {
     return candidatesWithMarks;
   } catch (error) {
     console.error("Error fetching data:", error);
-    throw error; // Proper error handling
+    throw error;
   }
 };

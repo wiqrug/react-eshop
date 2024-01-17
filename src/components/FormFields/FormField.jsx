@@ -3,7 +3,7 @@ import { TextField, Grid } from "@mui/material";
 // import { formatAsISO } from "utils";
 import { convertFromISOToYYYYMMDD } from "utils/convertFromISOToYYYYMMDD";
 
-const FormField = ({ onChange, fieldConfigurations, ...fields  }) => {
+const FormField = ({ onChange, fieldConfigurations, ...fields }) => {
   const handleDateChange = (fieldName, dateValue) => {
     // Convert to ISO format and trigger onChange
     const event = {

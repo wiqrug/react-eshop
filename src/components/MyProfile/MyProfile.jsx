@@ -10,22 +10,19 @@ export default function MyProfile() {
     email: "email",
     // Add more fields as needed
   };
-  // State to manage user data
+
   const [userData, setUserData] = useState(initialUserData);
 
-  // State to track whether the user is in edit mode
   const [isEditMode, setIsEditMode] = useState(false);
 
-  // Function to handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
 
-  // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can add logic here to save the updated user data
+
     setIsEditMode(false);
   };
 
@@ -41,7 +38,6 @@ export default function MyProfile() {
     <div className="myprofile-container">
       <h1 className="myprofile-title">My Profile</h1>
       {isEditMode ? (
-        // Edit mode form
         <form onSubmit={handleSubmit} className="myprofile-form">
           <div className="myprofile-form-group">
             <label htmlFor="firstName" className="myprofile-label">
@@ -82,13 +78,12 @@ export default function MyProfile() {
               className="myprofile-input"
             />
           </div>
-          {/* Add more fields as needed */}
+
           <button type="submit" className="myprofile-button">
             Save
           </button>
         </form>
       ) : (
-        // Display mode
         <div className="myprofile-details">
           <p>
             <strong>First Name:</strong> {userData.firstName}
@@ -99,7 +94,7 @@ export default function MyProfile() {
           <p>
             <strong>Email:</strong> {userData.email}
           </p>
-          {/* Display more fields as needed */}
+
           <button
             onClick={() => setIsEditMode(true)}
             className="myprofile-button"

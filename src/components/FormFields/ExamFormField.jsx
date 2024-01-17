@@ -1,16 +1,15 @@
 import React from "react";
 import { TextField, Grid } from "@mui/material";
-// import { formatAsISO } from "utils";
+
 import { convertFromISOToYYYYMMDD } from "utils/convertFromISOToYYYYMMDD";
 import { examFieldConfigurations } from "utils/examFieldConfigurations";
 
 const CandidateFormFields = ({ onChange, ...fields }) => {
   const handleDateChange = (fieldName, dateValue) => {
-    // Convert to ISO format and trigger onChange
     const event = {
       target: {
         name: fieldName,
-        value: dateValue, // Assuming dateValue is already in the desired format
+        value: dateValue,
       },
     };
     onChange(event);

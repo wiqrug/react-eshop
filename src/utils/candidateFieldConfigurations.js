@@ -28,8 +28,6 @@ export const candidateFieldConfigurations = () => {
     { name: "postalCode", label: "Postal Code", type: "text" },
     { name: "landlineNumber", label: "Landline Number", type: "text" },
     { name: "mobileNumber", label: "Mobile Number", type: "text" },
-
-    // Add any additional fields here in the same format
   ];
   return fieldConfig;
 };

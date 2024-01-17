@@ -12,7 +12,7 @@ const useFormFields = (initialState) => {
 
   return {
     fields,
-    setFields, // To set all fields at once, useful when loading data
+    setFields,
     handleFieldChange,
   };
 };

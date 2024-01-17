@@ -13,12 +13,10 @@ export const getCandidateCertificates = async (
       return response.data;
     } catch (error) {
       console.error("Error fetching candidates obtained certificates", error);
-      // Optionally return a default value or re-throw the error
       throw error;
     }
   } else {
-    // Handle the case where there is no current user or candidate number
     console.error("No current user or candidate number found");
-    return Promise.resolve([]); // or however you want to handle this scenario
+    return Promise.resolve([]);
   }
 };

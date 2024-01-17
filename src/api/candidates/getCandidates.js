@@ -4,7 +4,7 @@ export const getCandidates = async () => {
   const url = "Admins/getCandidates";
   try {
     const response = await axios.get(url);
-    // Map over the array and exclude the $id property from each object
+
     const candidatesWithoutId = response.data.$values.map(
       ({ $id, ...rest }) => rest
     );
