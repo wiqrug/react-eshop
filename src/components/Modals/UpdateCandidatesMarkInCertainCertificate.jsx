@@ -7,11 +7,11 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
-export const UpdateCandidatesMarkInCertainCertificate = (
+export const UpdateCandidatesMarkInCertainCertificate = ({
   open,
   onClose,
-  onSave
-) => {
+  onSave,
+}) => {
   const [mark, setMark] = useState("");
 
   const handleSave = () => {
