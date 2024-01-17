@@ -192,3 +192,7 @@ p,
   animation: none;
   /* Additional styling for hover state if needed */
 }
+
+.exam-start-btn {
+  padding: 10px;
+}

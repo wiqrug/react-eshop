@@ -46,10 +46,11 @@ export default function SignUp({ handleSetCookie }) {
 
       await signUp(payload);
       const user = await login(data);
+console.log(user)
       handleSetCookie({
-        email: user.user.email,
         token: user.token,
         candidateNumber: user.user.candidateNumber,
+        firstName: user.user.firstName
       });
 
       navigate("/");

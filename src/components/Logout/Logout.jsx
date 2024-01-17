@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Logout.css"; // Import your CSS file for styling

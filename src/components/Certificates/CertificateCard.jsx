@@ -6,7 +6,7 @@ import { updateCertificateByTitle } from "api/certificates/updateCertificateByTi
 import { useModal } from "hooks/useModal";
 
 const CertificateCard = ({
-  src,
+  imageSrc,
   title,
   price,
   id,

@@ -17,13 +17,25 @@ import {
   Admin,
 } from "./components";
 import CertificateStatus from "components/Certificate/CertificateStatus";
+import { createTheme } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
 
 const App = () => {
   const { cookie, handleSetCookie, handleRemoveCookie } = useUserCookie();
   const { certificates, fetchCertificates } = useCertificates();
 
+  // extract CertificateRoutes, AuthRoutes, etc.
+  const theme = createTheme({
+    palette: {
+      background: {
+        paper: '#ffffff'
+      },
+    },
+  }
+);
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <NavBar cookieValue={cookie} />
       <Routes>
         <Route
@@ -57,7 +69,7 @@ const App = () => {
         <Route
           path="/MyProfile"
           element={
-            cookie ? <MyProfile /> : <Login handleSetCookie={handleSetCookie} />
+            cookie ? <MyProfile cookieValue={cookie}/> : <Login handleSetCookie={handleSetCookie} />
           }
         />
 
@@ -65,7 +77,7 @@ const App = () => {
           path="/Logout"
           element={<Logout handleRemoveCookie={handleRemoveCookie} />}
         />
-        <Route path="/Exam/:id" element={<Exam />} />
+        <Route path="/Exam/:id" element={<Exam cookie={cookie}/>} />
         <Route
           path="/Admin"
           element={
@@ -89,7 +101,7 @@ const App = () => {
         ></Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </ThemeProvider>
   );
 };
 

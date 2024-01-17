@@ -1,7 +1,7 @@
 export const login = async (data) => {
   const jsonPayload = {
     email: data.get("email"),
-    password: data.get("password"), //To btoa() function kanei encode se base-64
+    password: data.get("password"),
   };
 
   const response = await fetch("http://localhost:5021/api/Account/Login", {

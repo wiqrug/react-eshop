@@ -13,11 +13,11 @@ const CertificatesList = ({
 }) => {
   return (
     <section>
-      {certificates?.map(({ $id: id, title, price }) => (
+      {certificates?.map(({ $id: id, title, price, imageSrc }) => (
         <CertificateCard
           key={id}
           id={id}
-          src={"https://image.jpg"}
+          imageSrc={imageSrc!=null? imageSrc : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"}
           title={title}
           price={price}
           cookieValue={cookieValue}

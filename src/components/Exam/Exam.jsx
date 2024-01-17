@@ -10,8 +10,9 @@ import { useExam, useLocalStorage } from "hooks";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
+import { getCandidatesOfCertainCertificate } from "api/candidates/getCandidatesOfCertainCertificate";
 
-const Exam = () => {
+const Exam = ({cookie}) => {
   const Exam = [
     {
       examName: "Exam Name",
@@ -103,7 +104,7 @@ const Exam = () => {
   const [alert, setAlert] = useState(false);
   const [start, setStart] = useState(false); // Used in start Exam
   const [examEnded, setExamEnded] = useState(false); // Used when Exam ends
-  const [mark, setMark] = useState(NaN); // Used when calculate Mark
+  const [mark, setMark] = useState(null); // Used when calculate Mark
   const [answers, setAnswers] = useState(Answers); // Contains user Answers, equal to Answers from Local Storage
   const [answerOptionClassName, setAnswerOptionClassName] = useState([
     "",
@@ -152,15 +153,68 @@ const Exam = () => {
     }
   };
 
-  const handleSubmit = () => {
-    // Handles submit button click
 
+
+    const getLastSegment = () => {
+      const path = window.location.pathname;
+      const segments = path.split('/');
+      return segments[segments.length - 1];
+    };
+    const title = decodeURIComponent(getLastSegment());
+
+    const [enrollmentData, setEnrollmentData] = useState(null);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const data = await getCandidatesOfCertainCertificate(title);
+          setEnrollmentData(data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+
+      fetchData();
+    }, [title]);
+
+    const [jsonPayload, setJsonPayload] = useState({
+      title: title,
+      mark: 0, // Initialize with a default value (it will be updated by the useEffect)
+    });
+
+
+  const handleSubmit = () => {
     handleNext(); // Handle Next Question
     setStart(false); // Change Star to false
     setExamEnded(true); // Change ExamEnded to true
+
+      const enrollemnt = enrollmentData?.filter(
+        (cand) => cand.candidateNumber === cookie.candidateNumber
+      );
+      const recordId = enrollemnt[0]?.recordId;
+      const url = `CandidateCertificates/Certificates/${recordId}`;
+      fetch(`http://localhost:5021/api/${url}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(jsonPayload),
+        headers: {
+          'Authorization': `Bearer ${cookie.token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Response:', data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
     // Must set mark to candidateExam throught post request
   };
 
+
+
+  
   // This functions is called int Timer Child Component when the timer hits zero
   const timeEnded = () => {
     setStart(false);
