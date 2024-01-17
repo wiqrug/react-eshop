@@ -1,22 +1,39 @@
+import { getCandidatesOfCertainCertificate } from "api/candidates/getCandidatesOfCertainCertificate";
 import CustomTable from "components/Admin/CustomTable";
 ///Certificate/:title/Status
-const { default: React } = require("react");
+const { default: React, useState, useEffect } = require("react");
 const { useParams } = require("react-router-dom");
 
 const CertificateStatus = () => {
-  const { title: peos } = useParams();
+  const [candidates, setCandidates] = useState([]);
+  const [columns, setColumns] = useState([]);
+  const [rows, setRows] = useState([]);
 
-  console.log(peos);
+  const fetchCandidates = async () => {
+    try {
+      const data = await getCandidatesOfCertainCertificate("pipi");
+      setCandidates(data);
+      console.log(data);
+
+      // ... [rest of your logic for setting columns and rows]
+    } catch (error) {
+      console.error("Failed to fetch candidates:", error);
+    }
+  };
+  useEffect(() => {
+    fetchCandidates();
+  }, []);
 
   return (
-    <CustomTable
-      columns={undefined}
-      rows={undefined}
-      handleAdd={undefined}
-      handleDelete={undefined}
-      handleUpdate={undefined}
-      identifierField={undefined}
-    ></CustomTable>
+    <>hello faggg</>
+    // <CustomTable
+    //   columns={undefined}
+    //   rows={undefined}
+    //   handleAdd={undefined}
+    //   handleDelete={undefined}
+    //   handleUpdate={undefined}
+    //   identifierField={undefined}
+    // ></CustomTable>
   );
 };
 

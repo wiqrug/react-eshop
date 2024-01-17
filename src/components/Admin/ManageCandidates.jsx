@@ -8,19 +8,9 @@ import { createCandidate } from "api/candidates/createCandidate";
 import { UpdateCandidateModal } from "components/Modals/UpdateCandidateModal";
 import { updateCandidateByNumber } from "../../api/candidates/updateCandidateByNumber";
 
-//rows and columns should have the same label
-
-//create 2 axios, one for get candidates details by candidate number,
-// one for post candidate details by candidate number
-// the handleSaveUpdated, should accept as argument the updated data frmo the UpdateCandidateModal
-// and should do the post request.
-
-//also in the UpdateCandidateModal i have an unimplemented useEffect
-// this useEffect is to prepopulate the data for the UI to make it easier for the admin
-
 const ManageCandidates = () => {
-  const [candidates, setCandidates] = useState([]);
   const [updatedCandidatesNumber, setUpdatedCandidatesNumber] = useState(null);
+  const [candidates, setCandidates] = useState([]);
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
 
@@ -108,8 +98,6 @@ const ManageCandidates = () => {
     }
     console.log(`Updated DAta ${updatedData}`);
   };
-  // console.log(`From manage candidate ${rows}`);
-  // console.log(`From manage candidate ${columns}`);
 
   return (
     <>
@@ -126,8 +114,6 @@ const ManageCandidates = () => {
         onClose={handleCloseAddModal}
         onSave={handleSave}
       />
-      {/* Change the state of the candidate with candidateNumber (which comes from
-      handleUpdate) */}
       <UpdateCandidateModal
         open={isUpdateModalOpen}
         onClose={handleCloseUpdateModal}

@@ -83,7 +83,7 @@ const App = () => {
         <Route path="/MyCertificates" element={<CandidateCertificates />} />
 
         <Route
-          path="/Certificate/:title/Status"
+          path="/CertificateStatus"
           element={<CertificateStatus />}
         ></Route>
         <Route path="*" element={<NotFound />} />
