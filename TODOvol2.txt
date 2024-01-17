@@ -39,3 +39,12 @@ last version
 
 Make the link, in order to catch from the param, the title of the Certificate, and print dynamically the details needed
 
+
+
+~~~~~~~~~~
+
+PROBLEMS. 
+
+UNOBTAINED CERTIFICATES DO NOT WORK, NEED TO FIX THAT, AND ALSO ADD BUTTON IN ORDER TO GIVE EXAMS
+
+OBTAINED CERTIFICATES SHOULD PRINT PDF

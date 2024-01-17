@@ -22,9 +22,6 @@ const NavBar = ({ cookieValue }) => {
             <li>
               <Link to="/Certificates">Certificates</Link>
             </li>
-            <li>
-              <Link to="/Certificatestatus">poutsaki</Link>
-            </li>
 
             <li>
               {hasCookie && isAdmin && (
