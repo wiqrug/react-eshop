@@ -77,7 +77,7 @@ const CertificateStatus = () => {
       <AddCandidateInCertainCertificate
         open={isModalOpen}
         onClose={handleCloseModal}
-        onSave={handleAdd}
+        onSave={undefined}
       />
     </>
   );
