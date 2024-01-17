@@ -8,7 +8,8 @@ export const signUp = async (data) => {
       },
     });
     if (!response.ok) {
-      throw new Error("error signing up");
+      const errorData = await response.json();
+      throw new Error(errorData.Error || "Error signing up");
     }
   } catch (error) {
     console.error("An error occurred while submitting form data", error);

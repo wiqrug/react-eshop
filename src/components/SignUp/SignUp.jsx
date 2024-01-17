@@ -12,7 +12,7 @@ import {
 
 import { login, signUp } from "../../api";
 import { useNavigate } from "react-router-dom";
-import { usePasswordValidation } from "../../hooks";
+import { useEmailValidation, usePasswordValidation } from "../../hooks";
 import { createSignupPayload } from "../../utils";
 
 import { Password, PersonalInfo } from "./inputGroups";
@@ -31,6 +31,13 @@ export default function SignUp({ handleSetCookie }) {
     setPasswordError,
   } = usePasswordValidation();
 
+  const {
+    email,
+    setEmail,
+    emailError,
+    setEmailError
+  } = useEmailValidation();
+
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -45,17 +52,21 @@ export default function SignUp({ handleSetCookie }) {
       const payload = createSignupPayload(data);
 
       await signUp(payload);
-      const user = await login(data);
-console.log(user)
-      handleSetCookie({
-        token: user.token,
-        candidateNumber: user.user.candidateNumber,
-        firstName: user.user.firstName
-      });
+//       const user = await login(data);
+// console.log(user)
+//       handleSetCookie({
+//         token: user.token,
+//         candidateNumber: user.user.candidateNumber,
+//         firstName: user.user.firstName
+//       });
 
-      navigate("/");
-    } catch (e) {
-      console.log(e);
+      // navigate("/");
+    } catch (error) {
+      if (error.Error === "This email address is already in use") {
+        setEmailError();
+      } else {
+        console.error("An error occurred while submitting form data", error);
+      }
     }
   };
 
@@ -79,7 +90,7 @@ console.log(user)
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <PersonalInfo />
+              <PersonalInfo emailError={emailError}/>
               <Password
                 password={password}
                 setPassword={setPassword}
@@ -105,3 +116,4 @@ console.log(user)
     </ThemeProvider>
   );
 }
+

@@ -1,7 +1,7 @@
 import { Grid, TextField } from "../../mui";
 import React from "react";
 
-const PersonalInfo = () => (
+const PersonalInfo = ({emailError}) => (
   <>
     <Grid item xs={12} sm={6}>
       <TextField name="firstName" label="First Name" required fullWidth />
@@ -22,6 +22,8 @@ const PersonalInfo = () => (
         required
         fullWidth
         type="email"
+        error={!!emailError}
+        helperText={emailError}
       />
     </Grid>
 

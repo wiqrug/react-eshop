@@ -47,7 +47,7 @@ export default function Home({ certificates, cookie }) {
               margin: "auto",
             }}
           >
-            {certificates?.slice(0, 3).map(({ $id: id, title, description, imageSrc }) => (
+            {certificates?.slice(0, 5).map(({ $id: id, title, description, imageSrc }) => (
               <Card
                 key={id}
                 className="card"

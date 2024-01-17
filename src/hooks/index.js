@@ -12,3 +12,4 @@ export { usePasswordValidation } from "./usePasswordValidation";
 export { useQuestions } from "./useQuestions";
 export { useUserCookie } from "./useUserCookie";
 export { useLocalStorage } from "./useLocalStorage";
+export { useEmailValidation } from "./useEmailValidation";
