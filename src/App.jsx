@@ -75,7 +75,7 @@ const App = () => {
           path="/Logout"
           element={<Logout handleRemoveCookie={handleRemoveCookie} />}
         />
-        <Route path="/Exam/:id" element={<Exam />} />
+        <Route path="/Exam/:id" element={<Exam cookie={cookie}/>} />
         <Route
           path="/Admin"
           element={

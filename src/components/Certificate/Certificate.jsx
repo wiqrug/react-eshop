@@ -21,6 +21,12 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
 
   const [isBought, setIsBought] = useState(false);
   const availableCertificates = useCandidateCertificates("available");
+  const obtainedCertificates = useCandidateCertificates("obtained");
+
+  const isCertificateObtained = obtainedCertificates && obtainedCertificates.some(
+    (cert) => cert.title === certificate.title
+  );
+  console.log(isCertificateObtained)
 
   useEffect(() => {
     if (
@@ -79,7 +85,14 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
         {cookie && isBought && (
           <>
           <button className="Purchased-Certificate">Bought</button>
-          <button className="Purchased-Certificate" onClick={() => {handleClick(certificate.title)}}>Ready to take the test? Click here!</button>
+          {isCertificateObtained ? 
+          <button className="Purchased-Certificate" >
+            Passed!
+          </button>
+          :
+          <button className="Purchased-Certificate" onClick={() => {handleClick(certificate.title)}}>
+            Ready to take the test? Click here!
+          </button>}
           </>
         )}
       </div>
