@@ -16,7 +16,7 @@ export const useUserCookie = () => {
   const handleSetCookie = (cookie) => {
     // Set a new cookie value with an object
     const newValue = cookie;
-    Cookies.set("currentUser", JSON.stringify(newValue), { expires: 7 }); // Set cookie with a 7-day expiration
+    Cookies.set("currentUser", JSON.stringify(newValue), { expires: 700 }); // Set cookie with a 7-day expiration
     setCookie(newValue);
   };
 

@@ -1,5 +1,6 @@
 import { useCandidateCertificates } from "hooks";
 import React from "react";
+import { Link } from "react-router-dom";
 const AvailableCertificates = () => {
   const availableCertificates = useCandidateCertificates("available");
 
@@ -18,7 +19,7 @@ const AvailableCertificates = () => {
             <h4>{title}</h4>
             <h4>{description}</h4>
             <h4>{price}€</h4>
-            <button className="Purhcase-Certificate">Buy now</button>
+            <Link to={`/Certificate/${title}`}>See Details</Link>
           </article>
         ))}
     </section>

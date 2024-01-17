@@ -4,6 +4,7 @@ import React from "react";
 const UnobtainedCertificates = () => {
   const unobtainedCertificates = useCandidateCertificates("unobtained");
 
+  console.log(unobtainedCertificates);
   return (
     <section>
       {/* <div className="Certificate-Details-Title">Unobtained Certificates</div> */}
