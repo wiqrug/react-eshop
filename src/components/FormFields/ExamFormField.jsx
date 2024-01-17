@@ -2,7 +2,7 @@ import React from "react";
 import { TextField, Grid } from "@mui/material";
 // import { formatAsISO } from "utils";
 import { convertFromISOToYYYYMMDD } from "utils/convertFromISOToYYYYMMDD";
-import { candidateFieldConfigurations } from "utils/candidateFieldConfigurations";
+import { examFieldConfigurations } from "utils/examFieldConfigurations";
 
 const CandidateFormFields = ({ onChange, ...fields }) => {
   const handleDateChange = (fieldName, dateValue) => {
@@ -15,7 +15,7 @@ const CandidateFormFields = ({ onChange, ...fields }) => {
     };
     onChange(event);
   };
-  const fieldConfigurations = candidateFieldConfigurations();
+  const fieldConfigurations = examFieldConfigurations();
   return (
     <Grid container spacing={2}>
       {fieldConfigurations.map((field) => (
@@ -46,16 +46,3 @@ const CandidateFormFields = ({ onChange, ...fields }) => {
 };
 
 export default CandidateFormFields;
-
-// import React from "react";
-// import FormField from './FormField';
-// import { candidateFieldConfigurations } from "utils/candidateFieldConfigurations";
-
-// const CandidateFormFields = ({ onChange, ...fields }) => {
-    
-//     return (
-//       <FormField onChange={onChange} {...fields} fieldConfigurations={candidateFieldConfigurations} />
-//     );
-//   };
-  
-//   export default CandidateFormFields;
