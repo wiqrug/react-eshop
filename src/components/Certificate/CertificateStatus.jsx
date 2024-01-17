@@ -1,12 +1,16 @@
 import { deleteCandidateOfCertainCertificate } from "api/candidates/deleteCandidateOfCertainCertificate";
 import { getCandidatesOfCertainCertificate } from "api/candidates/getCandidatesOfCertainCertificate";
 import CustomTable from "components/Admin/CustomTable";
+import { useModal } from "hooks";
 ///Certificate/:title/Status
 const { default: React, useState, useEffect } = require("react");
 const { useParams } = require("react-router-dom");
 
 const CertificateStatus = () => {
+  const { isModalOpen, setIsModalOpen, handleCloseModal, handleOpenModal } =
+    useModal();
   const [candidates, setCandidates] = useState([]);
+  const [candidate, setCandidate] = useState();
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
   const { title } = useParams();
@@ -33,7 +37,10 @@ const CertificateStatus = () => {
     fetchCandidates();
   }, [title]);
 
-  //Needs implementation
+  //Add should be a modal.
+  //this modal is a form with candidateNumber
+  //I should take using useParam the name of the Certificate
+  //and do a post method with the title of the certificate and the candidate number
   const handleAdd = () => {};
 
   const handleDelete = async (recordId) => {
@@ -53,15 +60,22 @@ const CertificateStatus = () => {
   //needs implementation
   const handleUpdate = () => {};
 
+  console.log(rows);
   return (
-    <CustomTable
-      columns={columns}
-      rows={rows}
-      handleAdd={undefined}
-      handleDelete={handleDelete}
-      handleUpdate={undefined}
-      identifierField={"recordId"}
-    ></CustomTable>
+    <>
+      <CustomTable
+        columns={columns}
+        rows={rows}
+        handleAdd={undefined}
+        handleDelete={handleDelete}
+        handleUpdate={undefined}
+        identifierField={"recordId"}
+      ></CustomTable>
+      <AddCandidateInCertainCertificate
+        open={isModalOpen}
+        onClose={handleCloseModal}
+      />
+    </>
   );
 };
 
