@@ -69,7 +69,7 @@ const ObtainedCertificates = () => {
   const handleShowPDF = (certificate) => {
     downloadPDF(certificate.title, certificate.description);
   };
-
+  //merge this
   return (
     <section>
       {/* <div className="Certificate-Details-Title">Obtained Certificates</div> */}
