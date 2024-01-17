@@ -1,3 +1,4 @@
+import { addCandidateToACertainCertificate } from "api/candidates/addCandidateToACertainCertificate";
 import { deleteCandidateOfCertainCertificate } from "api/candidates/deleteCandidateOfCertainCertificate";
 import { getCandidatesOfCertainCertificate } from "api/candidates/getCandidatesOfCertainCertificate";
 import CustomTable from "components/Admin/CustomTable";
@@ -63,6 +64,17 @@ const CertificateStatus = () => {
   //needs implementation
   const handleUpdate = () => {};
 
+  const handleSaveNewCandidate = async (candidateNumber) => {
+    try {
+      await addCandidateToACertainCertificate(candidateNumber, title);
+      const updatedCandidates = await getCandidatesOfCertainCertificate(title);
+      setCandidates(updatedCandidates);
+      setRows(updatedCandidates);
+    } catch (error) {
+      console.error("Error adding candidate to that certificate");
+    }
+  };
+
   console.log(rows);
   return (
     <>
@@ -77,7 +89,7 @@ const CertificateStatus = () => {
       <AddCandidateInCertainCertificate
         open={isModalOpen}
         onClose={handleCloseModal}
-        onSave={undefined}
+        onSave={handleSaveNewCandidate}
       />
     </>
   );
