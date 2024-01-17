@@ -1,6 +1,6 @@
 import { useCandidateCertificates } from "hooks";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const AvailableCertificates = () => {
   const availableCertificates = useCandidateCertificates("available");
   const navigate = useNavigate();
@@ -23,11 +23,11 @@ const AvailableCertificates = () => {
                 style={{ maxWidth: '100%', minHeight: '50%', maxHeight: '50%' }}
               />
 
-              <h4>{title.substring(0, 30)}...</h4>
-              <h4>{description.substring(0, 50)}...</h4>
-              <h4>{price}€</h4>
-            </article>
-          </button>
+            <h4>{title}</h4>
+            <h4>{description}</h4>
+            <h4>{price}€</h4>
+            <Link to={`/Certificate/${title}`}>See Details</Link>
+          </article>
         ))}
     </section>
   );

@@ -94,7 +94,7 @@ const App = () => {
         <Route path="/MyCertificates" element={<CandidateCertificates />} />
 
         <Route
-          path="/Certificate/:title/Status"
+          path="/CertificateStatus/:title"
           element={<CertificateStatus />}
         ></Route>
         <Route path="*" element={<NotFound />} />

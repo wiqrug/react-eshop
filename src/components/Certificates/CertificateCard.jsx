@@ -15,9 +15,6 @@ const CertificateCard = ({
   certificates,
   fetchCertificates,
 }) => {
-  // CandidateNumber returns 0 if user is an Admin, and something >0 in every other case
-  const cookie = cookieValue;
-
   const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
 
   const handleDelete = () => {
@@ -36,10 +33,14 @@ const CertificateCard = ({
     handleCloseModal();
   };
 
+  const linkPath = isAdminView
+    ? `/CertificateStatus/${encodeURIComponent(title)}`
+    : `/Certificate/${encodeURIComponent(title)}`;
+
   return (
     <>
       <Link
-        to={isAdminView ? "./" : `/Certificate/${encodeURIComponent(title)}`}
+        to={linkPath}
         style={{ textDecoration: "none" }}
         className="certificate-link"
       >
@@ -51,14 +52,14 @@ const CertificateCard = ({
           />
           <h4 className="certificate-title">{title}</h4>
           <h4>{price} €</h4>
-          {!cookie?.candidateNumber && isAdminView && (
+          {!cookieValue?.candidateNumber && isAdminView && (
             <div className="action-buttons">
               <button
                 className="action-button update"
                 onClick={handleOpenModal}
               >
                 &#9998; Update
-              </button>{" "}
+              </button>
               <button className="action-button delete" onClick={handleDelete}>
                 &#128465; Delete
               </button>

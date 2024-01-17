@@ -16,6 +16,7 @@ const UnobtainedCertificates = () => {
   }
 
 
+  console.log(unobtainedCertificates);
   return (
     <section>
       {/* <div className="Certificate-Details-Title">Unobtained Certificates</div> */}
