@@ -67,9 +67,7 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
         </div>
 
         {cookie == null && !isBought && (
-          <Link to="/Login">
-            <button className="Purchase-Certificate">Buy now</button>
-          </Link>
+           <button className="Purchase-Certificate" onClick={() => navigate("/Login")}>Buy now</button>
         )}
 
         {cookie && !isBought && (
