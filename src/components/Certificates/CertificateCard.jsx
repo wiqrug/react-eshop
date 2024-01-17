@@ -10,7 +10,6 @@ const CertificateCard = ({
   title,
   price,
   id,
-  cookieValue,
   isAdminView,
   certificates,
   fetchCertificates,
