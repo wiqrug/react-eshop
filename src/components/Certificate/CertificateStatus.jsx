@@ -1,21 +1,38 @@
+///Certificate/:title/Status
+
 import { addCandidateToACertainCertificate } from "api/candidates/addCandidateToACertainCertificate";
 import { deleteCandidateOfCertainCertificate } from "api/candidates/deleteCandidateOfCertainCertificate";
 import { getCandidatesOfCertainCertificate } from "api/candidates/getCandidatesOfCertainCertificate";
+import { updateCandidateMark } from "api/candidates/updateCandidateMark";
 import CustomTable from "components/Admin/CustomTable";
 import AddCandidateInCertainCertificate from "components/Modals/AddCandidateInCertainCertificate";
+import { UpdateCandidatesMarkInCertainCertificate } from "components/Modals/UpdateCandidatesMarkInCertainCertificate";
 import { useModal } from "hooks";
-///Certificate/:title/Status
+
 const { default: React, useState, useEffect } = require("react");
 const { useParams } = require("react-router-dom");
-
+//////////////////////////////////////////////////////////////////////////////////////////
 const CertificateStatus = () => {
+  //Setting modals
   const { isModalOpen, setIsModalOpen, handleCloseModal, handleOpenModal } =
     useModal();
+
+  const {
+    isModalOpen: isUpdateModalOpen,
+    setIsModalOpen: setIsUpdateModalOpen,
+    handleCloseModal: handleCloseUpdateModal,
+    handleOpenModal: handleOpenUpdateModal,
+  } = useModal();
+
+  ///////////////////////////////////////////////////////////////////////////////////
+
   const [candidates, setCandidates] = useState([]);
   const [candidate, setCandidate] = useState();
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
   const { title } = useParams();
+
+  const [recordId, setRecordId] = useState(null);
 
   const fetchCandidates = async () => {
     try {
@@ -62,7 +79,27 @@ const CertificateStatus = () => {
   };
 
   //needs implementation
-  const handleUpdate = () => {};
+  const handleUpdate = (recordId) => {
+    setRecordId(recordId);
+    handleOpenUpdateModal(); // Open the update modal
+  };
+
+  const handleSaveUpdatedMark = async (newMark) => {
+    if (recordId) {
+      try {
+        // Call your API to update the candidate's mark
+        await updateCandidateMark(recordId, newMark);
+        // After updating, fetch the updated list of candidates
+        const updatedCandidates = await getCandidatesOfCertainCertificate(
+          title
+        );
+        setCandidates(updatedCandidates);
+        setRows(updatedCandidates);
+      } catch (error) {
+        console.error("Error updating candidate's mark:", error);
+      }
+    }
+  };
 
   const handleSaveNewCandidate = async (candidateNumber) => {
     try {
@@ -83,13 +120,18 @@ const CertificateStatus = () => {
         rows={rows}
         handleAdd={handleAdd}
         handleDelete={handleDelete}
-        handleUpdate={undefined}
+        handleUpdate={handleUpdate}
         identifierField={"recordId"}
       ></CustomTable>
       <AddCandidateInCertainCertificate
         open={isModalOpen}
         onClose={handleCloseModal}
         onSave={handleSaveNewCandidate}
+      />
+      <UpdateCandidatesMarkInCertainCertificate
+        open={isUpdateModalOpen}
+        onClose={handleCloseUpdateModal}
+        onSave={handleSaveUpdatedMark}
       />
     </>
   );
