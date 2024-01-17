@@ -127,10 +127,14 @@ const Exam = ({cookie}) => {
         count++;
       }
     }
-
-    setMark(Math.round((100 * count) / Questions.length)); // Set Mark
+    const calculatedMark = Math.round((100 * count) / Questions.length);
+    setMark(calculatedMark); // Set Mark
     removeItem("Answers"); // Remove Answers from Local Storage
     removeItem("Timer"); // Remove Timer from Local Storage
+    return setJsonPayload((prevPayload) => ({
+      ...prevPayload,
+      mark: calculatedMark,
+    }));
   }, [examEnded]);
 
   // Handles submit button click
@@ -179,7 +183,7 @@ const Exam = ({cookie}) => {
 
     const [jsonPayload, setJsonPayload] = useState({
       title: title,
-      mark: 0, // Initialize with a default value (it will be updated by the useEffect)
+      mark: 40, // Initialize with a default value (it will be updated by the useEffect)
     });
 
 
@@ -192,6 +196,7 @@ const Exam = ({cookie}) => {
         (cand) => cand.candidateNumber === cookie.candidateNumber
       );
       const recordId = enrollemnt[0]?.recordId;
+console.log(jsonPayload)
       const url = `CandidateCertificates/Certificates/${recordId}`;
       fetch(`http://localhost:5021/api/${url}`,
       {

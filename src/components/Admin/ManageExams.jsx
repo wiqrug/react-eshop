@@ -107,7 +107,7 @@ const ManageExams = () => {
         open={isUpdateModalOpen}
         onClose={handleCloseUpdateModal}
         onSave={handleSaveUpdated}
-        Title={updatedCandidatesNumber}
+        Title={examTitle}
       />
     </>
   );
