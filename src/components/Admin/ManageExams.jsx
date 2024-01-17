@@ -2,13 +2,16 @@ import { useExams } from "hooks/useExams";
 import React, { useEffect, useState } from "react";
 import CustomTable from "./CustomTable";
 import { useModal } from "hooks";
+import AddExamModal from "components/Modals/AddExamModal";
+import { addExam, updateExam } from "api";
+import UpdateExamModal from "components/Modals/UpdateExamModal";
 
 const ManageExams = () => {
   const [rows, setRows] = useState([]);           // Initiate Rows as Empty Array
   const [columns, setColumns] = useState([]);     // Initiate Columns as Empty Array
-  const [examId, setExamId] = useState(null);     //
+  const [examTitle, setExamTitle] = useState(null);     //
   const { exams, fetchExams } = useExams();       // Deconstruct exams and fetchExams
-  
+
   const {
     isModalOpen: isAddModalOpen,
     handleCloseModal: handleCloseAddModal,
@@ -20,7 +23,7 @@ const ManageExams = () => {
     handleCloseModal: handleCloseUpdateModal,
     handleOpenModal: handleOpenUpdateModal,
   } = useModal();
-  
+
   useEffect(() => {
     try {
       fetchExams();                                               // Fetch
@@ -37,26 +40,34 @@ const ManageExams = () => {
     handleOpenAddModal();
   };
 
-  const handleUpdate = (id) => {
+  const handleUpdate = (Title) => {
     handleOpenUpdateModal();
-    setExamId(id)
+    setExamTitle(Title)
   };
 
-  // const handleSave = async (newCandidateData) => {
-  //   try {
-  //     // Call API function to add the new candidate
-  //     await createCandidate(newCandidateData);
-  //     console.log("from Manage Candidates");
-  //     console.log(newCandidateData);
+  const handleSave = async (newExamData) => {
+    try {
+      // Call API function to add the new candidate
+      await addExam(newExamData);
+      console.log("from Manage Exams");
+      console.log(newExamData);
 
-  //     // Fetch the updated list of candidates after adding the new one
-  //     await fetchCandidates();
-  //   } catch (error) {
-  //     console.error("Failed to add candidate:", error);
-  //   }
-  // };
+      // Fetch the updated list of candidates after adding the new one
+      await fetchExams();
+    } catch (error) {
+      console.error("Failed to add candidate:", error);
+    }
+  };
 
-
+  const handleSaveUpdated = async (Title, updatedData) => {
+    try {
+      await updateExam(Title, updatedData);
+      await fetchExams();
+    } catch (error) {
+      console.error("failed to update candidate ");
+    }
+    console.log(`Updated DAta ${updatedData}`);
+  };
 
 
   const handleDelete = (id) => {
@@ -70,7 +81,7 @@ const ManageExams = () => {
       // setCandidates(
       //   candidates.filter(
       //     (candidate) => candidate.candidateNumber !== candidateNumber
-        // )
+      // )
       // );
     } catch (error) {
       console.error("Failed to delete candidate:", error);
@@ -78,14 +89,27 @@ const ManageExams = () => {
   };
 
   return (
-    <CustomTable
-      columns={columns}
-      rows={rows}
-      handleAdd={handleAdd}
-      handleDelete={handleDelete}
-      handleUpdate={handleUpdate}
-      identifierField={undefined}
-    />
+    <>
+      <CustomTable
+        columns={columns}
+        rows={rows}
+        handleAdd={handleAdd}
+        handleDelete={handleDelete}
+        handleUpdate={handleUpdate}
+        identifierField={undefined}
+      />
+      <AddExamModal
+        open={isAddModalOpen}
+        onClose={handleCloseAddModal}
+        onSave={handleSave}
+      />
+      <UpdateExamModal
+        open={isUpdateModalOpen}
+        onClose={handleCloseUpdateModal}
+        onSave={handleSaveUpdated}
+        Title={updatedCandidatesNumber}
+      />
+    </>
   );
 };
 

@@ -1,8 +1,15 @@
 import { instance as axios } from "api/axios";
 
-export const updateCandidateMark = async (recordId, newMark) => {
+export const updateCandidateMark = async (
+  updateCandMark,
+  title,
+  newMark,
+  recordId
+) => {
   const url = `CandidateCertificates/Certificates/${recordId}`;
   const jsonPayload = {
+    candidateNumber: updateCandMark,
+    title: title,
     mark: newMark,
   };
 

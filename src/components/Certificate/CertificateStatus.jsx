@@ -87,8 +87,10 @@ const CertificateStatus = () => {
   const handleSaveUpdatedMark = async (newMark) => {
     if (recordId) {
       try {
+        const targetRow = rows.find((row) => row.recordId === recordId);
+        const updateCandMark = targetRow.candidateNumber;
         // Call your API to update the candidate's mark
-        await updateCandidateMark(recordId, newMark);
+        await updateCandidateMark(updateCandMark, title, newMark, recordId);
         // After updating, fetch the updated list of candidates
         const updatedCandidates = await getCandidatesOfCertainCertificate(
           title
@@ -112,7 +114,6 @@ const CertificateStatus = () => {
     }
   };
 
-  console.log(rows);
   return (
     <>
       <CustomTable
