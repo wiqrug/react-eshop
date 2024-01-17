@@ -25,7 +25,7 @@ export const UpdateCandidatesMarkInCertainCertificate = ({
     <Dialog open={open} onClose={onClose}>
       <DialogContent>
         <TextField
-          label="Candidate Number"
+          label="Mark"
           type="number"
           fullWidth
           value={mark}

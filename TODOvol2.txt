@@ -48,3 +48,14 @@ PROBLEMS.
 UNOBTAINED CERTIFICATES DO NOT WORK, NEED TO FIX THAT, AND ALSO ADD BUTTON IN ORDER TO GIVE EXAMS
 
 OBTAINED CERTIFICATES SHOULD PRINT PDF
+
+`````````````````````````````````````````````````````````````````````````````````````````````````````````
+
+
+fix forms in Add new candidate (email and password should be under personal details)
+
+candidateNumber etc should be presented bold and not camelCase
+
+in the obtained certificates, candidate should be able to give exam test and get his grade.
+
+maybe instead of making presentation seperately, add it to homepage?
