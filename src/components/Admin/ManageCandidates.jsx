@@ -45,10 +45,10 @@ const ManageCandidates = () => {
       console.error("Failed to fetch candidates:", error);
     }
   };
-
+  //dont forget to add interval
   useEffect(() => {
     fetchCandidates();
-  }, [candidates]);
+  }, []);
 
   const handleAdd = () => {
     handleOpenAddModal();
@@ -77,12 +77,11 @@ const ManageCandidates = () => {
       // Assuming deleteCandidateByNumber is an API call that deletes the candidate based on candidateNumber
       await deleteCandidateByNumber(candidateNumber);
 
-      // Update the state to remove the candidate from the UI
-      setCandidates(
-        candidates.filter(
-          (candidate) => candidate.candidateNumber !== candidateNumber
-        )
+      const updatedCandidates = candidates.filter(
+        (candidate) => candidate.candidateNumber !== candidateNumber
       );
+      setCandidates(updatedCandidates);
+      setRows(updatedCandidates);
     } catch (error) {
       console.error("Failed to delete candidate:", error);
     }

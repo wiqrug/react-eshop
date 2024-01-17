@@ -1,3 +1,4 @@
+import { deleteCandidateOfCertainCertificate } from "api/candidates/deleteCandidateOfCertainCertificate";
 import { getCandidatesOfCertainCertificate } from "api/candidates/getCandidatesOfCertainCertificate";
 import CustomTable from "components/Admin/CustomTable";
 ///Certificate/:title/Status
@@ -13,9 +14,16 @@ const CertificateStatus = () => {
     try {
       const data = await getCandidatesOfCertainCertificate("pipi");
       setCandidates(data);
-      console.log(data);
 
-      // ... [rest of your logic for setting columns and rows]
+      //creating the columns of the array
+      if (data.length > 0) {
+        const dynamicColumns = Object.keys(data[0]).map((key) => ({
+          label: key,
+        }));
+        setColumns(dynamicColumns);
+        //creating the rows of the array
+        setRows(data);
+      }
     } catch (error) {
       console.error("Failed to fetch candidates:", error);
     }
@@ -23,17 +31,33 @@ const CertificateStatus = () => {
   useEffect(() => {
     fetchCandidates();
   }, []);
+  const handleAdd = () => {};
+
+  const handleDelete = async (recordId) => {
+    try {
+      await deleteCandidateOfCertainCertificate(recordId);
+
+      const updatedCandidates = candidates.filter(
+        (c) => c.recordId !== recordId
+      );
+      setCandidates(updatedCandidates);
+      setRows(updatedCandidates);
+    } catch (error) {
+      console.error("poli diskolo file!");
+    }
+  };
+
+  const handleUpdate = () => {};
 
   return (
-    <>hello faggg</>
-    // <CustomTable
-    //   columns={undefined}
-    //   rows={undefined}
-    //   handleAdd={undefined}
-    //   handleDelete={undefined}
-    //   handleUpdate={undefined}
-    //   identifierField={undefined}
-    // ></CustomTable>
+    <CustomTable
+      columns={columns}
+      rows={rows}
+      handleAdd={undefined}
+      handleDelete={handleDelete}
+      handleUpdate={undefined}
+      identifierField={"recordId"}
+    ></CustomTable>
   );
 };
 
