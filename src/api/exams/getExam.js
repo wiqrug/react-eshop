@@ -1,6 +1,6 @@
 import { instance as axios } from "../axios";
 
-export const getSpecificExam = ({ Title }) =>
+export const getExam = ({ Title }) =>
   axios
     .get(`Exams/${Title}`)
     .then((response) => response.data)
