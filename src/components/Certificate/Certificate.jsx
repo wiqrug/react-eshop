@@ -59,7 +59,7 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
         </div>
         <img
           className="Certificate-Logo"
-          src={certificate.imageSrc}
+          src={certificate.imageSrc ? certificate.imageSrc : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"}
           alt="Certificate"
         />
         <div className="Certificate-Details-Description">

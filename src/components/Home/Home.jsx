@@ -34,14 +34,14 @@ export default function Home({certificates, cookie}) {
           <h1>Best Sellers</h1>
           <div className="cards"style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', margin: 'auto' }}>
             {certificates?.slice(0, 3).map(({ $id: id, title, price, description, imageSrc }) => (
-              <Card key={id} className="card" sx={{ maxWidth: 330, flex: '1 0 30%', margin: '0.5rem 2rem' }}>
+              <Card key={id} className="card" sx={{ maxWidth: 300, flex: '1 0 30%', margin: '0.5rem 2rem' }}>
                 <Link to={`/Certificate/${title}`} style={{textDecoration : "none"}}>
                 
                 <CardMedia
                   component="img"
                   height="194"
                   image={imageSrc? imageSrc : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"}
-                  sx={{objectFit: 'contain' }}
+                  sx={{objectFit: 'fill'  }}
                 />
                 <CardHeader 
                   title={
@@ -73,7 +73,7 @@ export default function Home({certificates, cookie}) {
                   <CardHeader 
                     title={
                       <Typography variant="h6" noWrap sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                        {title}
+                        {title.substring(0, 20)}{title.length>20 && "..."}
                       </Typography>
                     }
                   />
@@ -81,7 +81,7 @@ export default function Home({certificates, cookie}) {
                     component="img"
                     height="194"
                     image={imageSrc? imageSrc : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"}
-                    sx={{objectFit: 'contain' }}
+                    sx={{objectFit: 'fill' }}
                   />
                   <CardContent>
                   <Typography variant="body2" color="text.secondary" noWrap sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>

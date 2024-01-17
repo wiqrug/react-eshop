@@ -50,7 +50,7 @@ const CertificateCard = ({
             alt="Certificate"
             style={{ maxWidth: '100%', minHeight: '50%', maxHeight: '50%' }}
           />
-          <h4 className="certificate-title">{title}</h4>
+          <h4 className="certificate-title">{title.substring(0, 30)}{title.length>30 && "..."}</h4>
           <h4>{price} €</h4>
           {!cookieValue?.candidateNumber && isAdminView && (
             <div className="action-buttons">
