@@ -52,10 +52,17 @@ OBTAINED CERTIFICATES SHOULD PRINT PDF
 `````````````````````````````````````````````````````````````````````````````````````````````````````````
 
 
-fix forms in Add new candidate (email and password should be under personal details)
+1) fix forms in Add new candidate (email and password should be under personal details)
 
-candidateNumber etc should be presented bold and not camelCase
+2) candidateNumber etc should be presented bold and not camelCase
 
-in the obtained certificates, candidate should be able to give exam test and get his grade.
+3) in the obtained certificates, candidate should be able to give exam test and get his grade.
 
-maybe instead of making presentation seperately, add it to homepage?
+4) validation at login, and also when creating nefw candidate through Admin
+
+5) validation to check if email exists (when signup)
+
+6) pdf to get the certificate 
+
+7) header for the set mark when candidate gives exams 
+
