@@ -90,12 +90,12 @@ const ManageCandidates = () => {
   //needs implementation
   const handleSaveUpdated = async (updatedData) => {
     try {
+      console.log(updatedData.candidateNumber);
       await updateCandidateByNumber(updatedCandidatesNumber, updatedData);
       await getCandidates();
     } catch (error) {
       console.error("failed to update candidate ");
     }
-    console.log(`Updated DAta ${updatedData}`);
   };
 
   return (

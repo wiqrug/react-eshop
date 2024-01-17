@@ -29,6 +29,8 @@ const CustomTable = ({
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+  // console.log(rows);
+  console.log(columns);
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
@@ -63,6 +65,10 @@ const CustomTable = ({
                   key={column.label}
                   align="center"
                   style={{ minWidth: MINWIDTH, width: WIDTH }}
+                  sx={{
+                    fontWeight: "bold", // Make font bolder
+                    fontSize: "1rem", // Increase font size
+                  }}
                 >
                   {column.label}
                 </TableCell>

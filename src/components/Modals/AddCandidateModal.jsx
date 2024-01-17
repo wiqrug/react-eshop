@@ -8,6 +8,8 @@ const AddCandidateModal = ({ open, onClose, onSave }) => {
     firstName: "",
     middleName: "",
     lastName: "",
+    email: "",
+    password: "",
     gender: "",
     nativeLanguage: "",
     birthDate: "",
@@ -22,9 +24,6 @@ const AddCandidateModal = ({ open, onClose, onSave }) => {
     postalCode: "",
     landlineNumber: "",
     mobileNumber: "",
-    email: "",
-    password: "",
-    // Add all other fields here
   });
 
   const handleSave = () => {
