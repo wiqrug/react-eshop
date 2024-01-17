@@ -42,7 +42,9 @@ const CertificateStatus = () => {
   //this modal is a form with candidateNumber
   //I should take using useParam the name of the Certificate
   //and do a post method with the title of the certificate and the candidate number
-  const handleAdd = () => {};
+  const handleAdd = () => {
+    handleOpenModal();
+  };
 
   const handleDelete = async (recordId) => {
     try {
@@ -67,11 +69,16 @@ const CertificateStatus = () => {
       <CustomTable
         columns={columns}
         rows={rows}
-        handleAdd={undefined}
+        handleAdd={handleAdd}
         handleDelete={handleDelete}
         handleUpdate={undefined}
         identifierField={"recordId"}
       ></CustomTable>
+      <AddCandidateInCertainCertificate
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        onSave={handleAdd}
+      />
     </>
   );
 };
