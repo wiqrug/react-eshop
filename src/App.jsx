@@ -26,7 +26,10 @@ const App = () => {
     <>
       <NavBar cookieValue={cookie} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={<Home certificates={certificates} cookie={cookie} />}
+        />
         <Route
           path="/Certificates"
           element={
