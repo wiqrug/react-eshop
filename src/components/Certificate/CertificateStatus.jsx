@@ -1,6 +1,7 @@
 import { deleteCandidateOfCertainCertificate } from "api/candidates/deleteCandidateOfCertainCertificate";
 import { getCandidatesOfCertainCertificate } from "api/candidates/getCandidatesOfCertainCertificate";
 import CustomTable from "components/Admin/CustomTable";
+import AddCandidateInCertainCertificate from "components/Modals/AddCandidateInCertainCertificate";
 import { useModal } from "hooks";
 ///Certificate/:title/Status
 const { default: React, useState, useEffect } = require("react");
@@ -71,10 +72,6 @@ const CertificateStatus = () => {
         handleUpdate={undefined}
         identifierField={"recordId"}
       ></CustomTable>
-      <AddCandidateInCertainCertificate
-        open={isModalOpen}
-        onClose={handleCloseModal}
-      />
     </>
   );
 };
