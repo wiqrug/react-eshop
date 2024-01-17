@@ -120,23 +120,28 @@ const Exam = ({cookie}) => {
 
   // Evaluate Mark
   useEffect(() => {
+    if (!examEnded) return;
+  
     let count = 0;
     for (let i = 0; i < Questions.length; i++) {
       if (Questions[i]["correctAnswer"] === answers[i]) {
-        // For each question check if the answeer is correct
         count++;
       }
     }
     const calculatedMark = Math.round((100 * count) / Questions.length);
-    setMark(calculatedMark); // Set Mark
-    removeItem("Answers"); // Remove Answers from Local Storage
-    removeItem("Timer"); // Remove Timer from Local Storage
-    return setJsonPayload((prevPayload) => ({
+    setMark(calculatedMark);
+  
+    // Remove Answers and Timer from Local Storage
+    removeItem("Answers");
+    removeItem("Timer");
+  
+    // Update the JSON payload with the calculated mark
+    setJsonPayload((prevPayload) => ({
       ...prevPayload,
       mark: calculatedMark,
     }));
-  }, [examEnded]);
-
+  }, [examEnded, Questions, answers]);
+  
   // Handles submit button click
   const handleNext = () => {
     if (answer !== "") {
@@ -187,19 +192,18 @@ const Exam = ({cookie}) => {
     });
 
 
-  const handleSubmit = () => {
-    handleNext(); // Handle Next Question
-    setStart(false); // Change Star to false
-    setExamEnded(true); // Change ExamEnded to true
+    // This useEffect will run when 'mark' is updated after the exam ends
+    useEffect(() => {
+      if (mark === null) return;
 
+      // Put the fetch request logic here
       const enrollemnt = enrollmentData?.filter(
         (cand) => cand.candidateNumber === cookie.candidateNumber
       );
       const recordId = enrollemnt[0]?.recordId;
-console.log(jsonPayload)
+
       const url = `CandidateCertificates/Certificates/${recordId}`;
-      fetch(`http://localhost:5021/api/${url}`,
-      {
+      fetch(`http://localhost:5021/api/${url}`, {
         method: 'PUT',
         body: JSON.stringify(jsonPayload),
         headers: {
@@ -214,8 +218,14 @@ console.log(jsonPayload)
       .catch(error => {
         console.error('Error:', error);
       });
-    // Must set mark to candidateExam throught post request
-  };
+
+    }, [mark, jsonPayload, enrollmentData]);
+      const handleSubmit = () => {
+        handleNext(); // Handle Next Question
+        setStart(false); // Change Star to false
+        setExamEnded(true); // Change ExamEnded to true
+        // Must set mark to candidateExam throught post request
+      };
 
 
 
