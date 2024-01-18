@@ -71,9 +71,10 @@ const ObtainedCertificates = () => {
             <img
               src={imageSrc? imageSrc : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"}
               alt="img-logo"
+              style = {{maxWidth: "100%", maxHeight: "50%", minHeight: "50%"}}
             />
-            <h4>{title}</h4>
-            <h4>{description}</h4>
+            <h4>{title.length < 25 ? title : title.substring(0,25) + "..."}</h4>
+            <h4>{description.length < 25 ? description : description.substring(0,25) + "..."}</h4>
             <button onClick={() => handleShowPDF({ title, description })}>
               Download PDF
             </button>

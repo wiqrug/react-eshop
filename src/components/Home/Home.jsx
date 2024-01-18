@@ -118,7 +118,7 @@ export default function Home({ certificates, cookie }) {
           }}
         >
           {certificates
-            ?.slice(3, 6)
+            ?.slice(3, 7)
             .map(({ $id: id, title, price, description, imageSrc }) => (
               <Card
                 key={id}
