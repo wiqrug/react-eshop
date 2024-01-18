@@ -18,7 +18,7 @@ const CertificatesList = ({
           key={id}
           id={id}
           // @ts-ignore
-          src={
+          imageSrc={
             imageSrc
               ? imageSrc
               : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNLVJaLYOkdIcEaY4pBVgjc5lmui9cfckSQg&usqp=CAU"
