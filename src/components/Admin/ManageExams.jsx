@@ -5,7 +5,6 @@ import { useModal } from "hooks";
 import AddExamModal from "components/Modals/AddExamModal";
 import { addExam, updateExam } from "api";
 import UpdateExamModal from "components/Modals/UpdateExamModal";
-import { Title } from "@mui/icons-material";
 
 const ManageExams = () => {
   const [rows, setRows] = useState([]);           // Initiate Rows as Empty Array
@@ -108,7 +107,7 @@ const ManageExams = () => {
         open={isUpdateModalOpen}
         onClose={handleCloseUpdateModal}
         onSave={handleSaveUpdated}
-        Title={Title}
+        Title={examTitle}
       />
     </>
   );
