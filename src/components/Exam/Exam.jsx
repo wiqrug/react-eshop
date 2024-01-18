@@ -120,19 +120,28 @@ const Exam = ({cookie}) => {
 
   // Evaluate Mark
   useEffect(() => {
+    if (!examEnded) return;
+  
     let count = 0;
     for (let i = 0; i < Questions.length; i++) {
       if (Questions[i]["correctAnswer"] === answers[i]) {
-        // For each question check if the answeer is correct
         count++;
       }
     }
-
-    setMark(Math.round((100 * count) / Questions.length)); // Set Mark
-    removeItem("Answers"); // Remove Answers from Local Storage
-    removeItem("Timer"); // Remove Timer from Local Storage
-  }, [examEnded]);
-
+    const calculatedMark = Math.round((100 * count) / Questions.length);
+    setMark(calculatedMark);
+  
+    // Remove Answers and Timer from Local Storage
+    removeItem("Answers");
+    removeItem("Timer");
+  
+    // Update the JSON payload with the calculated mark
+    setJsonPayload((prevPayload) => ({
+      ...prevPayload,
+      mark: calculatedMark,
+    }));
+  }, [examEnded, Questions, answers]);
+  
   // Handles submit button click
   const handleNext = () => {
     if (answer !== "") {
@@ -179,22 +188,23 @@ const Exam = ({cookie}) => {
 
     const [jsonPayload, setJsonPayload] = useState({
       title: title,
-      mark: 0, // Initialize with a default value (it will be updated by the useEffect)
+      mark: 40, // Initialize with a default value (it will be updated by the useEffect)
     });
 
 
-  const handleSubmit = () => {
-    handleNext(); // Handle Next Question
-    setStart(false); // Change Star to false
-    setExamEnded(true); // Change ExamEnded to true
+    // This useEffect will run when 'mark' is updated after the exam ends
+    useEffect(() => {
+      if (mark === null) return;
 
-      const enrollemnt = enrollmentData?.filter(
+      // Put the fetch request logic here
+      const enrollment = enrollmentData?.filter(
         (cand) => cand.candidateNumber === cookie.candidateNumber
       );
-      const recordId = enrollemnt[0]?.recordId;
+      console.log(cookie.candidateNumber)
+      const recordId = enrollment[0]?.recordId;
+
       const url = `CandidateCertificates/Certificates/${recordId}`;
-      fetch(`http://localhost:5021/api/${url}`,
-      {
+      fetch(`http://localhost:5021/api/${url}`, {
         method: 'PUT',
         body: JSON.stringify(jsonPayload),
         headers: {
@@ -209,8 +219,14 @@ const Exam = ({cookie}) => {
       .catch(error => {
         console.error('Error:', error);
       });
-    // Must set mark to candidateExam throught post request
-  };
+
+    }, [mark, jsonPayload, enrollmentData]);
+      const handleSubmit = () => {
+        handleNext(); // Handle Next Question
+        setStart(false); // Change Star to false
+        setExamEnded(true); // Change ExamEnded to true
+        // Must set mark to candidateExam throught post request
+      };
 
 
 
