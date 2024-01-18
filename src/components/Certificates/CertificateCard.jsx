@@ -6,10 +6,11 @@ import { updateCertificateByTitle } from "api/certificates/updateCertificateByTi
 import { useModal } from "hooks/useModal";
 
 const CertificateCard = ({
-  src,
+  imageSrc,
   title,
   price,
   id,
+  cookieValue,
   isAdminView,
   certificates,
   fetchCertificates,
@@ -43,9 +44,9 @@ const CertificateCard = ({
           <>
             <img
               src={
-                src
-                  ? src
-                  : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg%7D"
+                imageSrc
+                  ? imageSrc
+                  : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNLVJaLYOkdIcEaY4pBVgjc5lmui9cfckSQg&usqp=CAU"
               }
               alt="Certificate"
             />
@@ -55,9 +56,9 @@ const CertificateCard = ({
           <Link to={detailsPath}>
             <img
               src={
-                src
-                  ? src
-                  : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg%7D"
+                imageSrc
+                  ? imageSrc
+                  : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNLVJaLYOkdIcEaY4pBVgjc5lmui9cfckSQg&usqp=CAU"
               }
               alt="Certificate"
             />

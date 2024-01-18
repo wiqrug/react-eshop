@@ -17,7 +17,12 @@ const CertificatesList = ({
         <CertificateCard
           key={id}
           id={id}
-          imageSrc={imageSrc!=null? imageSrc : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"}
+          // @ts-ignore
+          src={
+            imageSrc
+              ? imageSrc
+              : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNLVJaLYOkdIcEaY4pBVgjc5lmui9cfckSQg&usqp=CAU"
+          }
           title={title}
           price={price}
           cookieValue={cookieValue}

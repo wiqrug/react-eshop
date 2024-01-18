@@ -64,3 +64,8 @@ OBTAINED CERTIFICATES SHOULD PRINT PDF
 
 certificate is still unObtained
 
+
+
+
+
+get exam grade 
