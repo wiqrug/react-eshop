@@ -8,7 +8,7 @@ import {
 import { useCandidateInfo } from "hooks/useCandidateInfo";
 import { useCertificateInfo } from "hooks/useCertificateInfo";
 import { buyCertificate } from "api/certificates/buyCertificate";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CertificateDetails = ({ certificates, cookieValue }) => {
   const certificate = useCertificate(certificates);
@@ -23,10 +23,10 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
   const availableCertificates = useCandidateCertificates("available");
   const obtainedCertificates = useCandidateCertificates("obtained");
 
-  const isCertificateObtained = obtainedCertificates && obtainedCertificates.some(
-    (cert) => cert.title === certificate.title
-  );
-  console.log(isCertificateObtained)
+  const isCertificateObtained =
+    obtainedCertificates &&
+    obtainedCertificates.some((cert) => cert.title === certificate.title);
+  console.log(isCertificateObtained);
 
   useEffect(() => {
     if (
@@ -51,7 +51,7 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
 
   const handleClick = (title) => {
     navigate(`/Exam/${title}`);
-  }
+  };
 
   const { cookie } = useUserCookie();
   //Custom hook should return cookie, isBought, handleBuy
@@ -65,7 +65,11 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
         </div>
         <img
           className="Certificate-Logo"
-          src={certificate.imageSrc ? certificate.imageSrc : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"}
+          src={
+            certificate.imageSrc
+              ? certificate.imageSrc
+              : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"
+          }
           alt="Certificate"
         />
         <div className="Certificate-Details-Description">
@@ -73,7 +77,12 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
         </div>
 
         {cookie == null && !isBought && (
-           <button className="Purchase-Certificate" onClick={() => navigate("/Login")}>Buy now</button>
+          <button
+            className="Purchase-Certificate"
+            onClick={() => navigate("/Login")}
+          >
+            Buy now
+          </button>
         )}
 
         {cookie && !isBought && (
@@ -84,15 +93,19 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
 
         {cookie && isBought && (
           <>
-          <button className="Purchased-Certificate">Bought</button>
-          {isCertificateObtained ? 
-          <button className="Purchased-Certificate" >
-            Passed!
-          </button>
-          :
-          <button className="Purchased-Certificate" onClick={() => {handleClick(certificate.title)}}>
-            Ready to take the test? Click here!
-          </button>}
+            <button className="Purchased-Certificate">Bought</button>
+            {isCertificateObtained ? (
+              <button className="Purchased-Certificate">Passed!</button>
+            ) : (
+              <button
+                className="Purchased-Certificate"
+                onClick={() => {
+                  handleClick(certificate.title);
+                }}
+              >
+                Ready to take the test? Click here!
+              </button>
+            )}
           </>
         )}
       </div>

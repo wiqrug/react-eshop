@@ -7,9 +7,11 @@ import { useModal } from "hooks/useModal";
 
 const CertificateCard = ({
   imageSrc,
+  imageSrc,
   title,
   price,
   id,
+  cookieValue,
   isAdminView,
   certificates,
   fetchCertificates,

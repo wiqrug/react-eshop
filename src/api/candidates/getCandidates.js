@@ -6,7 +6,27 @@ export const getCandidates = async () => {
     const response = await axios.get(url);
 
     const candidatesWithoutId = response.data.$values.map(
-      ({ $id, ...rest }) => rest
+      ({
+        $id,
+        middleName,
+        gender,
+        nativeLanguage,
+        photoIDType,
+        photoIDNumber,
+        photoIDIssueDate,
+        addressLine2,
+        stateOrTerritoryOrProvince,
+        townOrCity,
+        landlineNumber,
+        createdAt,
+        userId,
+        role,
+        birthDate,
+        countryOfResidence,
+        postalCode,
+        address,
+        ...rest
+      }) => rest
     );
     return candidatesWithoutId;
   } catch (error) {

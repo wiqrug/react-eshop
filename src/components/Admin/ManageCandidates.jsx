@@ -84,11 +84,12 @@ const ManageCandidates = () => {
 
   const handleSaveUpdated = async (updatedData) => {
     try {
-      console.log(updatedData.candidateNumber);
       await updateCandidateByNumber(updatedCandidatesNumber, updatedData);
-      await getCandidates();
+      const updatedCandidates = await getCandidates();
+      setCandidates(updatedCandidates);
+      setRows(updatedCandidates);
     } catch (error) {
-      console.error("failed to update candidate ");
+      console.error("failed to update candidate:", error);
     }
   };
 
