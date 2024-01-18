@@ -1,10 +1,9 @@
 import { instance as axios } from "api/axios";
 
-export const deleteExam = async(title) => {
+export const deleteQuestion = async(id) => {
 
   try {
-    const url = `Exams/${title}`;
-    const response = await axios.delete(url);
+    const response = await axios.delete(`Questions/${id}`);
 
     if (response.status === 200) {
       console.log("Certificate deleted successfully");

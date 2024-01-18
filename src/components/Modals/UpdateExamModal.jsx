@@ -1,8 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
-import { getExam } from "api";
 import ExamFormField from "components/FormFields/ExamFormField";
 import useFormFields from "hooks/useFormFields";
-import React, { useEffect } from "react";
+import React from "react";
 
 const UpdateExamModal = ({
   open,
@@ -10,31 +9,20 @@ const UpdateExamModal = ({
   onSave,
   Title,
 }) => {
-  const { fields, setFields, handleFieldChange } = useFormFields({
+  const { fields, handleFieldChange } = useFormFields({
     title: "",
     description:"",
     time: "",
+    certificateTitle: "",
   });
-
-  useEffect(() => {
-    if (Title) {
-      const fetchExamData = async () => {
-        try {
-          const examData = await getExam(Title);
-          setFields(examData); // Sets all the fields with the fetched data
-        } catch (error) {
-          console.error("Error fetching Exam data: ", error);
-        }
-      };
-
-      fetchExamData();
-    }
-  }, [Title, setFields]);
-
+  
   const handleSaveClick = () => {
-    onSave(fields); // Passesthe updated fields to the onSave function
+    console.log("From Update Exam Modal fields:", fields);
+    console.log("From Update Exam Modal Title:", Title);
+    onSave(Title, fields); // Passesthe updated fields to the onSave function
     onClose(); // Closes the modal
   };
+
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogContent>

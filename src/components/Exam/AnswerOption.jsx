@@ -14,16 +14,16 @@ const AnswerOption = ({ index, question }) => {
   let answerOption;
   switch (index) {
     case 0:
-      answerOption = "A";
+      answerOption = "a";
       break;
     case 1:
-      answerOption = "B";
+      answerOption = "b";
       break;
     case 2:
-      answerOption = "C";
+      answerOption = "c";
       break;
     case 3:
-      answerOption = "D";
+      answerOption = "d";
       break;
   }
 

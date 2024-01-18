@@ -8,10 +8,10 @@ export const useExams = () => {
   const [exams, setExams] = useState(null);
   const fetchExams = () => {
     getExams().then((data) => {
-      const examsWithoutId = data.$values.map(
+      const examWithoutId = data.$values.map(
         ({ $id, questions, certificate, ...rest }) => rest
       ); // Exclude $id, questions, certificate from data
-      setExams(examsWithoutId);
+      setExams(examWithoutId);
     });
   };
 

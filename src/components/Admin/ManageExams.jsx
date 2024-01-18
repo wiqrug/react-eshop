@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import CustomTable from "./CustomTable";
 import { useModal } from "hooks";
 import AddExamModal from "components/Modals/AddExamModal";
-import { addExam, updateExam } from "api";
+import { addExam, deleteExam, updateExam } from "api";
 import UpdateExamModal from "components/Modals/UpdateExamModal";
 
 const ManageExams = () => {
@@ -26,11 +26,10 @@ const ManageExams = () => {
 
   useEffect(() => {
     try {
-      fetchExams();                                               // Fetch
-      const dynamicColumns =                                      // Make Keys from Dictionary Exams as Columns
-        Object.keys(exams[0]).map((key) => ({ label: key }));
-      setColumns(dynamicColumns);                                 // Set Columns
-      setRows(exams);                                             // Set Rows
+      fetchExams();
+      const dynamicColumns = Object.keys(exams[0]).map((key) => ({ label: key })); // Make Keys from Dictionary Exams as Columns
+      setColumns(dynamicColumns);
+      setRows(exams);
     } catch (error) {
       console.error("Failed to fetch exams:", error);
     }
@@ -38,11 +37,6 @@ const ManageExams = () => {
 
   const handleAdd = () => {
     handleOpenAddModal();
-  };
-
-  const handleUpdate = (Title) => {
-    handleOpenUpdateModal();
-    setExamTitle(Title)
   };
 
   const handleSave = async (newExamData) => {
@@ -59,30 +53,32 @@ const ManageExams = () => {
     }
   };
 
-  const handleSaveUpdated = async (Title, updatedData) => {
+  const handleUpdate = (Title) => {
+    console.log("Title handle update:" + Title)
+    setExamTitle(Title);
+    handleOpenUpdateModal();
+  };
+
+  const handleSaveUpdated = async (Title, updatedExamData) => {
+    console.log(`Updated DAta ${updatedExamData}`);
+
     try {
-      await updateExam(Title, updatedData);
-      await fetchExams();
+      await updateExam(Title, updatedExamData);
+      fetchExams();
+      console.log(`Updated DAta ${updatedExamData}`);
+
     } catch (error) {
+      console.log(`ERROR: `, error.message);
+
       console.error("failed to update candidate ");
     }
-    console.log(`Updated DAta ${updatedData}`);
   };
 
 
-  const handleDelete = (id) => {
-    // Not implemented yet
+  const handleDelete = async (Title) => {
     try {
-      // Assuming deleteCandidateByNumber is an API call that deletes the candidate based on candidateNumber
-      // await deleteCandidateByNumber(candidateNumber);
-
-      // Update the state to remove the candidate from the UI
-
-      // setCandidates(
-      //   candidates.filter(
-      //     (candidate) => candidate.candidateNumber !== candidateNumber
-      // )
-      // );
+      await deleteExam(Title);
+      fetchExams();
     } catch (error) {
       console.error("Failed to delete candidate:", error);
     }
@@ -96,7 +92,7 @@ const ManageExams = () => {
         handleAdd={handleAdd}
         handleDelete={handleDelete}
         handleUpdate={handleUpdate}
-        identifierField={undefined}
+        identifierField="title"
       />
       <AddExamModal
         open={isAddModalOpen}
@@ -107,7 +103,7 @@ const ManageExams = () => {
         open={isUpdateModalOpen}
         onClose={handleCloseUpdateModal}
         onSave={handleSaveUpdated}
-        Title={updatedCandidatesNumber}
+        Title={examTitle}
       />
     </>
   );

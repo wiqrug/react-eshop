@@ -5,7 +5,7 @@ import useFormFields from "hooks/useFormFields";
 
 const AddExamModal = ({ open, onClose, onSave }) => {
   const { fields, handleFieldChange } = useFormFields({
-    Title: "",
+    certificateTitle: "",
     title: "",
     description: "",
     time: ""
