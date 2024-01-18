@@ -66,10 +66,14 @@ const ObtainedCertificates = () => {
   return (
     <>
       <section>
-        {obtainedCertificates?.map(({ title, description }) => (
+        {obtainedCertificates?.map(({ title, description, imageSrc }) => (
           <article key={title}>
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNLVJaLYOkdIcEaY4pBVgjc5lmui9cfckSQg&usqp=CAU"
+              src={
+                imageSrc
+                  ? imageSrc
+                  : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"
+              }
               alt="img-logo"
             />
             <h4>{title}</h4>
