@@ -42,27 +42,31 @@ const CertificateCard = ({
       <article>
         {isAdminView ? (
           <>
-            <img
-              src={
-                imageSrc
-                  ? imageSrc
-                  : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNLVJaLYOkdIcEaY4pBVgjc5lmui9cfckSQg&usqp=CAU"
-              }
-              alt="Certificate"
-            />
-            <h4 className="certificate-title">{title}</h4>
+            <div className="image-title-container">
+              <img
+                src={
+                  imageSrc
+                    ? imageSrc
+                    : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNLVJaLYOkdIcEaY4pBVgjc5lmui9cfckSQg&usqp=CAU"
+                }
+                alt="Certificate"
+              />
+              <h4 className="certificate-title">{title}</h4>
+            </div>
           </>
         ) : (
           <Link to={detailsPath}>
-            <img
-              src={
-                imageSrc
-                  ? imageSrc
-                  : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNLVJaLYOkdIcEaY4pBVgjc5lmui9cfckSQg&usqp=CAU"
-              }
-              alt="Certificate"
-            />
-            <h4 className="certificate-title">{title}</h4>
+            <div className="image-title-container">
+              <img
+                src={
+                  imageSrc
+                    ? imageSrc
+                    : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNLVJaLYOkdIcEaY4pBVgjc5lmui9cfckSQg&usqp=CAU"
+                }
+                alt="Certificate"
+              />
+              <h4 className="certificate-title">{title}</h4>
+            </div>
           </Link>
         )}
         <h4>{price} €</h4>

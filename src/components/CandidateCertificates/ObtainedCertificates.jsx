@@ -26,9 +26,9 @@ const ObtainedCertificates = () => {
     <br/>
     <br/>
     <br/>
-    <h1 style="font-size: 20vh;">${title}</h1>
-    <h2 style="font-size: 20vh;">${description}</h2>
-    <p style="font-size: 20vh;">Congratulations, you just completed this course.</p>
+    <h1 style="font-size: 14vh;">${title}</h1>
+    <h2 style="font-size: 14vh;">${description}</h2>
+    <p style="font-size: 14vh;">Congratulations, you just completed this course.</p>
   `;
     document.body.appendChild(tempDiv);
 
@@ -74,6 +74,7 @@ const ObtainedCertificates = () => {
                   ? imageSrc
                   : "https://thewisdomofwalt.com/wp-content/uploads/2019/10/Learn-something-new.jpg"
               }
+              style={{ maxWidth: "100%", maxHeight: "50%", minHeight: "50%" }}
               alt="img-logo"
             />
             <h4>{title}</h4>

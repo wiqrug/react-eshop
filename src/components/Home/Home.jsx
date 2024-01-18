@@ -48,7 +48,7 @@ export default function Home({ certificates, cookie }) {
             }}
           >
             {certificates
-              ?.slice(0, 3)
+              ?.slice(1, 4)
               .map(({ $id: id, title, price, description, imageSrc }) => (
                 <Card
                   key={id}
@@ -118,7 +118,7 @@ export default function Home({ certificates, cookie }) {
           }}
         >
           {certificates
-            ?.slice(3, 6)
+            ?.slice(4, 8)
             .map(({ $id: id, title, price, description, imageSrc }) => (
               <Card
                 key={id}

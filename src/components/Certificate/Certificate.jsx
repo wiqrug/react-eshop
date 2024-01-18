@@ -73,7 +73,7 @@ const CertificateDetails = ({ certificates, cookieValue }) => {
           alt="Certificate"
         />
         <div className="Certificate-Details-Description">
-          <h1>{certificate.description}</h1>
+          <h2>{certificate.description}</h2>
         </div>
 
         {cookie == null && !isBought && (

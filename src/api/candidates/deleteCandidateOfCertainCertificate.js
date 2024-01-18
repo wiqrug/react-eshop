@@ -11,6 +11,6 @@ export const deleteCandidateOfCertainCertificate = async (recordId) => {
       console.error("Failed to delete Record with non-200 response");
     }
   } catch (error) {
-    console.error("Error in pipaki request:", error);
+    console.error("Error request:", error);
   }
 };
