@@ -26,11 +26,12 @@ const ObtainedCertificates = () => {
     <br/>
     <br/>
     <br/>
-    <div style="background-color: ivory; border: 10px double darkslategray; padding: 50px; text-align: center; width: 100vw; height: 100vh; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: 'Times New Roman', serif;">
-    <h1 style="font-size: 4vw; color: darkslategray; margin-bottom: 0.5em;">${title}</h1>
-    <hr style="border: none; height: 4px; background-color: darkslategray; width: 50%; margin: 0 auto 20px;"/>
-    <h2 style="font-size: 3vw; color: darkslategray; margin-top: 0; margin-bottom: 1em;">${description}</h2>
-    <p style="font-size: 2vw; font-weight: bold; margin-top: 0;">Congratulations, you have successfully completed this course.</p>
+    <div style="background-color: ivory; border: 5px solid goldenrod; padding: 50px; text-align: center; width: 100vw; height: 100vh; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <h1 style="font-size: 4vw;">${title}</h1>
+    <hr style="border: none; height: 2px; background-color: black; margin: 10px 30%;"/>
+    <h2 style="font-size: 3vw;">${description}</h2>
+    <p style="font-size: 1.8vw;">Congratulations, you just completed this course.</p>
+ 
 </div>
 
   `;

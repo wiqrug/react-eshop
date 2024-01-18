@@ -28,11 +28,10 @@ const App = () => {
   const theme = createTheme({
     palette: {
       background: {
-        paper: '#ffffff'
+        paper: "#ffffff",
       },
     },
-  }
-);
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -69,7 +68,11 @@ const App = () => {
         <Route
           path="/MyProfile"
           element={
-            cookie ? <MyProfile cookieValue={cookie}/> : <Login handleSetCookie={handleSetCookie} />
+            cookie ? (
+              <MyProfile cookieValue={cookie} />
+            ) : (
+              <Login handleSetCookie={handleSetCookie} />
+            )
           }
         />
 
@@ -77,7 +80,7 @@ const App = () => {
           path="/Logout"
           element={<Logout handleRemoveCookie={handleRemoveCookie} />}
         />
-        <Route path="/Exam/:id" element={<Exam cookie={cookie}/>} />
+        <Route path="/Exam/:Title" element={<Exam cookie={cookie} />} />
         <Route
           path="/Admin"
           element={
