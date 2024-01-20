@@ -1,9 +1,10 @@
 import React from "react";
 import { TextField, Grid } from "@mui/material";
+// import { formatAsISO } from "utils";
 import { convertFromISOToYYYYMMDD } from "utils/convertFromISOToYYYYMMDD";
-import { examFieldConfigurations } from "utils/examFieldConfigurations";
+import { questionFieldConfigurations } from "utils/questionFieldConfigurations";
 
-const ExamFormField = ({ onChange, ...fields }) => {
+const QuestionFormField = ({ onChange, ...fields }) => {
   const handleDateChange = (fieldName, dateValue) => {
     // Convert to ISO format and trigger onChange
     const event = {
@@ -14,7 +15,7 @@ const ExamFormField = ({ onChange, ...fields }) => {
     };
     onChange(event);
   };
-  const fieldConfigurations = examFieldConfigurations();
+  const fieldConfigurations = questionFieldConfigurations();
   return (
     <Grid container spacing={2}>
       {fieldConfigurations.map((field) => (
@@ -44,17 +45,17 @@ const ExamFormField = ({ onChange, ...fields }) => {
   );
 };
 
-export default ExamFormField;
+export default QuestionFormField;
 
 // import React from "react";
 // import FormField from './FormField';
-// import { examFieldConfigurations } from "utils/examFieldConfigurations";
+// import { questionFieldConfigurations } from "utils/questionFieldConfigurations";
 
-// const ExamFormFields = ({ onChange, ...fields }) => {
+// const QuestionFormField = ({ onChange, ...fields }) => {
 
 //     return (
 //       <FormField onChange={onChange} {...fields} fieldConfigurations={questionFieldConfigurations} />
 //     );
 //   };
 
-//   export default ExamFormField;
+//   export default QuestionFormField;

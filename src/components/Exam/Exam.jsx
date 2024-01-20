@@ -9,75 +9,38 @@ import { useExam, useLocalStorage } from "hooks";
 
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
-import Stack from "@mui/material/Stack";
+import { useParams } from "react-router-dom";
 import { getCandidatesOfCertainCertificate } from "api/candidates/getCandidatesOfCertainCertificate";
 
-const Exam = ({cookie}) => {
-  const Exam = [
-    {
-      examName: "Exam Name",
-      examDescriprion:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      Time: 10,
-    },
-  ];
-
-  const dummyAnswer = (question) => ({
-    question,
-    A: "A",
-    B: "B",
-    C: "C",
-    D: "D",
-    image:
-      "https://www.ticketmastersport.com/wp-content/uploads/2019/09/Iraklis20FC-1.jpg",
-    correctAnswer: "A",
-  });
-
-  // dependency arrays should have all the variables warned by the linter
-  // useMemo allows us to add Questions into the dependency array by persisting
-  // a reference to the array between renders
-  const Questions = useMemo(
-    () => [
-      dummyAnswer(
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-      ),
-      dummyAnswer("ply dummy text of the printing and typesetting industry."),
-      dummyAnswer(
-        "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry."
-      ),
-      dummyAnswer("Lorem Ipsum is simply dummy ustry."),
-      {
-        question:
-          "Lorem IpLorem Ipsum is simply dummy texLorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.t of the printing and typesetting industry.printing and typesetting industry.",
-        A: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
-        B: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
-        C: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
-        D: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
-        image: "",
-        correctAnswer: "D",
-      },
-      {
-        question: "",
-        A: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
-        B: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
-        C: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
-        D: "Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.Lorem IpLorem Ipsum is simply dummy text of the printing and typesetting industry.printing and typesetting industry.",
-        image:
-          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.cG9zeaNG2T9xG1xOKNDXdQHaIG%26pid%3DApi&f=1&ipt=e38a4a26c79740fe3a03a579c48a3be44a202dd41ddb4508c14c2eda24d98481&ipo=images",
-        correctAnswer: "D",
-      },
-    ],
-    // Create array once on initial render, never re-create the object
-    []
-  );
-
+const Exam = ({ cookie }) => {
   const CandidateExam = [
     {
       examMark: null,
     },
   ];
 
+  const { Title } = useParams();
+
   const { getItem, setItem, removeItem } = useLocalStorage();
+  // const { exam: Exam, questions: Questions, mark: userMark, fetchExam } = useExam(Title)
+  const { exam: Exam, questions: Questions, fetchExam } = useExam(Title);
+  const userMark = 0;
+
+  console.log("from Exam.jsx EXAM:");
+
+  console.log("exam:" + typeof Exam.time);
+  Object.entries(Exam).forEach(([key, value]) => {
+    console.log(key, value);
+  });
+
+  console.log("questions: " + Questions);
+  console.log("questionsTYPE: " + typeof Questions);
+
+  console.log("from getExam   QUESTION:");
+  Object.entries(Questions).forEach(([key, value]) => {
+    console.log(key, value);
+  });
+  console.log("END EXAM.JSX:");
 
   const Answers = useMemo(() => {
     return getItem("Answers") ?? "";
@@ -86,25 +49,10 @@ const Exam = ({cookie}) => {
     return getItem("Timer") ?? null;
   }, []); // Check if there is timer in local storage
 
-  // const { useCandidateExam, useQuestionsForExam, useSpecificExam } = useExam()
-  // const { candidateExam, fetchCandidateExam } = useCandidateExam()
-  // const { questionsForExam, fetchQuestionsForExam } = useQuestionsForExam()
-  // const { specificExam, fetchSpecificExam } = useSpecificExam()
-
-  // useEffect(() => {
-  //   try {
-  //     fetchCandidateExam()                                  // Fetch
-  //     fetchQuestionsForExam()                               // Fetch
-  //     fetchSpecificExam()                                   // Fetch
-  //   } catch (error) {
-  //     console.error("Failed to fetch Exam:", error);
-  //   }
-  // }, []);
-
   const [alert, setAlert] = useState(false);
   const [start, setStart] = useState(false); // Used in start Exam
   const [examEnded, setExamEnded] = useState(false); // Used when Exam ends
-  const [mark, setMark] = useState(null); // Used when calculate Mark
+  const [mark, setMark] = useState(NaN); // Used when calculate Mark
   const [answers, setAnswers] = useState(Answers); // Contains user Answers, equal to Answers from Local Storage
   const [answerOptionClassName, setAnswerOptionClassName] = useState([
     "",
@@ -121,17 +69,23 @@ const Exam = ({cookie}) => {
   // Evaluate Mark
   useEffect(() => {
     let count = 0;
-    for (let i = 0; i < Questions.length; i++) {
-      if (Questions[i]["correctAnswer"] === answers[i]) {
+    const length = Object.keys(Questions).length;
+    for (let i = 0; i < length; i++) {
+      if (Questions[i].correctAnswer === answers[i]) {
         // For each question check if the answeer is correct
         count++;
       }
     }
-
-    setMark(Math.round((100 * count) / Questions.length)); // Set Mark
+    const calculatedMark = Math.round((100 * count) / length);
+    setMark(calculatedMark); // Set Mark
     removeItem("Answers"); // Remove Answers from Local Storage
     removeItem("Timer"); // Remove Timer from Local Storage
-  }, [examEnded]);
+    removeItem("Exam"); // Remove Timer from Local Storage
+    setJsonPayload((prevPayload) => ({
+      ...prevPayload,
+      mark: calculatedMark,
+    }));
+  }, [examEnded, Questions, answers]);
 
   // Handles submit button click
   const handleNext = () => {
@@ -153,68 +107,68 @@ const Exam = ({cookie}) => {
     }
   };
 
+  const getLastSegment = () => {
+    const path = window.location.pathname;
+    const segments = path.split("/");
+    return segments[segments.length - 1];
+  };
+  const title = decodeURIComponent(getLastSegment());
 
+  const [enrollmentData, setEnrollmentData] = useState(null);
 
-    const getLastSegment = () => {
-      const path = window.location.pathname;
-      const segments = path.split('/');
-      return segments[segments.length - 1];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getCandidatesOfCertainCertificate(title);
+        setEnrollmentData(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
-    const title = decodeURIComponent(getLastSegment());
 
-    const [enrollmentData, setEnrollmentData] = useState(null);
+    fetchData();
+  }, [title]);
 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const data = await getCandidatesOfCertainCertificate(title);
-          setEnrollmentData(data);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      };
+  const [jsonPayload, setJsonPayload] = useState({
+    title: title,
+    mark: 0, // Initialize with a default value (it will be updated by the useEffect)
+  });
+  console.log(enrollmentData);
+  useEffect(() => {
+    if (mark === null) return;
 
-      fetchData();
-    }, [title]);
+    // Put the fetch request logic here
+    const enrollment = enrollmentData?.filter(
+      (cand) => cand.candidateNumber === cookie.candidateNumber
+    );
 
-    const [jsonPayload, setJsonPayload] = useState({
-      title: title,
-      mark: 0, // Initialize with a default value (it will be updated by the useEffect)
-    });
+    const recordId = enrollment?.recordId;
 
+    const url = `CandidateCertificates/Certificates/${recordId}`;
+    fetch(`http://localhost:5021/api/${url}`, {
+      method: "PUT",
+      body: JSON.stringify(jsonPayload),
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJDYW5kaWRhdGUiLCJJZCI6IjI0ZDUzZjRiLTMyNDItNDI5ZC1iZmExLTAwYjE1YWQ2M2NmZCIsImV4cCI6MTcwNTY1NTc5MCwiaXNzIjoiQWRtaW4iLCJhdWQiOiJDYW5kaWRhdGUifQ.65SWEH4Z95CAYE7QcpdlewyOcdMJU79QLcPQoaaYn2c`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Response:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, [mark, jsonPayload, enrollmentData]);
 
   const handleSubmit = () => {
     handleNext(); // Handle Next Question
     setStart(false); // Change Star to false
     setExamEnded(true); // Change ExamEnded to true
-
-      const enrollemnt = enrollmentData?.filter(
-        (cand) => cand.candidateNumber === cookie.candidateNumber
-      );
-      const recordId = enrollemnt[0]?.recordId;
-      const url = `CandidateCertificates/Certificates/${recordId}`;
-      fetch(`http://localhost:5021/api/${url}`,
-      {
-        method: 'PUT',
-        body: JSON.stringify(jsonPayload),
-        headers: {
-          'Authorization': `Bearer ${cookie.token}`,
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Response:', data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
     // Must set mark to candidateExam throught post request
   };
-
-
-
-  
   // This functions is called int Timer Child Component when the timer hits zero
   const timeEnded = () => {
     setStart(false);
@@ -222,16 +176,22 @@ const Exam = ({cookie}) => {
   };
 
   const handleStart = () => {
-    if (getItem("Exam") && getItem("Exam") !== Exam[0].examName) {
+    // @ts-ignore
+    if (getItem("Exam") && getItem("Exam") !== Exam.title) {
+      console.log("getItem from local: " + getItem("Exam"));
+      // @ts-ignore
+      console.log("getItem from local!=Exxam.title: " + Exam.title);
+
       console.log(
-        "Your previous exam you given is unfinished. You must complete that in order to start a new one!"
+        "Your previous exam given is unfinished. You must complete that in order to start a new one!"
       );
       setAlert(true);
       return;
     }
 
     setStart(!start);
-    setItem("Exam", Exam[0].examName); // Set the name of the exam in local storage
+    // @ts-ignore
+    setItem("Exam", Exam.title); // Set the name of the exam in local storage
     let time;
 
     if (!timer) {
@@ -246,7 +206,8 @@ const Exam = ({cookie}) => {
         datetimeNow.getHours(),
         datetimeNow.getMinutes(),
         datetimeNow.getSeconds() -
-          (Exam[0].Time * 60 -
+          // @ts-ignore
+          (Exam.time * 60 -
             Number(timer.hours) * 60 * 60 -
             Number(timer.minutes) * 60 -
             Number(timer.seconds))
@@ -257,139 +218,189 @@ const Exam = ({cookie}) => {
     setTimeWhenExamStarted(time); // Set time
   };
 
-  if (CandidateExam[0].examMark) {
-    // Consider if the exam has been already taken
-    return (
-      // Return a Page with the mark shown
-      <>
-        <div className="container result">
-          <h1>{Exam[0].examName}</h1>
-          <hr />
-          <p className="paragraph">About the exam:</p>
-          <p className="paragraph">{Exam[0].examDescriprion}</p>
+  // console.log("mark:" + userMark);
+  // if (userMark === -1) {
+  //   return (
+  //     // Return a Page with the mark shown
+  //     <>
+  //       <div className="container result">
+  //         <h1>
+  //           {
+  //             // @ts-ignore
+  //             Exam.title
+  //           }
+  //         </h1>
+  //         <hr />
+  //         <p className="paragraph">About the exam:</p>
+  //         <p className="paragraph">
+  //           {
+  //             // @ts-ignore
+  //             Exam.description
+  //           }
+  //         </p>
 
-          {/*  Page after exam has ended */}
-          <div>Your Mark is {CandidateExam[0].examMark} %</div>
-        </div>
-      </>
-    );
-  } else {
-    return (
-      // Return a Page with the Exam Shield
-      <>
-        {start ? (
-          <div className="container">
-            {/* Question */}
-            <div className="questionAndTimer">
-              <div className={`questionContainer ${questionClassName}`}>
-                <div className="questionCount">
-                  Question {questionNumber + 1} of {Questions.length}:
-                </div>
-                <h2 className="question">
-                  {Questions[questionNumber].question}
-                </h2>
+  //         {/*  Page after exam has ended */}
+  //         <div>You cannot take this Exam!</div>
+  //       </div>
+  //     </>
+  //   );
+  // } else if (userMark > 50) {
+  //   // Consider if the exam has been already taken
+  //   return (
+  //     // Return a Page with the mark shown
+  //     <>
+  //       <div className="container result">
+  //         <h1>
+  //           {
+  //             // @ts-ignore
+  //             Exam.title
+  //           }
+  //         </h1>
+  //         <hr />
+  //         <p className="paragraph">About the exam:</p>
+  //         <p className="paragraph">
+  //           {
+  //             // @ts-ignore
+  //             Exam.description
+  //           }
+  //         </p>
+
+  //         {/*  Page after exam has ended */}
+  //         <div>Your Mark is {userMark} %</div>
+  //       </div>
+  //     </>
+  //   );
+  // } else {
+
+  return (
+    // Return a Page with the Exam Shield
+    <>
+      {start ? (
+        <div className="container">
+          {/* Question */}
+          <div className="questionAndTimer">
+            <div className={`questionContainer ${questionClassName}`}>
+              <div className="questionCount">
+                Question {questionNumber + 1} of {Object.keys(Questions).length}
+                :
               </div>
-
-              {/* <Timer /> */}
-              <TimerContext.Provider value={timeEnded}>
-                <Timer
-                  examTimeLimit={Exam[0].Time}
-                  examStartedTime={timeWhenExamStarted}
-                />
-              </TimerContext.Provider>
+              <h2 className="question">{Questions[questionNumber].question}</h2>
             </div>
-            {Questions[questionNumber].image !== "" && (
-              <div className={`questionContainer ${questionClassName}`}>
-                <img
-                  src={Questions[questionNumber].image}
-                  // src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.PvQ6hvlsjJhHpuP5qZfNrAHaHa%26pid%3DApi&f=1&ipt=d9cf3324541dff5b768690113a9f99d6a472aac8c0f18dc45495f2ed2b8cb28b&ipo=images"
-                  // src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.cG9zeaNG2T9xG1xOKNDXdQHaIG%26pid%3DApi&f=1&ipt=e38a4a26c79740fe3a03a579c48a3be44a202dd41ddb4508c14c2eda24d98481&ipo=images"
-                  alt="QuestionImage"
-                  className="image"
-                />
-              </div>
-            )}
-            {/* AnswerField */}
-            <AnswerOptionContext.Provider
-              value={{
-                answer,
-                setAnswer,
-                answerOptionClassName,
-                setAnswerOptionClassName,
-              }}
-            >
-              <AnswerField
-                answerOptions={Questions[questionNumber]}
-                answerFieldClassName={answerFieldClassName}
+
+            {/* <Timer /> */}
+            <TimerContext.Provider value={timeEnded}>
+              <Timer
+                // @ts-ignore
+                examTimeLimit={Exam.time}
+                examStartedTime={timeWhenExamStarted}
               />
-            </AnswerOptionContext.Provider>
-
-            <div className="container">
-              <div className="center">
-                {Questions.length - 1 === questionNumber ? (
-                  <Button
-                    variant="contained"
-                    disableElevation
-                    onClick={handleSubmit}
-                  >
-                    End Exam
-                  </Button>
-                ) : (
-                  <Button
-                    variant="contained"
-                    disableElevation
-                    onClick={handleNext}
-                  >
-                    Next Question
-                  </Button>
-                )}
-              </div>
-            </div>
+            </TimerContext.Provider>
           </div>
-        ) : (
-          // Page before and after starting the exam
-          <div className="container result">
-            {alert && (
-              <Alert
-                severity="error"
-                onClose={() => {
-                  setAlert(false);
-                }}
-              >
-                <AlertTitle>Error</AlertTitle>
-                Your previous exam you given is unfinished. You must complete
-                that in order to start a new one!
-              </Alert>
-            )}
-            <h1>{Exam[0].examName}</h1>
-            <hr />
-            <p className="paragraph">About the exam:</p>
-            <p className="paragraph">{Exam[0].examDescriprion}</p>
+          {Questions[questionNumber].imageSrc !== "" && (
+            <div className={`questionContainer ${questionClassName}`}>
+              <img
+                src={Questions[questionNumber].imageSrc}
+                alt="QuestionImage"
+                className="image"
+              />
+            </div>
+          )}
+          {/* AnswerField */}
+          <AnswerOptionContext.Provider
+            value={{
+              answer,
+              setAnswer,
+              answerOptionClassName,
+              setAnswerOptionClassName,
+            }}
+          >
+            <AnswerField
+              answerOptions={Questions[questionNumber]}
+              answerFieldClassName={answerFieldClassName}
+            />
+          </AnswerOptionContext.Provider>
 
-            {/*  Page after exam has ended */}
-            {examEnded ? (
-              <div>Exam Completed! Your Mark is {mark} %</div>
-            ) : (
-              // Page before exam starts
-              <div>
-                <p className="paragraph">
-                  For this exam you need to answer {Questions.length} questions
-                  in {Exam[0].Time} minutes!
-                </p>
+          <div className="container">
+            <div className="center">
+              {Object.keys(Questions).length - 1 === questionNumber ? (
                 <Button
                   variant="contained"
                   disableElevation
-                  onClick={handleStart}
+                  onClick={handleSubmit}
                 >
-                  Let's Start
+                  End Exam
                 </Button>
-              </div>
-            )}
+              ) : (
+                <Button
+                  variant="contained"
+                  disableElevation
+                  onClick={handleNext}
+                >
+                  Next Question
+                </Button>
+              )}
+            </div>
           </div>
-        )}
-      </>
-    );
-  }
+        </div>
+      ) : (
+        // Page before and after starting the exam
+        <div className="container result">
+          {alert && (
+            <Alert
+              severity="error"
+              onClose={() => {
+                setAlert(false);
+              }}
+            >
+              <AlertTitle>Error</AlertTitle>
+              Your previous exam you given is unfinished. You must complete that
+              in order to start a new one!
+            </Alert>
+          )}
+          <h1>
+            {
+              // @ts-ignore
+              Exam.title
+            }
+          </h1>
+          <hr />
+          <p className="paragraph">About the exam:</p>
+          <p className="paragraph">
+            {
+              // @ts-ignore
+              Exam.description
+            }
+          </p>
+
+          {/*  Page after exam has ended */}
+          {examEnded ? (
+            <div>Exam Completed! Your Mark is {mark} %</div>
+          ) : (
+            // Page before exam starts
+            <div>
+              <p className="paragraph">
+                For this exam you need to answer {Object.keys(Questions).length}{" "}
+                questions in{" "}
+                {
+                  // @ts-ignore
+                  Exam.time
+                }{" "}
+                minutes!
+              </p>
+              <Button
+                variant="contained"
+                disableElevation
+                onClick={handleStart}
+              >
+                Let's Start
+              </Button>
+            </div>
+          )}
+        </div>
+      )}
+    </>
+  );
+  // }
 };
 
 export default Exam;

@@ -1,33 +1,36 @@
 import React, { useEffect, useState } from "react";
 import "./MyProfile.css";
-import  DisplayMode  from "./modes/DisplayMode";
-import { createUpdateCandPayload } from "utils";
+import DisplayMode from "./modes/DisplayMode";
 import EditMode from "./modes/EditMode";
+import { createUpdateCandPayload } from "utils/createUpdateCandPayload";
 
 export default function MyProfile({ cookieValue }) {
   const [candidate, setCandidate] = useState({});
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:5021/api/Candidates/${cookieValue.candidateNumber}`, {
-          method: "GET",
-          headers: {
-            'Authorization': `Bearer ${cookieValue.token}`, // Assuming token is a JWT token
-            'Content-Type': 'application/json',
-            'currentUser': `${JSON.stringify(cookieValue)}`
+        const response = await fetch(
+          `http://localhost:5021/api/Candidates/${cookieValue.candidateNumber}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${cookieValue.token}`, // Assuming token is a JWT token
+              "Content-Type": "application/json",
+              currentUser: `${JSON.stringify(cookieValue)}`,
+            },
           }
-        });
+        );
 
         if (response.ok) {
           const candidateData = await response.json();
           setCandidate(candidateData); // Set user data assuming it's similar to candidate data
-          console.log(candidateData)
+          console.log(candidateData);
         } else {
-          console.error('Fetch error:', response.status);
+          console.error("Fetch error:", response.status);
         }
       } catch (error) {
-        console.error('Fetch error:', error);
+        console.error("Fetch error:", error);
       }
     };
 
@@ -35,7 +38,6 @@ export default function MyProfile({ cookieValue }) {
       fetchData();
     }
   }, [cookieValue]);
-
 
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -48,18 +50,20 @@ export default function MyProfile({ cookieValue }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = createUpdateCandPayload(candidate);
-    console.log(payload)
-    
-    await fetch(`http://localhost:5021/api/Candidates/${cookieValue.candidateNumber}`,
-    {
-      method: 'PUT',
-      body: JSON.stringify(candidate),
-      headers: {
-        'Authorization': `Bearer ${cookieValue.token}`,
-        'Content-Type': 'application/json',
-        'currentUser': `${JSON.stringify(cookieValue)}`
+    console.log(payload);
+
+    await fetch(
+      `http://localhost:5021/api/Candidates/${cookieValue.candidateNumber}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(candidate),
+        headers: {
+          Authorization: `Bearer ${cookieValue.token}`,
+          "Content-Type": "application/json",
+          currentUser: `${JSON.stringify(cookieValue)}`,
+        },
       }
-    });
+    );
     setIsEditMode(false);
   };
 
@@ -68,11 +72,14 @@ export default function MyProfile({ cookieValue }) {
       <h1 className="myprofile-title">My Profile</h1>
       {isEditMode ? (
         // Edit mode form
-       <EditMode candidate={candidate} handleInputChange={handleInputChange} handleSubmit={handleSubmit}/>
+        <EditMode
+          candidate={candidate}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       ) : (
         // Display mode
-        <DisplayMode candidate={candidate} setIsEditMode={setIsEditMode}/>
-        
+        <DisplayMode candidate={candidate} setIsEditMode={setIsEditMode} />
       )}
     </div>
   );

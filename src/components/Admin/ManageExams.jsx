@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import CustomTable from "./CustomTable";
 import { useModal } from "hooks";
 import AddExamModal from "components/Modals/AddExamModal";
-import { addExam, updateExam } from "api";
+import { addExam, deleteExam, updateExam } from "api";
 import UpdateExamModal from "components/Modals/UpdateExamModal";
 
 const ManageExams = () => {
-  const [rows, setRows] = useState([]);           // Initiate Rows as Empty Array
-  const [columns, setColumns] = useState([]);     // Initiate Columns as Empty Array
-  const [examTitle, setExamTitle] = useState(null);     //
-  const { exams, fetchExams } = useExams();       // Deconstruct exams and fetchExams
+  const [rows, setRows] = useState([]); // Initiate Rows as Empty Array
+  const [columns, setColumns] = useState([]); // Initiate Columns as Empty Array
+  const [examTitle, setExamTitle] = useState(null); //
+  const { exams, fetchExams } = useExams(); // Deconstruct exams and fetchExams
 
   const {
     isModalOpen: isAddModalOpen,
@@ -26,11 +26,12 @@ const ManageExams = () => {
 
   useEffect(() => {
     try {
-      fetchExams();                                               // Fetch
-      const dynamicColumns =                                      // Make Keys from Dictionary Exams as Columns
-        Object.keys(exams[0]).map((key) => ({ label: key }));
-      setColumns(dynamicColumns);                                 // Set Columns
-      setRows(exams);                                             // Set Rows
+      fetchExams();
+      const dynamicColumns = Object.keys(exams[0]).map((key) => ({
+        label: key,
+      })); // Make Keys from Dictionary Exams as Columns
+      setColumns(dynamicColumns);
+      setRows(exams);
     } catch (error) {
       console.error("Failed to fetch exams:", error);
     }
@@ -38,11 +39,6 @@ const ManageExams = () => {
 
   const handleAdd = () => {
     handleOpenAddModal();
-  };
-
-  const handleUpdate = (Title) => {
-    handleOpenUpdateModal();
-    setExamTitle(Title)
   };
 
   const handleSave = async (newExamData) => {
@@ -59,30 +55,30 @@ const ManageExams = () => {
     }
   };
 
-  const handleSaveUpdated = async (Title, updatedData) => {
-    try {
-      await updateExam(Title, updatedData);
-      await fetchExams();
-    } catch (error) {
-      console.error("failed to update candidate ");
-    }
-    console.log(`Updated DAta ${updatedData}`);
+  const handleUpdate = (Title) => {
+    console.log("Title handle update:" + Title);
+    setExamTitle(Title);
+    handleOpenUpdateModal();
   };
 
+  const handleSaveUpdated = async (Title, updatedExamData) => {
+    console.log(`Updated DAta ${updatedExamData}`);
 
-  const handleDelete = (id) => {
-    // Not implemented yet
     try {
-      // Assuming deleteCandidateByNumber is an API call that deletes the candidate based on candidateNumber
-      // await deleteCandidateByNumber(candidateNumber);
+      await updateExam(Title, updatedExamData);
+      fetchExams();
+      console.log(`Updated DAta ${updatedExamData}`);
+    } catch (error) {
+      console.log(`ERROR: `, error.message);
 
-      // Update the state to remove the candidate from the UI
+      console.error("failed to update candidate ");
+    }
+  };
 
-      // setCandidates(
-      //   candidates.filter(
-      //     (candidate) => candidate.candidateNumber !== candidateNumber
-      // )
-      // );
+  const handleDelete = async (Title) => {
+    try {
+      await deleteExam(Title);
+      fetchExams();
     } catch (error) {
       console.error("Failed to delete candidate:", error);
     }
@@ -96,7 +92,7 @@ const ManageExams = () => {
         handleAdd={handleAdd}
         handleDelete={handleDelete}
         handleUpdate={handleUpdate}
-        identifierField={undefined}
+        identifierField="title"
       />
       <AddExamModal
         open={isAddModalOpen}
@@ -107,7 +103,7 @@ const ManageExams = () => {
         open={isUpdateModalOpen}
         onClose={handleCloseUpdateModal}
         onSave={handleSaveUpdated}
-        Title={updatedCandidatesNumber}
+        Title={examTitle}
       />
     </>
   );
